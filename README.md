@@ -28,7 +28,7 @@ Onsdag:
 
 Mandag:
 
-- Sirius & Asger sætter Godot op
+- Sirius & Asger sætter Godot logic op
 - Asger & Kristine laver styleguide
 - Kristine laver tilemaps
 - Emilie tager bamsefotos og laver sprites med gennemsigtighed
