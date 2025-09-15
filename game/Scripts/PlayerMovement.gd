@@ -1,30 +1,38 @@
 extends CharacterBody2D
 
+var jump_count: int = 0
+const MAX_JUMPS := 2  # 1 = normal jump, 2 = double jump
+
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	#if not is_on_floor():
-	#	velocity += get_gravity() * delta
+	# Gravity
+	if not is_on_floor():
+		velocity.y += Global.Constants.GRAVITY * delta
+	else:
+		# Reset jump counter on landing
+		jump_count = 0
 
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = Global.Constants.JUMP_VELOCITY
+	# Jump input
+	if Input.is_action_just_pressed("ui_accept"):
+		if is_on_floor() or jump_count < MAX_JUMPS:
+			velocity.y = Global.Constants.JUMP_VELOCITY
+			jump_count += 1
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
+	# Horizontal input
 	var direction := Input.get_axis("ui_left", "ui_right")
 
-	#If slower than minimum speed, speed set to minimum speed
-	if direction and velocity.x <=Global.Constants.START_SPEED * direction:
-		velocity.x=Global.Constants.START_SPEED * direction
-
-	#If moving and slower than top speed, accelerate
-	if direction and velocity.x <= Global.Constants.TOP_SPEED * direction:
-		velocity.x += direction * Global.Constants.ACCELERATION * delta
-
-	#While moving at top speed, keep moving at top speed
-	if direction and velocity.x == Global.Constants.TOP_SPEED * direction:	
-		velocity.x = Global.Constants.TOP_SPEED * direction
+	if direction != 0:
+		# Accelerate toward top speed
+		velocity.x = move_toward(
+			velocity.x,
+			direction * Global.Constants.TOP_SPEED,
+			Global.Constants.ACCELERATION * delta
+		)
 	else:
-		velocity.x = move_toward(velocity.x, 0, Global.Constants.TOP_SPEED)
+		# Decelerate to zero
+		velocity.x = move_toward(
+			velocity.x,
+			0,
+			Global.Constants.ACCELERATION * delta
+		)
 
 	move_and_slide()
