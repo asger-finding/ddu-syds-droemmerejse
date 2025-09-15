@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 @onready var _animated_sprite = $AnimatedSprite2D
 
 func _process(_delta):
+	#movement animations
 	if Input.is_action_pressed("ui_right"):
 		_animated_sprite.flip_h = false
 		_animated_sprite.play("Run")
