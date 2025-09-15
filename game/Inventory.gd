@@ -25,3 +25,11 @@ func add_follower(identifier: String) -> void:
 		printerr('Follower ID does not exist')
 		return
 	followers.push_front(identifier)
+
+func remove_follower(identifier: String) -> void:
+	if identifier not in Global.Constants.FOLLOWERS:
+		printerr('Follower ID does not exist')
+		return
+	var index = followers.find(identifier)
+	var popped = followers.pop_at(index)
+	print("Popped:", popped)
