@@ -1,24 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://ccka8i7m0yo72"]
+[gd_scene load_steps=3 format=4 uid="uid://ccka8i7m0yo72"]
 
-[ext_resource type="Texture2D" uid="uid://ddmr8125rk86k" path="res://Assets/Tilemaps/tilemap-test.png" id="1_3e0l0"]
 [ext_resource type="PackedScene" uid="uid://dftcpbshdx783" path="res://Scenes/World-1.tscn" id="1_u6nay"]
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u6nay"]
-texture = ExtResource("1_3e0l0")
-texture_region_size = Vector2i(64, 64)
-0:0/size_in_atlas = Vector2i(3, 3)
-0:0/0 = 0
-3:0/size_in_atlas = Vector2i(1, 5)
-3:0/0 = 0
-4:0/size_in_atlas = Vector2i(1, 5)
-4:0/0 = 0
-5:0/size_in_atlas = Vector2i(5, 1)
-5:0/0 = 0
-5:1/size_in_atlas = Vector2i(5, 1)
-5:1/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_x72gv"]
-sources/0 = SubResource("TileSetAtlasSource_u6nay")
+[ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -26,6 +9,6 @@ sources/0 = SubResource("TileSetAtlasSource_u6nay")
 scale = Vector2(0.5, 0.5)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-position = Vector2(-300, -500)
+position = Vector2(-749, -652)
 tile_map_data = PackedByteArray("AAAiADMAAAAAAAAAAAAuADMAAAAAAAAAAAA6ADMAAAAAAAAAAABGADMAAAAAAAAAAABEADsAAAAFAAAAAAA3ADoAAAAFAAAAAAAtADsAAAAFAAAAAAAkADoAAAAFAAAAAABEACwAAAAFAAEAAAA8ACsAAAAFAAEAAAAyACwAAAAFAAEAAAAoACwAAAAFAAEAAAAhACwAAAAFAAEAAABMADMAAAADAAAAAAAaADMAAAAEAAAAAAAiADoAAAAFAAAAAAA=")
-tile_set = SubResource("TileSet_x72gv")
+tile_set = ExtResource("2_u6nay")
