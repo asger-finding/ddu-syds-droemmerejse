@@ -11,5 +11,10 @@ config_version=5
 [application]
 
 config/name="Unavngivet Sidescroller"
+run/main_scene="uid://cq4gf0ctpud42"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Global="*res://Global.gd"
