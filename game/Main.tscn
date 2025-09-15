@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cq4gf0ctpud42"]
+
+[ext_resource type="Script" uid="uid://bed1661ujgmmn" path="res://Scripts/GameController.gd" id="1_uu6xs"]
+
+[node name="GameController" type="Node"]
+script = ExtResource("1_uu6xs")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Overlay" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Main2D" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Main2D"]
