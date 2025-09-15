@@ -34,5 +34,17 @@ func _physics_process(delta: float) -> void:
 			0,
 			Global.Constants.ACCELERATION * delta
 		)
+@onready var _animated_sprite = $AnimatedSprite2D
 
+func _process(_delta):
+	if Input.is_action_pressed("ui_right"):
+		_animated_sprite.flip_h = false
+		_animated_sprite.play("Run")
+	if Input.is_action_pressed("ui_left"):
+		_animated_sprite.flip_h = true
+		_animated_sprite.play("Run")
+	if Input.is_action_pressed("ui_down"):
+		_animated_sprite.play("Roll")	
+	else:
+		_animated_sprite.stop()
 	move_and_slide()
