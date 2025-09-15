@@ -16,7 +16,7 @@ func unload_level() -> void:
 	
 func load_level(level_name: String) -> void:
 	unload_level()
-	var path := 'res://Levels/%s.tscn' % level_name
+	var path := 'res://Scenes/%s.tscn' % level_name
 	var level_resource = load(path)
 	if (level_resource):
 		level_instance = level_resource.instance()

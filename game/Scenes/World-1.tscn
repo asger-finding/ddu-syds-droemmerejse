@@ -1,12 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dftcpbshdx783"]
+[gd_scene load_steps=6 format=3 uid="uid://dftcpbshdx783"]
 
-[ext_resource type="Texture2D" uid="uid://ddmr8125rk86k" path="res://Assets/Tilemaps/tilemap-test.png" id="1_2f2ij"]
+[ext_resource type="Script" uid="uid://nta00bts7x8w" path="res://sid_movement.gd" id="1_2f2ij"]
+[ext_resource type="Texture2D" uid="uid://ddmr8125rk86k" path="res://Assets/Tilemaps/tilemap-test.png" id="2_yl1pn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5t3f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yl1pn"]
 resource_name = "platform"
-texture = ExtResource("1_2f2ij")
+texture = ExtResource("2_yl1pn")
 texture_region_size = Vector2i(32, 32)
 0:0/size_in_atlas = Vector2i(4, 4)
 0:0/0 = 0
@@ -25,6 +26,7 @@ sources/0 = SubResource("TileSetAtlasSource_yl1pn")
 [node name="Node2D" type="Node2D"]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_2f2ij")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 sprite_frames = SubResource("SpriteFrames_k5t3f")
