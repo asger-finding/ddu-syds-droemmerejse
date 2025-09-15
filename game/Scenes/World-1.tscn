@@ -1,6 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://dftcpbshdx783"]
+[gd_scene load_steps=5 format=3 uid="uid://dftcpbshdx783"]
+
+[ext_resource type="Texture2D" uid="uid://ddmr8125rk86k" path="res://Assets/Tilemaps/tilemap-test.png" id="1_2f2ij"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5t3f"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yl1pn"]
+resource_name = "platform"
+texture = ExtResource("1_2f2ij")
+texture_region_size = Vector2i(32, 32)
+0:0/size_in_atlas = Vector2i(4, 4)
+0:0/0 = 0
+4:2/size_in_atlas = Vector2i(6, 2)
+4:2/0 = 0
+4:0/size_in_atlas = Vector2i(6, 2)
+4:0/0 = 0
+0:4/size_in_atlas = Vector2i(2, 6)
+0:4/0 = 0
+2:4/size_in_atlas = Vector2i(2, 6)
+2:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_t2xfb"]
+sources/0 = SubResource("TileSetAtlasSource_yl1pn")
 
 [node name="Node2D" type="Node2D"]
 
@@ -10,3 +30,6 @@
 sprite_frames = SubResource("SpriteFrames_k5t3f")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_t2xfb")
