@@ -3,7 +3,7 @@ extends Node
 func _ready():
 	Global.Inventory = self
 
-# Set default values
+# Set default inventory values
 var scrap_amount = 0
 var fluff_amount = 0
 var followers = []
@@ -32,4 +32,4 @@ func remove_follower(identifier: String) -> void:
 		return
 	var index = followers.find(identifier)
 	var popped = followers.pop_at(index)
-	print("Popped:", popped)
+	print("Popped: ", popped)

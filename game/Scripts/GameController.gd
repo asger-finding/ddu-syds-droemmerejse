@@ -3,23 +3,23 @@ extends Node
 @onready var hud := $"HUD"
 @onready var game := $"Main2D"
 
-var level_instance
+var scene_instance
 
 func _ready():
 	# Remember to set as global
 	Global.GameController = self
 
-func unload_level() -> void:
-	if (is_instance_id_valid(level_instance)):
-		level_instance.queue_free()
-	level_instance = null
+func unload_scene() -> void:
+	if (is_instance_id_valid(scene_instance)):
+		scene_instance.queue_free()
+	scene_instance = null
 	
-func load_level(level_name: String) -> void:
-	unload_level()
-	var path := 'res://Levels/%s.tscn' % level_name
-	var level_resource = load(path)
-	if (level_resource):
-		level_instance = level_resource.instance()
-		game.add_child(level_instance)
+func load_scene(scene_name: String) -> void:
+	unload_scene()
+	var path := 'res://Scenes/%s.tscn' % scene_name
+	var scene_resource = load(path)
+	if (scene_resource):
+		scene_instance = scene_resource.instance()
+		game.add_child(scene_instance)
 	else:
-		printerr('Level path not found')
+		printerr('Scene path not found')
