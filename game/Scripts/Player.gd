@@ -100,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(
 			velocity.x,
 			0,
-			Global.Constants.ACCELERATION * delta
+			Global.Constants.DEACCELERATION * delta
 		)
 	#Fastfall
 	if Input.is_action_just_pressed("ui_down") and !is_on_floor():

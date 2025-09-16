@@ -21,6 +21,6 @@ func _process(delta: float) -> void:
 	var smoothing = 5.0
 	effective_velocity = lerp(effective_velocity, target_velocity, smoothing * delta)
 	
-	var zoom_factor = max(0, -exp(max(effective_velocity - 500, 0) * Global.Constants.CAMERA_ZOOM_COEFF) + 2)
-	var target_zoom = lerp(Global.Constants.CAMERA_ZOOM_FURTHEST, 1.0, zoom_factor)
+	var zoom_factor = max(0, -exp(max(effective_velocity - 500, 0) * Global.Constants.CAMERA_ZOOM_PLAYER_SPEED_COEFF) + 2)
+	var target_zoom = lerp(Global.Constants.CAMERA_ZOOM_FURTHEST, Global.Constants.CAMERA_ZOOM_CLOSEST, zoom_factor)
 	zoom = Vector2.ONE * target_zoom
