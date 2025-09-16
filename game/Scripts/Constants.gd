@@ -6,7 +6,13 @@ func _ready():
 
 const FOLLOWERS = ["Dog", "Racoon", "Hooker"]
 
-# Player movement constants
+# Camera follow
+const FOLLOW_X_INTERPOLATION_SPEED = 0.05 # lerp weight
+const FOLLOW_Y_INTERPOLATION_SPEED = 0.5 # lerp weight
+const CAMERA_Y_FLOOR = 0 # px
+const CAMERA_ZOOM_COEFF = 0.0005
+
+# Player movement
 const START_SPEED = 100
 const TOP_SPEED = 500
 const ACCELERATION = 3000

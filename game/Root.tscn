@@ -23,10 +23,10 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Main2D" type="Node2D" parent="."]
+[node name="Scene" type="Node2D" parent="."]
 script = ExtResource("3_cwqeq")
 
-[node name="world" parent="Main2D" instance=ExtResource("2_24d08")]
+[node name="World" parent="Scene" instance=ExtResource("2_24d08")]
 
-[node name="Camera2D" type="Camera2D" parent="Main2D"]
+[node name="Camera" type="Camera2D" parent="Scene"]
 script = ExtResource("5_3ipfy")
