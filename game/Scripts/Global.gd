@@ -5,3 +5,4 @@ var GameController
 var Inventory # TODO
 var Player # TODO
 var Constants
+var EnemyParent

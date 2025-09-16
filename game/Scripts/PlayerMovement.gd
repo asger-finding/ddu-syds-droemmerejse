@@ -96,5 +96,5 @@ func _process(_delta):
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == "Roll":
 		is_rolling = false
-		print("roll done :p")
+		#print("roll done :p")
 	pass # Replace with function body.
