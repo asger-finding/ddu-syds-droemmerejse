@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player;
 
 # FIXME: move to Constants
 # FIXME: does not need explicit definitions

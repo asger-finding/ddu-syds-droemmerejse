@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dftcpbshdx783"]
+[gd_scene load_steps=21 format=3 uid="uid://dftcpbshdx783"]
 
 [ext_resource type="Script" uid="uid://nta00bts7x8w" path="res://Scripts/Player.gd" id="1_2f2ij"]
 [ext_resource type="Texture2D" uid="uid://dpc1b1oshyt7q" path="res://Assets/Sprites/Fald.png" id="2_hkp03"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://422e2vkvj65i" path="res://Assets/Sprites/Løb 2.png" id="7_i7i4w"]
 [ext_resource type="Texture2D" uid="uid://bjjs7c7dxfocr" path="res://Assets/Sprites/Løb 3.png" id="8_6newq"]
 [ext_resource type="Texture2D" uid="uid://c0nshynkped3c" path="res://Assets/Sprites/Wallslide.png" id="10_tu4k3"]
-[ext_resource type="Script" uid="uid://b4rusvdaja68k" path="res://Scenes/EnemyCow.gd" id="12_tu4k3"]
+[ext_resource type="Script" uid="uid://b4rusvdaja68k" path="res://Scripts/EnemyCow.gd" id="12_tu4k3"]
 [ext_resource type="Texture2D" uid="uid://b58mq7nc8gt3i" path="res://icon.svg" id="13_tsdoj"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5t3f"]
@@ -97,7 +97,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1k0mi"]
-size = Vector2(397, 385)
+size = Vector2(176.25, 204.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r53dp"]
+size = Vector2(383, 359)
 
 [node name="Node2D" type="Node2D"]
 
@@ -119,7 +122,7 @@ debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 tile_set = SubResource("TileSet_t2xfb")
 
 [node name="EnemyKo" type="CharacterBody2D" parent="."]
-position = Vector2(2000, 0)
+position = Vector2(937, -31)
 script = ExtResource("12_tu4k3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyKo"]
@@ -128,7 +131,14 @@ sprite_frames = SubResource("SpriteFrames_65xv6")
 animation = &"Test"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyKo"]
-position = Vector2(-4.5, 2.5)
+position = Vector2(-8, -5)
 shape = SubResource("RectangleShape2D_1k0mi")
 
+[node name="Area2D" type="Area2D" parent="EnemyKo"]
+
+[node name="Detect" type="CollisionShape2D" parent="EnemyKo/Area2D"]
+position = Vector2(-1.5, -13.5)
+shape = SubResource("RectangleShape2D_r53dp")
+
 [connection signal="animation_finished" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="EnemyKo/Area2D" to="EnemyKo" method="_on_area_2d_body_entered"]
