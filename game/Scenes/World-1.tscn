@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://dftcpbshdx783"]
+[gd_scene load_steps=16 format=3 uid="uid://dftcpbshdx783"]
 
 [ext_resource type="Script" uid="uid://nta00bts7x8w" path="res://Scripts/PlayerMovement.gd" id="1_2f2ij"]
+[ext_resource type="Texture2D" uid="uid://dpc1b1oshyt7q" path="res://Assets/Sprites/Fald.png" id="2_hkp03"]
 [ext_resource type="Texture2D" uid="uid://jsewx6c4y0dg" path="res://Assets/Sprites/Rul 1.png" id="2_jvwht"]
 [ext_resource type="Texture2D" uid="uid://ddmr8125rk86k" path="res://Assets/Tilemaps/tilemap-test.png" id="2_yl1pn"]
 [ext_resource type="Texture2D" uid="uid://c1cjh6oqvyua1" path="res://Assets/Sprites/Rul 2.png" id="3_pahhf"]
@@ -9,9 +10,18 @@
 [ext_resource type="Texture2D" uid="uid://bu7riuei70740" path="res://Assets/Sprites/Løb 1.png" id="6_tsdoj"]
 [ext_resource type="Texture2D" uid="uid://422e2vkvj65i" path="res://Assets/Sprites/Løb 2.png" id="7_i7i4w"]
 [ext_resource type="Texture2D" uid="uid://bjjs7c7dxfocr" path="res://Assets/Sprites/Løb 3.png" id="8_6newq"]
+[ext_resource type="Texture2D" uid="uid://c0nshynkped3c" path="res://Assets/Sprites/Wallslide.png" id="10_tu4k3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5t3f"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_hkp03")
+}],
+"loop": true,
+"name": &"Fald",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_jvwht")
@@ -41,6 +51,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_tu4k3")
+}],
+"loop": true,
+"name": &"Wallslide",
 "speed": 5.0
 }]
 
@@ -74,7 +92,7 @@ script = ExtResource("1_2f2ij")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 scale = Vector2(0.2, 0.2)
 sprite_frames = SubResource("SpriteFrames_k5t3f")
-animation = &"Run"
+animation = &"Fald"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 position = Vector2(3, -6)
