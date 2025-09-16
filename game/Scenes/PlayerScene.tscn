@@ -133,6 +133,7 @@ animation = &"Test"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyKo"]
 position = Vector2(-8, -5)
 shape = SubResource("RectangleShape2D_1k0mi")
+disabled = true
 
 [node name="Area2D" type="Area2D" parent="EnemyKo"]
 

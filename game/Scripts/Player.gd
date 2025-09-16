@@ -9,7 +9,8 @@ var is_rolling: bool = false
 const roll_velocity := 900  # Adjust for distance
 var roll_direction := 0    # -1 or 1
 var fastfall = 1
-#var fastfallVelocity
+var fastfallCount=1
+var health = 3
 
 @onready var _animated_sprite = $AnimatedSprite2D
 
@@ -53,6 +54,14 @@ func _process(_delta):
 	if not moving:
 		_animated_sprite.stop()
 	move_and_slide()
+	
+	if health == 0:
+		print("you r died")
+		hide()
+		set_process(false)
+		
+
+
 
 func _physics_process(delta: float) -> void:
 	# Gravity
@@ -95,8 +104,9 @@ func _physics_process(delta: float) -> void:
 		)
 	#Fastfall
 	if Input.is_action_just_pressed("ui_down") and !is_on_floor():
-		fastfall +1
-		if fastfall <=3:
+		fastfall =2
+		fastfallCount+=1
+		if fastfallCount <=3:
 			velocity.y +=500
 
 func _on_animated_sprite_2d_animation_finished() -> void:

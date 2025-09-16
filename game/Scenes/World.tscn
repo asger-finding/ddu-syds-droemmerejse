@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://dftcpbshdx783" path="res://Scenes/PlayerScene.tscn" id="1_u6nay"]
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
-[ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
+[ext_resource type="Script" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D2" type="Node2D"]
 
 [node name="PaperRoot" type="Node2D" parent="."]
 position = Vector2(-749, -652)
