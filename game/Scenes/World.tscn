@@ -1,25 +1,18 @@
-[gd_scene load_steps=5 format=4 uid="uid://bfumbaprtnnwu"]
+[gd_scene load_steps=4 format=4 uid="uid://bfumbaprtnnwu"]
 
 [ext_resource type="PackedScene" uid="uid://dftcpbshdx783" path="res://Scenes/PlayerScene.tscn" id="1_u6nay"]
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
-[ext_resource type="Shader" uid="uid://bkofqxeqlkr3f" path="res://Shaders/Paper.gdshader" id="3_6mlo6"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lxkqg"]
-shader = ExtResource("3_6mlo6")
-shader_parameter/tile_size = 12.0
-shader_parameter/line_width = 0.3
-shader_parameter/line_color = Vector3(0.7, 0.6, 0.7)
-shader_parameter/noise_strength = 0.2
+[ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
 
 [node name="Node2D" type="Node2D"]
-
-[node name="player" parent="." instance=ExtResource("1_u6nay")]
-scale = Vector2(0.5, 0.5)
 
 [node name="PaperRoot" type="Node2D" parent="."]
 position = Vector2(-749, -652)
 
 [node name="PaperLayer" type="TileMapLayer" parent="PaperRoot"]
-material = SubResource("ShaderMaterial_lxkqg")
 tile_map_data = PackedByteArray("AAAaADMAAAAEAAAAAAAhACwAAAAFAAEAAAAiADMAAAAAAAAAAAAiADoAAAAFAAAAAAAkADoAAAAFAAAAAAAoACwAAAAFAAEAAAAtADsAAAAFAAAAAAAuADMAAAAAAAAAAAAyACwAAAAFAAEAAAA3ADoAAAAFAAAAAAA6ADMAAAAAAAAAAAA8ACsAAAAFAAEAAABEACwAAAAFAAEAAABEADsAAAAFAAAAAABGADMAAAAAAAAAAABMADMAAAADAAAAAAA=")
 tile_set = ExtResource("2_u6nay")
+script = ExtResource("3_gjpho")
+
+[node name="player" parent="." instance=ExtResource("1_u6nay")]
+scale = Vector2(0.5, 0.5)
