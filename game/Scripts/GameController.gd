@@ -1,7 +1,7 @@
 extends Node
 
-@onready var hud := $"HUD"
-@onready var game := $"Scene"
+@onready var hud := $'HUD'
+@onready var game := $'Scene'
 
 var scene_instance
 
