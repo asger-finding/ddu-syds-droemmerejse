@@ -213,7 +213,7 @@ script = ExtResource("12_v63vq")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyKo"]
 sprite_frames = SubResource("SpriteFrames_65xv6")
 animation = &"OndHaj"
-frame_progress = 0.21697
+frame_progress = 0.470326
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyKo"]
