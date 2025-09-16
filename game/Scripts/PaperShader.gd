@@ -3,7 +3,7 @@ extends TileMapLayer
 var shader_material: ShaderMaterial
 
 func _ready() -> void:
-	var shader_code := """
+	var shader_code := '''
 shader_type canvas_item;
 render_mode world_vertex_coords;
 
@@ -46,18 +46,18 @@ void fragment() {
 
 	COLOR = vec4(mixed, base.a);
 }
-"""
+'''
 	var shader = Shader.new()
 	shader.code = shader_code
 
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
-	shader_material.set_shader_parameter("line_color", Vector3(0.7, 0.6, 0.7))
+	shader_material.set_shader_parameter('line_color', Vector3(0.7, 0.6, 0.7))
 
 	material = shader_material
 
 func _process(_delta: float) -> void:
 	var cam_zoom = get_viewport().get_camera_2d().zoom.x
 	if shader_material:
-		shader_material.set_shader_parameter("tile_size", 12.0 * cam_zoom)
-		shader_material.set_shader_parameter("line_width", 0.3 * cam_zoom)
+		shader_material.set_shader_parameter('tile_size', 12.0 * cam_zoom)
+		shader_material.set_shader_parameter('line_width', 0.3 * cam_zoom)

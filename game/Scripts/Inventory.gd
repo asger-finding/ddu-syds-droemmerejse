@@ -10,13 +10,13 @@ var followers = []
 
 func add_scrap(num: int) -> void:
 	if num <= 0:
-		printerr("Tried to add zero or less scrap to inventory")
+		printerr('Tried to add zero or less scrap to inventory')
 		return
 	scrap_amount += num
 
 func add_fluff(num: int) -> void:
 	if num <= 0:
-		printerr("Tried to add zero or less fluff to inventory")
+		printerr('Tried to add zero or less fluff to inventory')
 		return
 	fluff_amount += num
 
@@ -32,4 +32,4 @@ func remove_follower(identifier: String) -> void:
 		return
 	var index = followers.find(identifier)
 	var popped = followers.pop_at(index)
-	print("Popped: ", popped)
+	print('Popped: ', popped)
