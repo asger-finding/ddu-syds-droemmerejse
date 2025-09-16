@@ -1,9 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://cq4gf0ctpud42"]
+[gd_scene load_steps=5 format=3 uid="uid://cq4gf0ctpud42"]
 
+[ext_resource type="Script" uid="uid://63qhft3d562w" path="res://Scripts/Constants.gd" id="1_24d08"]
 [ext_resource type="Script" uid="uid://bed1661ujgmmn" path="res://Scripts/GameController.gd" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://ccka8i7m0yo72" path="res://Scenes/Scene-Test-Tilemap.tscn" id="2_24d08"]
+[ext_resource type="Script" uid="uid://y1k8o0ynu5yh" path="res://Scripts/Global.gd" id="3_cwqeq"]
 
 [node name="GameController" type="Node"]
 script = ExtResource("1_uu6xs")
+
+[node name="Constants" type="Node" parent="."]
+script = ExtResource("1_24d08")
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -17,5 +23,8 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Main2D" type="Node2D" parent="."]
+script = ExtResource("3_cwqeq")
+
+[node name="world" parent="Main2D" instance=ExtResource("2_24d08")]
 
 [node name="Camera2D" type="Camera2D" parent="Main2D"]
