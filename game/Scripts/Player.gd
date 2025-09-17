@@ -30,11 +30,10 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if is_alive():
 		if process_stun(delta):
-			move_and_slide()
 			return
 			
 		_handle_animation()
-	
+		
 	move_and_slide()
 
 func _physics_process(delta: float) -> void:
@@ -51,7 +50,6 @@ func _physics_process(delta: float) -> void:
 	
 	_handle_jump()
 	_handle_roll()
-	
 	_handle_punch()
 	_handle_horizontal_movement(delta)
 
@@ -125,7 +123,6 @@ func _handle_jump() -> void:
 func _handle_roll() -> void:
 	if is_rolling:
 		velocity.x = (-1 if _animated_sprite.flip_h else 1) * Global.Constants.ROLL_VELOCITY
-		move_and_slide()
 
 func _start_roll() -> void:
 	is_rolling = true
@@ -207,7 +204,7 @@ func process_stun(delta: float) -> bool:
 
 	if is_stunned:
 		is_rolling = false
-		var white := (int(floor(stun_time * Global.Constants.FLASH_FREQUENCY)) % 2 == 0) if stun_time > delta else false
+		var white := (int(floor(stun_time * Global.Constants.FLASH_FREQUENCY)) % 2 == 0) if stun_time >= delta else false
 		_animated_sprite.material.set_shader_parameter("white", white)
 	return is_stunned
 	
