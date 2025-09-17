@@ -18,8 +18,7 @@ func load_scene(scene_name: String) -> void:
 	unload_scene()
 	var path := 'res://Scenes/%s.tscn' % scene_name
 	var scene_resource = load(path)
-	if (scene_resource):
-		scene_instance = scene_resource.instance()
-		game.add_child(scene_instance)
-	else:
-		assert(false, 'Scene path not found')
+	assert(scene_resource, 'Tried to load scene, but provided scene path was not found')
+
+	scene_instance = scene_resource.instance()
+	game.add_child(scene_instance)

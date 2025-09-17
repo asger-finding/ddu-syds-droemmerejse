@@ -2,45 +2,53 @@ extends CharacterBody2D
 class_name Player
 
 # --- State ---
-var health := 3
+var health := 0
 var jump_count := 0
 var is_fastfalling := false
 var is_rolling := false
 var is_punching := false
-var roll_direction := 0   # -1 = left, 1 = right
 var stun_time := 0.0
 
 # --- References ---
-@onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
-@onready var _punch_hit_box: CollisionShape2D = $AnimatedSprite2D/Punch/Punchhitbox
+@onready var animated_sprite: AnimatedSprite2D = $PlayerSprite
+@onready var punch_hit_box: CollisionShape2D = $PlayerSprite/Punch/PunchHitbox
 
 var shader_material: ShaderMaterial
 
 # --- Lifecycle ---
 func _ready() -> void:
 	Global.Player = self
+	health = Global.Constants.HEALTH
 	_setup_flash_shader()
 
 func _process(delta: float) -> void:
+	if not is_alive():
+		_die()
+	
 	if process_stun(delta):
 		move_and_slide()
 		return
+	
 	_handle_animation()
 	move_and_slide()
-	if not is_alive():
-		_die()
 
 func _physics_process(delta: float) -> void:
+	_apply_gravity(delta)
+	
 	if stun_time > 0:
 		return
-	_apply_gravity(delta)
+	
 	if is_punching:
 		return
-	_punch_hit_box.disabled = true
+	
+	punch_hit_box.disabled = true
+	
 	_handle_jump()
+	
 	if is_rolling:
 		_apply_roll()
 		return
+	
 	_handle_fastfall(delta)
 	_handle_punch()
 	_handle_horizontal_movement(delta)
@@ -60,39 +68,39 @@ func _setup_flash_shader() -> void:
 	shader.code = shader_code
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
-	_animated_sprite.material = shader_material
-var moving
+	animated_sprite.material = shader_material
+
 # --- Internal: Animation ---
 func _handle_animation() -> void:
 	if is_rolling:
 		return
 	if is_punching:
 		return
-		
+	
 	var moving := false
-	_animated_sprite.speed_scale = 1
+	# animated_sprite.speed_scale = 1
 	if Input.is_action_just_pressed("ui_down") and is_on_floor():
 		_start_roll()
 		return
 
 	if Input.is_action_pressed("ui_right"):
-		_animated_sprite.flip_h = false
+		animated_sprite.flip_h = false
 		if is_on_floor():
-			_animated_sprite.play("Run")
+			animated_sprite.play("Run")
 			moving = true
 	elif Input.is_action_pressed("ui_left"):
-		_animated_sprite.flip_h = true
+		animated_sprite.flip_h = true
 		if is_on_floor():
-			_animated_sprite.play("Run")
+			animated_sprite.play("Run")
 			moving = true
 
 	if not moving:
-		_animated_sprite.stop()
+		animated_sprite.stop()
 		if is_on_floor():
-			_animated_sprite.speed_scale = 0.8*(velocity.x)/(Global.Constants.TOP_SPEED)
-			_animated_sprite.play("Stand")
+			# animated_sprite.speed_scale = 0.8*(velocity.x)/(Global.Constants.TOP_SPEED)
+			animated_sprite.play("Idle")
 		else:
-			_animated_sprite.play("Fald")
+			animated_sprite.play("Fall")
 
 # --- Internal: Movement ---
 func _apply_gravity(delta: float) -> void:
@@ -106,19 +114,18 @@ func _apply_gravity(delta: float) -> void:
 func _handle_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor() or jump_count < Global.Constants.MAX_JUMPS:
-			velocity.y = Global.Constants.JUMP_VELOCITY
+			velocity.y = -Global.Constants.JUMP_VELOCITY
 			jump_count += 1
 			is_rolling = false
 
 func _apply_roll() -> void:
-	velocity.x = roll_direction * Global.Constants.ROLL_VELOCITY
+	velocity.x = (-1 if animated_sprite.flip_h else 1) * Global.Constants.ROLL_VELOCITY
 	move_and_slide()
 
 func _start_roll() -> void:
 	is_rolling = true
-	_animated_sprite.speed_scale = 2
-	_animated_sprite.play("Roll")
-	roll_direction = -1 if _animated_sprite.flip_h else 1
+	# animated_sprite.speed_scale = 5
+	animated_sprite.play("Roll")
 
 func _handle_fastfall(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_down") and not is_on_floor():
@@ -151,50 +158,47 @@ func _handle_punch():
 	if Input.is_action_just_pressed("Punch"):
 		is_rolling=false
 		is_punching = true
-		_animated_sprite.play("Punch")
+		animated_sprite.play("Punch")
 		var direction
-		if _animated_sprite.flip_h: 
+		if animated_sprite.flip_h: 
 			direction = -1 
 		else:
 			direction = 1
-		_punch_hit_box.disabled = false
-		_punch_hit_box.position= position + Vector2(200*direction,70)
-		print(position,_punch_hit_box.position )
+		punch_hit_box.disabled = false
+		punch_hit_box.position= position + Vector2(200*direction,70)
+		print(position,punch_hit_box.position )
 		
 		print("PUNCH!")
-
-
 
 # --- Internal: State ---
 func _die() -> void:
 	print("you r died")
-	hide()
+	animated_sprite.play("Death")
 	set_process(false)
 
 # --- Callbacks ---
-func _on_animated_sprite_2d_animation_finished() -> void:
-	if _animated_sprite.animation == "Roll":
-		is_rolling = false
-	if _animated_sprite.animation == "Punch":
-		is_punching = false
-		_punch_hit_box.disabled = true
-		_animated_sprite.play("Stand")
+func _onanimated_sprite_2d_animation_finished() -> void:
+	match animated_sprite.animation:
+		"Roll":
+			is_rolling = false
+		"Punch":
+			is_punching = false
+			punch_hit_box.disabled = true
+			animated_sprite.play("Idle")
 
 func _on_punch_body_entered(body: Node2D) -> void:
-	if body.is_class("CharacterBody2D") and body != self:
-		body.health -=1
+	print(body.get_class())
+	if body.is_class("Enemy") and body != self:
+		body.health -= 1
 		print("you hit") 
 		print(body)
-	else:
-		pass # Replace with function body.
+
 func _on_punch_body_exited(body: Node2D) -> void:
-	if body.is_class("CharacterBody2D") and body != self:
-		body.health -=1
+	if body.is_class("Enemy") and body != self:
+		body.health -= 1
 		print("you hit") 
 		print(body)
-	pass # Replace with function body.
-	
-	
+
 # --- Public API: Stun ---
 func stun(time: float) -> bool:
 	if stun_time > 0:
@@ -209,8 +213,18 @@ func process_stun(delta: float) -> bool:
 	if is_stunned:
 		is_rolling = false
 		var white := (int(floor(stun_time * Global.Constants.FLASH_FREQUENCY)) % 2 == 0) if stun_time > delta else false
-		_animated_sprite.material.set_shader_parameter("white", white)
+		animated_sprite.material.set_shader_parameter("white", white)
 	return is_stunned
+	
+# --- Public API: Knockback ---
+func knockback(direction: Vector2, launch_force: float, ignore_current_velocity = true) -> void:
+	var new_velocity = direction * launch_force
+	
+	if ignore_current_velocity:
+		print(new_velocity)
+		velocity = new_velocity
+	else:
+		velocity += new_velocity
 
 # --- Public API: Health ---
 func get_health() -> int:
@@ -236,7 +250,7 @@ func is_alive() -> bool:
 
 # --- Public API: States ---
 func get_roll() -> Dictionary:
-	return { "state": is_rolling, "direction": roll_direction }
+	return { "state": is_rolling, "direction": -1 if animated_sprite.flip_h else 1 }
 
 func get_fastfall() -> Dictionary:
 	return { "state": is_fastfalling }

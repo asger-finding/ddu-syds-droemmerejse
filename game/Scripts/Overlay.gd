@@ -2,11 +2,11 @@ extends Control
 
 @onready var hearts_container = $HealthContainer
 @onready var filling_label = $FillingContainer/FillingLabel
-@onready var gears_label = $GearsContainer/GearsLabel
+@onready var scrap_label = $ScrapContainer/ScrapLabel
 
 var last_health = -1
 var last_filling = -1
-var last_gears = -1
+var last_scrap = -1
 
 func _ready():
 	update_health()
@@ -22,8 +22,8 @@ func _process(_delta):
 		last_filling = Global.Inventory.Filling
 		update_collectibles()
 	
-	if Global.Inventory.Gears != last_gears:
-		last_gears = Global.Inventory.Gears
+	if Global.Inventory.Scrap != last_scrap:
+		last_scrap = Global.Inventory.Scrap
 		update_collectibles()
 
 func update_health():
@@ -59,4 +59,4 @@ func update_health():
 
 func update_collectibles():
 	filling_label.text = str(Global.Inventory.Filling)
-	gears_label.text   = str(Global.Inventory.Gears)
+	scrap_label.text   = str(Global.Inventory.Scrap)

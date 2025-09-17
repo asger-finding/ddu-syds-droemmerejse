@@ -1,6 +1,6 @@
 extends ColorRect
 
-@export var camera_reference: Camera2D
+@export var camera_reference: Camera2D # Parallax should follow the camera transform
 @export var parallax_speed: float = 0.2  # How fast the background moves relative to camera
 
 var shader_material: ShaderMaterial

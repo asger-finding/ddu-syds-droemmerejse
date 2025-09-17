@@ -4,17 +4,16 @@ var effective_velocity := 0.0
 
 func _process(delta: float) -> void:
 	var player: Player = Global.Player
-	if not player:
-		assert(false, 'Player does not exist in Global context. Camera cannot follow.')
-		return
-		
+	
+	assert(player is Player, 'Player does not exist in Global context. Camera cannot follow.')
+	
 	if not player.is_alive():
 		# Player is dead. Intentionally do nothing.
 		return
 	
-	position.x = lerp(position.x, player.position.x / 2, Global.Constants.FOLLOW_X_INTERPOLATION_SPEED * delta)
+	position.x = lerp(position.x, player.position.x, Global.Constants.FOLLOW_X_INTERPOLATION_SPEED * delta)
 	position.y = min(
-		lerp(position.y, player.position.y / 2, Global.Constants.FOLLOW_Y_INTERPOLATION_SPEED * delta),
+		lerp(position.y, player.position.y, Global.Constants.FOLLOW_Y_INTERPOLATION_SPEED * delta),
 		Global.Constants.CAMERA_Y_FLOOR
 	)
 	

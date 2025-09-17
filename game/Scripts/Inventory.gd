@@ -1,7 +1,7 @@
 extends Node
 
 # --- Inventory state ---
-var Gears = 0
+var Scrap = 0
 var Filling = 0
 var Followers = []
 
@@ -11,27 +11,23 @@ func _ready():
 
 # --- Public API: Inventory ---
 func add_scrap(num: int) -> void:
-	if num <= 0:
-		assert(false, 'Tried to add zero or less scrap to inventory')
-		return
-	Gears += num
+	assert(num > 0, 'Tried to add zero or less scrap to inventory')
+
+	Scrap += num
 
 func add_fluff(num: int) -> void:
-	if num <= 0:
-		assert(false, 'Tried to add zero or less fluff to inventory')
-		return
+	assert(num > 0, 'Tried to add zero or less scrap to inventory')
+
 	Filling += num
 
 func add_follower(identifier: String) -> void:
-	if identifier not in Global.Constants.Followers:
-		assert(false, 'Follower ID does not exist')
-		return
+	assert(identifier in Global.Constants.Followers, 'Follower ID does not exist')
+	
 	Followers.push_front(identifier)
 
 func remove_follower(identifier: String) -> void:
-	if identifier not in Global.Constants.Followers:
-		assert(false, 'Follower ID does not exist')
-		return
+	assert(identifier in Global.Constants.Followers, 'Follower ID does not exist')
+
 	var index = Followers.find(identifier)
 	var popped = Followers.pop_at(index)
 	print('Popped: ', popped)
