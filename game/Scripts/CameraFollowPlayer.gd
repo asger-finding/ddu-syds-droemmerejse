@@ -1,8 +1,5 @@
 extends Camera2D
 
-func _ready() -> void:
-	pass
-
 var effective_velocity := 0.0
 
 func _process(delta: float) -> void:
@@ -26,7 +23,7 @@ func _process(delta: float) -> void:
 	var smoothing := 5.0
 	effective_velocity = lerp(effective_velocity, target_velocity, smoothing * delta)
 	
-	# Stabilize zoom factor with clamp
+	# Stabilize zoom factor
 	var speed_over: float = max(effective_velocity - 500.0, 0.0)
 	var zoom_factor: float = clamp(-exp(speed_over * Global.Constants.CAMERA_ZOOM_PLAYER_SPEED_COEFF) + 2.0, 0.0, 1.0)
 	

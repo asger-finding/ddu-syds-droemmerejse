@@ -2,13 +2,13 @@ extends TileMapLayer
 
 var shader_material: ShaderMaterial
 
-
 func _ready() -> void:
 	Global.PaperTileMap = self
 	var shader_code := '''
 shader_type canvas_item;
 render_mode world_vertex_coords;
 
+// Paper settings
 uniform float tile_size = 32.0;
 uniform float line_width = 1.0;
 uniform vec3 line_color = vec3(0.6);
@@ -80,18 +80,25 @@ void fragment() {
 
 	for (float x = -float(blur_radius); x <= float(blur_radius); ++x) {
 		for (float y = -float(blur_radius); y <= float(blur_radius); ++y) {
-			weight += (gaussian(-coord.x + x + 1.0) - gaussian(-coord.x + x))
-				* (gaussian(-coord.y + y + 1.0) - gaussian(-coord.y + y))
-				* padded_sample(TEXTURE, UV + vec2(x, y) * TEXTURE_PIXEL_SIZE).a;
+			vec2 offset = vec2(x, y) * TEXTURE_PIXEL_SIZE;
+			// Sample the texture alpha at the offset position
+			float sample_alpha = padded_sample(TEXTURE, UV + offset).a;
+			// Only contribute to shadow if the sampled pixel has non-zero alpha
+			if (sample_alpha > 0.0) {
+				weight += (gaussian(-coord.x + x + 1.0) - gaussian(-coord.x + x))
+					* (gaussian(-coord.y + y + 1.0) - gaussian(-coord.y + y))
+					* sample_alpha;
+			}
 		}
 	}
 
 	vec4 c = padded_sample(TEXTURE, UV);
 	float e = shadow_only ? 0.0 : 1.0;
 
-	// mix shadow + paper effect
-	COLOR = c.a * e * paper_color + (1.0 - c.a * e) * vec4(1.0, 1.0, 1.0, weight) * shadow_color;
-	COLOR *= modulate;
+	// Mix shadow and paper effect, ensuring shadow respects paper's alpha
+	vec4 shadow = vec4(shadow_color.rgb, shadow_color.a * weight * c.a);
+	vec4 final_color = mix(shadow, paper_color, c.a * e);
+	COLOR = final_color * modulate;
 }
 '''
 	var shader = Shader.new()
@@ -101,7 +108,7 @@ void fragment() {
 	shader_material.shader = shader
 	shader_material.set_shader_parameter('line_color', Vector3(0.7, 0.6, 0.7))
 	shader_material.set_shader_parameter('shadow_color', Color(0,0,0,0.3))
-	shader_material.set_shader_parameter('blur_std', 6.0)
+	shader_material.set_shader_parameter('blur_std', 1.0)
 
 	material = shader_material
 
