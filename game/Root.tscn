@@ -1,10 +1,30 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq4gf0ctpud42"]
+[gd_scene load_steps=14 format=3 uid="uid://cq4gf0ctpud42"]
 
 [ext_resource type="Script" uid="uid://63qhft3d562w" path="res://Scripts/Constants.gd" id="1_24d08"]
 [ext_resource type="Script" uid="uid://bed1661ujgmmn" path="res://Scripts/GameController.gd" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://bfumbaprtnnwu" path="res://Scenes/World.tscn" id="2_24d08"]
 [ext_resource type="Script" uid="uid://y1k8o0ynu5yh" path="res://Scripts/Global.gd" id="3_cwqeq"]
+[ext_resource type="Script" uid="uid://c3omvkqoxj37v" path="res://Scripts/Inventory.gd" id="3_f5i44"]
+[ext_resource type="Script" uid="uid://dl0cglho8jpui" path="res://Overlay.gd" id="3_g0d6c"]
 [ext_resource type="Script" uid="uid://botyddwy7pgi" path="res://CameraFollow.gd" id="5_3ipfy"]
+[ext_resource type="FontFile" uid="uid://b6ixxpdy5in1g" path="res://Fonts/Schoolbell-Regular.ttf" id="8_n0g3p"]
+[ext_resource type="Texture2D" uid="uid://cpe2c0i8bj32q" path="res://Assets/HUD/Filling/frame.png" id="9_8hd61"]
+[ext_resource type="Texture2D" uid="uid://d2butkivrlbho" path="res://Assets/HUD/Gears/frame.png" id="10_hbe7s"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2qvp8"]
+font = ExtResource("8_n0g3p")
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_n0g3p"]
+font = ExtResource("8_n0g3p")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8hd61"]
+font = ExtResource("8_n0g3p")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
 
 [node name="GameController" type="Node"]
 script = ExtResource("1_uu6xs")
@@ -12,16 +32,8 @@ script = ExtResource("1_uu6xs")
 [node name="Constants" type="Node" parent="."]
 script = ExtResource("1_24d08")
 
-[node name="HUD" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="Overlay" type="Control" parent="HUD"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("3_f5i44")
 
 [node name="Scene" type="Node2D" parent="."]
 script = ExtResource("3_cwqeq")
@@ -30,3 +42,61 @@ script = ExtResource("3_cwqeq")
 
 [node name="Camera" type="Camera2D" parent="Scene"]
 script = ExtResource("5_3ipfy")
+
+[node name="HUD" type="CanvasLayer" parent="Scene/Camera"]
+
+[node name="Overlay" type="Control" parent="Scene/Camera/HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 15.0
+offset_top = 10.0
+offset_right = 55.0
+offset_bottom = 50.0
+script = ExtResource("3_g0d6c")
+
+[node name="HealthText" type="Label" parent="Scene/Camera/HUD/Overlay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Health:"
+label_settings = SubResource("LabelSettings_2qvp8")
+
+[node name="HealthContainer" type="HBoxContainer" parent="Scene/Camera/HUD/Overlay"]
+layout_mode = 0
+offset_left = 171.0
+offset_top = 36.0
+offset_right = 211.0
+offset_bottom = 76.0
+scale = Vector2(0.35, 0.35)
+
+[node name="FillingContainer" type="HBoxContainer" parent="Scene/Camera/HUD/Overlay"]
+layout_mode = 2
+offset_top = 55.0
+offset_right = 142.0
+offset_bottom = 138.0
+
+[node name="FillingIcon" type="TextureRect" parent="Scene/Camera/HUD/Overlay/FillingContainer"]
+layout_mode = 2
+texture = ExtResource("9_8hd61")
+expand_mode = 2
+
+[node name="FillingLabel" type="Label" parent="Scene/Camera/HUD/Overlay/FillingContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_n0g3p")
+
+[node name="GearsContainer" type="HBoxContainer" parent="Scene/Camera/HUD/Overlay"]
+layout_mode = 0
+offset_top = 131.0
+offset_right = 141.0
+offset_bottom = 214.0
+
+[node name="GearsIcon" type="TextureRect" parent="Scene/Camera/HUD/Overlay/GearsContainer"]
+layout_mode = 2
+texture = ExtResource("10_hbe7s")
+expand_mode = 2
+
+[node name="GearsLabel" type="Label" parent="Scene/Camera/HUD/Overlay/GearsContainer"]
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_8hd61")

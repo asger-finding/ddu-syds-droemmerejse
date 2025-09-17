@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://khd7wjylv621"
-path="res://.godot/imported/Hjerte (død) 1.png-9b560396dad837a093c4230b8e7327d9.ctex"
+uid="uid://cpe2c0i8bj32q"
+path="res://.godot/imported/frame.png-d45858a76c7c5b61387d9b0b7b6d500b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HUD/Hjerte (død) 1.png"
-dest_files=["res://.godot/imported/Hjerte (død) 1.png-9b560396dad837a093c4230b8e7327d9.ctex"]
+source_file="res://Assets/HUD/Filling/frame.png"
+dest_files=["res://.godot/imported/frame.png-d45858a76c7c5b61387d9b0b7b6d500b.ctex"]
 
 [params]
 

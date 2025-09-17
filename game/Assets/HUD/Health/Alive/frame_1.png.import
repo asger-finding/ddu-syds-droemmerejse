@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d2butkivrlbho"
-path="res://.godot/imported/frame_0.png-ccd547ce3d52c3b20de0159c35456a7b.ctex"
+uid="uid://che4hhnr38xq8"
+path="res://.godot/imported/frame_1.png-47615bad9b79147df9f7ceb8fed82d5c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HUD/Gears/frame_0.png"
-dest_files=["res://.godot/imported/frame_0.png-ccd547ce3d52c3b20de0159c35456a7b.ctex"]
+source_file="res://Assets/HUD/Health/Alive/frame_1.png"
+dest_files=["res://.godot/imported/frame_1.png-47615bad9b79147df9f7ceb8fed82d5c.ctex"]
 
 [params]
 
