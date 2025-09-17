@@ -29,3 +29,4 @@ const GRAVITY = 6500
 
 #Enemy movement
 const COW_SPEED = 400
+const DRAGON_SPEED= 800
