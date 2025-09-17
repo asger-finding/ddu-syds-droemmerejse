@@ -1,13 +1,13 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://cdid8llshmlpg"]
 
-[ext_resource type="Texture2D" uid="uid://ddmr8125rk86k" path="res://Assets/Tilemaps/tilemap-test.png" id="1_ejx5b"]
+[ext_resource type="Texture2D" uid="uid://ddmr8125rk86k" path="res://Assets/Tilemaps/paper.png" id="1_ejx5b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_u6nay"]
 texture = ExtResource("1_ejx5b")
 texture_region_size = Vector2i(64, 64)
 0:0/size_in_atlas = Vector2i(3, 3)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-96.3858, -96.0672, 96.0672, -96.7044, 95.7485, 96.0672, -96.0672, 95.7485)
 3:0/size_in_atlas = Vector2i(1, 5)
 3:0/0 = 0
 4:0/size_in_atlas = Vector2i(1, 5)

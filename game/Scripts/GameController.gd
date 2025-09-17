@@ -1,7 +1,7 @@
 extends Node
 
-@onready var hud := $"HUD"
-@onready var game := $"Main2D"
+@onready var hud := $'HUD'
+@onready var game := $'Scene'
 
 var scene_instance
 
@@ -22,4 +22,4 @@ func load_scene(scene_name: String) -> void:
 		scene_instance = scene_resource.instance()
 		game.add_child(scene_instance)
 	else:
-		printerr('Scene path not found')
+		assert(false, 'Scene path not found')
