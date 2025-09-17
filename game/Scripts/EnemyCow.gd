@@ -4,6 +4,7 @@ var dead = false
 var direction
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var _ray_cast_2d = $RayCast2D
+@onready var _collision_shape_2d = $CollisionShape2D
 #@onready var _paper_layer = getPaperRoot/PaperLayer
 var health = 1
 func _physics_process(delta: float) -> void:
@@ -42,6 +43,8 @@ func is_floor_ahead():
 func death():
 	hide()
 	set_process(false)
+	set_physics_process(false)
+	_collision_shape_2d.disabled = true
 	dead=true
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

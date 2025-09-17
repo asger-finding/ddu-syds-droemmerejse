@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dftcpbshdx783"]
+[gd_scene load_steps=25 format=3 uid="uid://dftcpbshdx783"]
 
 [ext_resource type="Script" uid="uid://nta00bts7x8w" path="res://Scripts/Player.gd" id="1_2f2ij"]
 [ext_resource type="Texture2D" uid="uid://ivti0mx0003c" path="res://Assets/Sprites/Player/Fall/frame_0.png" id="2_r53dp"]
@@ -17,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://stvh0hkkhb44" path="res://Assets/Sprites/Player/Punch/frame_0.png" id="12_ye8ic"]
 [ext_resource type="Texture2D" uid="uid://65k375fygsoh" path="res://Assets/Sprites/Player/Stand/frame_0.png" id="13_oimcg"]
 [ext_resource type="PackedScene" uid="uid://cg7wxtqqfp1x" path="res://Scenes/enemy_drage.tscn" id="13_r53dp"]
+[ext_resource type="PackedScene" uid="uid://bmll3giptxv7o" path="res://Scenes/fluff.tscn" id="18_lpedo"]
+[ext_resource type="PackedScene" uid="uid://drv412exw06io" path="res://Scenes/scrap.tscn" id="19_lpedo"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5t3f"]
 animations = [{
@@ -94,7 +96,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye8ic"]
-size = Vector2(332, 538)
+size = Vector2(339, 956)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ye8ic"]
 radius = 14.9
@@ -137,13 +139,12 @@ frame_progress = 1.0
 position = Vector2(62, -396)
 
 [node name="Punchhitbox" type="CollisionShape2D" parent="Player/AnimatedSprite2D/Punch"]
-position = Vector2(174, 203)
+position = Vector2(-138, 454)
 shape = SubResource("RectangleShape2D_ye8ic")
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-3.9, -1)
-scale = Vector2(1, 1)
+position = Vector2(-8.4, 5.2)
 shape = SubResource("CapsuleShape2D_ye8ic")
 one_way_collision = true
 one_way_collision_margin = 0.0
@@ -157,6 +158,12 @@ position = Vector2(865, -134)
 
 [node name="EnemyDrage" parent="." instance=ExtResource("13_r53dp")]
 position = Vector2(-189, -1385)
+
+[node name="Fluff type 1" parent="." instance=ExtResource("18_lpedo")]
+position = Vector2(-2208, -1422)
+
+[node name="Scrap" parent="." instance=ExtResource("19_lpedo")]
+position = Vector2(-2645, -1330)
 
 [connection signal="animation_finished" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Player/AnimatedSprite2D/Punch" to="Player" method="_on_punch_body_entered"]

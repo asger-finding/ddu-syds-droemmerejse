@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://drv412exw06io"]
+
+[ext_resource type="PackedScene" uid="uid://bmll3giptxv7o" path="res://Scenes/fluff.tscn" id="1_itaa7"]
+[ext_resource type="Texture2D" uid="uid://csyy4bi4bsf42" path="res://Assets/Collectibles/gear.png" id="2_nkhrt"]
+[ext_resource type="Script" uid="uid://cf2w4rpne6b74" path="res://Scripts/scrap.gd" id="3_cu64b"]
+
+[node name="Scrap" instance=ExtResource("1_itaa7")]
+texture = ExtResource("2_nkhrt")
+script = ExtResource("3_cu64b")
