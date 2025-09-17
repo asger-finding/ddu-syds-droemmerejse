@@ -2,24 +2,23 @@ extends CharacterBody2D
 
 class_name Player;
 
+var health := 3
 var jump_count := 0
+var is_fastfalling := false
 var is_rolling := false
 var roll_direction := 0 # -1 (left) or 1 (right)
-var fastfall := 1
-var fastfall_count := 1
-var health := 3
-
+var movement_locked = false
 @onready var _animated_sprite = $AnimatedSprite2D
 
-# Define our Player globally
+# --- Internal functions ---
 func _ready() -> void:
 	Global.Player = self
 
 func _process(_delta):
-	# movement animations
+	# Movement animations
 	var moving = false
-	if is_rolling == true:
-		return
+	
+	if is_rolling == true: return
 
 	_animated_sprite.speed_scale = 1
 	if is_on_floor():
@@ -57,18 +56,19 @@ func _process(_delta):
 		set_process(false)
 
 func _physics_process(delta: float) -> void:
+	if movement_locked:
+		return
 	# Gravity
 	if not is_on_floor():
 		if jump_count <= 1:
-			jump_count=1
-		velocity.y += Global.Constants.GRAVITY * fastfall * delta
+			jump_count = 1
+		velocity.y += Global.Constants.GRAVITY * delta
 	else:
 		# Reset jump counter on landing
 		jump_count = 0
-		fastfall = 1
-	
-	# Jump input
-	if Input.is_action_just_pressed('ui_accept'):
+
+	# Jump input (Arrow Up or Space)
+	if Input.is_action_just_pressed('ui_up') or Input.is_action_just_pressed('ui_accept'):
 		if is_on_floor() or jump_count < Global.Constants.MAX_JUMPS:
 			velocity.y = Global.Constants.JUMP_VELOCITY
 			jump_count += 1
@@ -79,7 +79,13 @@ func _physics_process(delta: float) -> void:
 		velocity.x = roll_direction * Global.Constants.ROLL_VELOCITY
 		move_and_slide()
 		return
+		
+	# Fastfall
+	if Input.is_action_just_pressed('ui_down') and !is_on_floor():
+		if velocity.y < 0: velocity.y = Global.Constants.FASTFALL_INITIAL_VELOCITY
+		velocity.y += Global.Constants.FASTFALL_VELOCITY * delta
 	
+	# Left-right movement handling
 	var direction := Input.get_axis('ui_left', 'ui_right')
 	if direction != 0:
 		# If our player is at standstill,
@@ -100,18 +106,50 @@ func _physics_process(delta: float) -> void:
 				dynamic_accel * delta
 			)
 	else:
+		# We deaccelerate in the x axis faster on the ground than in the air
 		var deacceleration = Global.Constants.FLOOR_DEACCELERATION if is_on_floor() else Global.Constants.AIR_DEACCELERATION
 		velocity.x = move_toward(velocity.x, 0, deacceleration * delta)
-	
-	# Fastfall
-	if Input.is_action_just_pressed('ui_down') and !is_on_floor():
-		fastfall = 2
-		fastfall_count += 1
-		if fastfall_count <= 3:
-			velocity.y +=500
 
+# --- Callbacks ---
+# Reset rolling state when animation is done
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == 'Roll':
 		is_rolling = false
-		#print('roll done :p')
-	pass # Replace with function body.
+
+
+# --- Public methods ---
+
+# Health methods
+func get_health() -> int:
+	return health
+
+func set_health(new_health: int) -> int:
+	health = new_health
+	if health < 0: assert(false, 'Health cannot be set to less than 0')
+	return health
+
+func heal(count = 1) -> int:
+	return _change_health(count)
+
+func deal_damage(count = 1) -> int:
+	return _change_health(-count)
+	
+func _change_health(count: int) -> int:
+	health += count
+	if health < 0: health = 0
+	return health
+
+func is_alive() -> bool:
+	return health > 0
+
+# Action states
+func get_roll() -> Dictionary:
+	return {
+		'state': is_rolling,
+		'direction': roll_direction
+	}
+
+func get_fastfall() -> Dictionary:
+	return {
+		'state': is_fastfalling
+	}

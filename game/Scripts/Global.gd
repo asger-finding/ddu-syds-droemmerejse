@@ -6,3 +6,4 @@ var Inventory # TODO
 var Player
 var Constants
 var EnemyParent
+var PaperTileMap
