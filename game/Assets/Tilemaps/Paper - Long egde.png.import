@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://che4hhnr38xq8"
-path="res://.godot/imported/fram_1.png-636c0adbf794dae27e8a65ece9173560.ctex"
+uid="uid://bllktvs6lfl31"
+path="res://.godot/imported/Paper - Long egde.png-b692c122aa21dcf08e16403e0c535188.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HUD/Health/Alive/fram_1.png"
-dest_files=["res://.godot/imported/fram_1.png-636c0adbf794dae27e8a65ece9173560.ctex"]
+source_file="res://Assets/Tilemaps/Paper - Long egde.png"
+dest_files=["res://.godot/imported/Paper - Long egde.png-b692c122aa21dcf08e16403e0c535188.ctex"]
 
 [params]
 

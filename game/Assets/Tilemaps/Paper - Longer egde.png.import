@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpe2c0i8bj32q"
-path="res://.godot/imported/frame_0.png-79b92efe834bfb8f70d35edf83bb3132.ctex"
+uid="uid://b7wbi4gom4hl6"
+path="res://.godot/imported/Paper - Longer egde.png-4df197cb3cdd139042f539f550dac428.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/HUD/Fluff/frame_0.png"
-dest_files=["res://.godot/imported/frame_0.png-79b92efe834bfb8f70d35edf83bb3132.ctex"]
+source_file="res://Assets/Tilemaps/Paper - Longer egde.png"
+dest_files=["res://.godot/imported/Paper - Longer egde.png-4df197cb3cdd139042f539f550dac428.ctex"]
 
 [params]
 

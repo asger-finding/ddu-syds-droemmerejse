@@ -1,35 +1,37 @@
 extends Node
 
+# --- Inventory state ---
+var Gears = 0
+var Filling = 0
+var Followers = []
+
+# --- Lifecycle ---
 func _ready():
 	Global.Inventory = self
 
-# Set default inventory values
-var scrap_amount = 0
-var fluff_amount = 0
-var followers = []
-
+# --- Public API: Inventory ---
 func add_scrap(num: int) -> void:
 	if num <= 0:
 		assert(false, 'Tried to add zero or less scrap to inventory')
 		return
-	scrap_amount += num
+	Gears += num
 
 func add_fluff(num: int) -> void:
 	if num <= 0:
 		assert(false, 'Tried to add zero or less fluff to inventory')
 		return
-	fluff_amount += num
+	Filling += num
 
 func add_follower(identifier: String) -> void:
-	if identifier not in Global.Constants.FOLLOWERS:
+	if identifier not in Global.Constants.Followers:
 		assert(false, 'Follower ID does not exist')
 		return
-	followers.push_front(identifier)
+	Followers.push_front(identifier)
 
 func remove_follower(identifier: String) -> void:
-	if identifier not in Global.Constants.FOLLOWERS:
+	if identifier not in Global.Constants.Followers:
 		assert(false, 'Follower ID does not exist')
 		return
-	var index = followers.find(identifier)
-	var popped = followers.pop_at(index)
+	var index = Followers.find(identifier)
+	var popped = Followers.pop_at(index)
 	print('Popped: ', popped)
