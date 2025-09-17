@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dftcpbshdx783"]
+[gd_scene load_steps=23 format=3 uid="uid://dftcpbshdx783"]
 
 [ext_resource type="Script" uid="uid://nta00bts7x8w" path="res://Scripts/Player.gd" id="1_2f2ij"]
 [ext_resource type="Texture2D" uid="uid://ivti0mx0003c" path="res://Assets/Sprites/Player/Fall/frame_0.png" id="2_r53dp"]
@@ -13,7 +13,9 @@
 [ext_resource type="Texture2D" uid="uid://b42mia73mgmod" path="res://Assets/Sprites/Player/Run/frame_3.png" id="10_oimcg"]
 [ext_resource type="Texture2D" uid="uid://c2wjqxenckvc5" path="res://Assets/Sprites/Player/Run/frame_4.png" id="11_lpedo"]
 [ext_resource type="Texture2D" uid="uid://c0g0iborlmxnt" path="res://Assets/Sprites/Player/Wallslide/frame_0.png" id="12_4xj7t"]
-[ext_resource type="PackedScene" uid="uid://bti2kv65qjgv7" path="res://Scenes/enemy_ko.tscn" id="12_8h68a"]
+[ext_resource type="PackedScene" uid="uid://sp858ls63win" path="res://Scenes/enemy_ko.tscn" id="12_8h68a"]
+[ext_resource type="Texture2D" uid="uid://stvh0hkkhb44" path="res://Assets/Sprites/Player/Punch/frame_0.png" id="12_ye8ic"]
+[ext_resource type="Texture2D" uid="uid://65k375fygsoh" path="res://Assets/Sprites/Player/Stand/frame_0.png" id="13_oimcg"]
 [ext_resource type="PackedScene" uid="uid://cg7wxtqqfp1x" path="res://Scenes/enemy_drage.tscn" id="13_r53dp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5t3f"]
@@ -25,6 +27,17 @@ animations = [{
 "loop": false,
 "name": &"Fald",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_oimcg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ye8ic")
+}],
+"loop": false,
+"name": &"Punch",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -61,7 +74,15 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run",
-"speed": 9.0
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_oimcg")
+}],
+"loop": true,
+"name": &"Stand",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -72,8 +93,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yl1pn"]
-size = Vector2(114, 138)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ye8ic"]
+size = Vector2(332, 538)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ye8ic"]
+radius = 14.9
+height = 103.2
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yl1pn"]
 resource_name = "platform"
@@ -94,19 +119,32 @@ texture_region_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_yl1pn")
 
 [node name="Node2D" type="Node2D"]
+position = Vector2(31, -198)
 
 [node name="Player" type="CharacterBody2D" parent="."]
 scale = Vector2(5, 5)
 script = ExtResource("1_2f2ij")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(0.2, 0.2)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_k5t3f")
-animation = &"Wallslide"
+animation = &"Punch"
+frame = 1
+frame_progress = 1.0
+
+[node name="Punch" type="Area2D" parent="Player/AnimatedSprite2D"]
+position = Vector2(62, -396)
+
+[node name="Punchhitbox" type="CollisionShape2D" parent="Player/AnimatedSprite2D/Punch"]
+position = Vector2(174, 203)
+shape = SubResource("RectangleShape2D_ye8ic")
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(3, -6)
-shape = SubResource("RectangleShape2D_yl1pn")
+position = Vector2(-3.9, -1)
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_ye8ic")
 one_way_collision = true
 one_way_collision_margin = 0.0
 debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
@@ -121,3 +159,4 @@ position = Vector2(865, -134)
 position = Vector2(-189, -1385)
 
 [connection signal="animation_finished" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="body_entered" from="Player/AnimatedSprite2D/Punch" to="Player" method="_on_punch_body_entered"]

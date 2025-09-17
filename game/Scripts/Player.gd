@@ -6,11 +6,14 @@ var health := 3
 var jump_count := 0
 var is_fastfalling := false
 var is_rolling := false
+var is_punching := false
 var roll_direction := 0   # -1 = left, 1 = right
 var stun_time := 0.0
 
 # --- References ---
 @onready var _animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var _punch_hit_box: CollisionShape2D = $AnimatedSprite2D/Punch/Punchhitbox
+
 var shader_material: ShaderMaterial
 
 # --- Lifecycle ---
@@ -31,11 +34,15 @@ func _physics_process(delta: float) -> void:
 	if stun_time > 0:
 		return
 	_apply_gravity(delta)
+	if is_punching:
+		return
+	_punch_hit_box.disabled = true
 	_handle_jump()
 	if is_rolling:
 		_apply_roll()
 		return
 	_handle_fastfall(delta)
+	_handle_punch()
 	_handle_horizontal_movement(delta)
 
 # --- Internal: Shader ---
@@ -54,20 +61,21 @@ func _setup_flash_shader() -> void:
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
 	_animated_sprite.material = shader_material
-
+var moving
 # --- Internal: Animation ---
 func _handle_animation() -> void:
 	if is_rolling:
 		return
-
+	if is_punching:
+		return
+	
+	if is_on_floor() and not moving:
+		_animated_sprite.play("Stand")
+	elif not moving:
+		_animated_sprite.play("Fald")
+		
 	var moving := false
 	_animated_sprite.speed_scale = 1
-
-	if is_on_floor():
-		_animated_sprite.play("Run")
-	else:
-		_animated_sprite.play("Fald")
-
 	if Input.is_action_just_pressed("ui_down") and is_on_floor():
 		_start_roll()
 		return
@@ -139,6 +147,16 @@ func _handle_horizontal_movement(delta: float) -> void:
 		var deaccel: float = Global.Constants.FLOOR_DEACCELERATION if is_on_floor() else Global.Constants.AIR_DEACCELERATION
 		velocity.x = move_toward(velocity.x, 0, deaccel * delta)
 
+func _handle_punch():
+	if Input.is_action_just_pressed("Punch"):
+		is_rolling=false
+		is_punching = true
+		_animated_sprite.play("Punch")
+		_punch_hit_box.disabled = false
+		print("PUNCH!")
+
+
+
 # --- Internal: State ---
 func _die() -> void:
 	print("you r died")
@@ -149,6 +167,17 @@ func _die() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == "Roll":
 		is_rolling = false
+	if _animated_sprite.animation == "Punch":
+		is_punching = false
+		_punch_hit_box.disabled = true
+		_animated_sprite.play("Stand")
+
+func _on_punch_body_entered(body: Node2D) -> void:
+	if body.is_class("CharacterBody2D") and body != self:
+		body.health -=1
+		print("you hit") 
+	else:
+		pass # Replace with function body.
 
 # --- Public API: Stun ---
 func stun(time: float) -> bool:
