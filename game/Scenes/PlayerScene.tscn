@@ -94,7 +94,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye8ic"]
-size = Vector2(332, 538)
+size = Vector2(339, 538)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ye8ic"]
 radius = 14.9
@@ -137,12 +137,12 @@ frame_progress = 1.0
 position = Vector2(62, -396)
 
 [node name="Punchhitbox" type="CollisionShape2D" parent="Player/AnimatedSprite2D/Punch"]
-position = Vector2(174, 203)
+position = Vector2(214, 432)
 shape = SubResource("RectangleShape2D_ye8ic")
 disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2(-3.9, -1)
+position = Vector2(-8.4, 5.2)
 scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_ye8ic")
 one_way_collision = true

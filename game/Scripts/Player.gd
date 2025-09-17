@@ -152,7 +152,15 @@ func _handle_punch():
 		is_rolling=false
 		is_punching = true
 		_animated_sprite.play("Punch")
+		var direction
+		if _animated_sprite.flip_h: 
+			direction = 1 
+		else:
+			direction = -1
 		_punch_hit_box.disabled = false
+		_punch_hit_box.position= position + Vector2(180*direction,70)
+		print(position,_punch_hit_box.position )
+		
 		print("PUNCH!")
 
 
