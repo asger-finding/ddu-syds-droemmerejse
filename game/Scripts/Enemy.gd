@@ -64,9 +64,11 @@ func is_edge_ahead() -> bool:
 	var collider = _edge_raycast.get_collider()
 	return !(collider and collider != Player)
 	
-func receive_knockback(lr_direction: int, knockback_strength: float, duration: float = 0.3) -> void:
+func receive_knockback(lr_direction: int, strength: float, duration: float = 0.3) -> void:
 	knockback_time = duration
-	knockback_velocity = lr_direction * knockback_strength * Vector2.ONE
+	var base_direction = Vector2(lr_direction, 0)
+	var knockback_direction = base_direction.rotated(deg_to_rad(-30))
+	knockback_velocity = knockback_direction * strength
 
 func apply_knockback_to_player(player: Player) -> void:
 		# Temporarily disable floor detection

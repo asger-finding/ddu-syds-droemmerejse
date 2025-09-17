@@ -105,7 +105,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dli4"]
-size = Vector2(770, 1044)
+size = Vector2(1000, 1044)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0dna"]
 size = Vector2(25.8, 101)
@@ -166,6 +166,12 @@ debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 [node name="Enemy" parent="Interactability" instance=ExtResource("18_irg3d")]
 position = Vector2(606, -1058)
 health = 5
+
+[node name="Flying Enemy" parent="Interactability" instance=ExtResource("18_irg3d")]
+position = Vector2(-583, -792)
+enemy_class = "Dragon"
+speed = 500.0
+flight_or_swim_distance = 1600.0
 
 [node name="Fluff" parent="Interactability" instance=ExtResource("19_y8a40")]
 position = Vector2(-2518, -1500)
