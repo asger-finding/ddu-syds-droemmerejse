@@ -2,7 +2,7 @@ extends Node
 
 # Here we initialize our globals
 var GameController
-var Inventory # TODO
+var Inventory
 var Player
 var Constants
 var EnemyParent

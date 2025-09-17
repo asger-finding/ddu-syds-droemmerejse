@@ -14,6 +14,9 @@ const CAMERA_ZOOM_CLOSEST = 0.4 # coeff of furthest we are zoomed in
 const CAMERA_ZOOM_FURTHEST = 0.05 # coeff of furthest we can zoom out
 const CAMERA_ZOOM_PLAYER_SPEED_COEFF = 0.0001 # how fast should we zoom out according to player speed
 
+# Player stats
+const HEALTH := 5
+
 # Player movement
 const MAX_JUMPS := 5
 const START_SPEED := 400.0
