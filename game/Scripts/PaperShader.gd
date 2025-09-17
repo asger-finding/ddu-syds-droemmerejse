@@ -2,7 +2,9 @@ extends TileMapLayer
 
 var shader_material: ShaderMaterial
 
+
 func _ready() -> void:
+	Global.PaperTileMap = self
 	var shader_code := '''
 shader_type canvas_item;
 render_mode world_vertex_coords;

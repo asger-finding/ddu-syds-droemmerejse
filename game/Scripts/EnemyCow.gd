@@ -3,6 +3,9 @@ extends Enemy
 
 var direction
 @onready var _animated_sprite = $AnimatedSprite2D
+@onready var _ray_cast_2d = $RayCast2D
+#@onready var _paper_layer = getPaperRoot/PaperLayer
+
 func _physics_process(delta: float) -> void:
 	_animated_sprite.play("GodKo")
 	if _animated_sprite.flip_h:
@@ -19,6 +22,8 @@ func _physics_process(delta: float) -> void:
 
 	# Check for edge ahead
 	if not is_floor_ahead():
+		_ray_cast_2d.target_position.x*=(-1)
+		print(_ray_cast_2d.target_position.x)
 		if _animated_sprite.flip_h:
 			_animated_sprite.flip_h =false
 		else:
@@ -27,32 +32,30 @@ func _physics_process(delta: float) -> void:
 	# Move and slide with floor detection
 	move_and_slide()
 func is_floor_ahead():
-	var space_state = get_world_2d().direct_space_state
-	# use global coordinates, not local to node
-	var query = PhysicsRayQueryParameters2D.create(Vector2(0, 0), Vector2(50*direction, 15))
-	var result = space_state.intersect_ray(query)
-	if result:
-		var pos = result["position"]
-		#print(result["position"])
-		print(pos.y)
-		#print(position.y)
-		return true if pos.y>=20 else false
-	else:
-		return true
-	#return true if result[1].position.y <= position.y else false
-	
-	
+	if _ray_cast_2d.is_colliding():
+		var collider = _ray_cast_2d.get_collider()
+		if collider:
+			return true
+		else:
+			return false
+		
+		
 	
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		print("You took damage")
 		body.is_rolling=false
-		var direction = -1 if body._animated_sprite.flip_h else 1
-		body.velocity += Vector2(1000*(-direction),-700)
+		var direction = -1 if Global.Player._animated_sprite.flip_h else 1
+		body.velocity += Vector2(1000*(-direction),-1500)
 		body.velocity.x = move_toward(
 			body.velocity.x,
-			2000*(-direction),
+			4000*(-direction),
+			Global.Constants.ACCELERATION
+			)
+		body.velocity.y = move_toward(
+			body.velocity.y,
+			-3000,
 			Global.Constants.ACCELERATION
 			)
 		body.health -= 1

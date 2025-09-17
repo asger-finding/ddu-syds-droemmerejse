@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dftcpbshdx783"]
+[gd_scene load_steps=17 format=3 uid="uid://dftcpbshdx783"]
 
 [ext_resource type="Script" uid="uid://nta00bts7x8w" path="res://Scripts/Player.gd" id="1_2f2ij"]
 [ext_resource type="Texture2D" uid="uid://dpc1b1oshyt7q" path="res://Assets/Sprites/Fald.png" id="2_hkp03"]
@@ -11,15 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://422e2vkvj65i" path="res://Assets/Sprites/Løb 2.png" id="7_i7i4w"]
 [ext_resource type="Texture2D" uid="uid://bjjs7c7dxfocr" path="res://Assets/Sprites/Løb 3.png" id="8_6newq"]
 [ext_resource type="Texture2D" uid="uid://c0nshynkped3c" path="res://Assets/Sprites/Wallslide.png" id="10_tu4k3"]
-[ext_resource type="Script" uid="uid://b4rusvdaja68k" path="res://Scripts/EnemyCow.gd" id="12_35rbq"]
-[ext_resource type="Texture2D" uid="uid://myl7t6t7mecu" path="res://Assets/Sprites/Dasiy/bevægelse2.png" id="13_4xj7t"]
-[ext_resource type="Texture2D" uid="uid://v4wg07iahw63" path="res://Assets/Sprites/Gertrud/bevægelse3.png" id="13_562eg"]
-[ext_resource type="Texture2D" uid="uid://b2bmqb3l5lxns" path="res://Assets/Sprites/Dasiy/bevægelse3.png" id="14_25his"]
-[ext_resource type="Texture2D" uid="uid://brprdj662cl23" path="res://Assets/Sprites/Gertrud/bevægelse2.png" id="14_84f7o"]
-[ext_resource type="Texture2D" uid="uid://cx2tf61pf7kum" path="res://Assets/Sprites/Gertrud/Unavngivet.png" id="15_w6o62"]
-[ext_resource type="Texture2D" uid="uid://cu6xsjqta7ha0" path="res://Assets/Sprites/Dasiy/Unavngivet.png" id="15_ye8ic"]
-[ext_resource type="Texture2D" uid="uid://dc4qtsr8uhrjq" path="res://Assets/Sprites/Otto/bevægelse2.png" id="16_v63vq"]
-[ext_resource type="Texture2D" uid="uid://cpumkdx7ukrej" path="res://Assets/Sprites/Otto/Unavngivet.png" id="17_eadb6"]
+[ext_resource type="PackedScene" uid="uid://sp858ls63win" path="res://Scenes/enemy_ko.tscn" id="12_8h68a"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5t3f"]
 animations = [{
@@ -92,54 +84,6 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_t2xfb"]
 sources/0 = SubResource("TileSetAtlasSource_yl1pn")
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_65xv6"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_562eg")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_84f7o")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_w6o62")
-}],
-"loop": true,
-"name": &"GodDrage",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("16_v63vq")
-}, {
-"duration": 1.0,
-"texture": ExtResource("17_eadb6")
-}],
-"loop": true,
-"name": &"GodHaj",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_4xj7t")
-}, {
-"duration": 1.0,
-"texture": ExtResource("14_25his")
-}, {
-"duration": 1.0,
-"texture": ExtResource("15_ye8ic")
-}],
-"loop": true,
-"name": &"GodKo",
-"speed": 5.0
-}]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1k0mi"]
-size = Vector2(373, 372.25)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r53dp"]
-size = Vector2(383, 359)
-
 [node name="Node2D" type="Node2D"]
 
 [node name="Player" type="CharacterBody2D" parent="."]
@@ -159,24 +103,7 @@ debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_t2xfb")
 
-[node name="EnemyKo" type="CharacterBody2D" parent="."]
-position = Vector2(644, -127)
-script = ExtResource("12_35rbq")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="EnemyKo"]
-sprite_frames = SubResource("SpriteFrames_65xv6")
-animation = &"GodKo"
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyKo"]
-position = Vector2(-3.5, 78.875)
-shape = SubResource("RectangleShape2D_1k0mi")
-
-[node name="Area2D" type="Area2D" parent="EnemyKo"]
-
-[node name="Detect" type="CollisionShape2D" parent="EnemyKo/Area2D"]
-position = Vector2(-1.5, -13.5)
-shape = SubResource("RectangleShape2D_r53dp")
+[node name="EnemyKo" parent="." instance=ExtResource("12_8h68a")]
+position = Vector2(865, -134)
 
 [connection signal="animation_finished" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_animation_finished"]
-[connection signal="body_entered" from="EnemyKo/Area2D" to="EnemyKo" method="_on_area_2d_body_entered"]
