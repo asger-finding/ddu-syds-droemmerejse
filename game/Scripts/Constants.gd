@@ -19,10 +19,9 @@ const TOP_SPEED := 2000.0
 const ACCELERATION := 3000.0
 const FLOOR_DEACCELERATION := 7000.0 # x component deacceleration when touching floor
 const AIR_DEACCELERATION := 1000.0 # x component deacceleration in the air
+const DEAD_DEACCELERATION := 3000.0 # x component deacceleration when our player dies
 const JUMP_VELOCITY := 2800.0
 const ROLL_VELOCITY := 1200.0
-const FASTFALL_VELOCITY := 1500.0
-const FASTFALL_INITIAL_VELOCITY := 800.0
 const FLASH_FREQUENCY := 5.0
 
 # Camera follow configuration

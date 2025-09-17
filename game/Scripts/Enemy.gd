@@ -17,6 +17,8 @@ class_name Enemy
 
 # Private
 var distance_traversed := 0.0 # px
+var knockback_time := 0.0
+var knockback_velocity := Vector2.ZERO
 
 func _ready() -> void:
 	_animated_sprite.play(enemy_class)
@@ -26,6 +28,13 @@ func _process(_delta: float) -> void:
 		kill()
 
 func _physics_process(delta: float) -> void:
+	if knockback_time > 0:
+		knockback_time -= delta
+		velocity = knockback_velocity
+		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, 5.0 * delta)
+		move_and_slide()
+		return
+	
 	match enemy_class:
 		"Cow":
 			velocity.x = speed * (-1 if _animated_sprite.flip_h else 1)
@@ -33,9 +42,8 @@ func _physics_process(delta: float) -> void:
 			# Apply gravity
 			if not is_on_floor(): 
 				velocity.y += Global.Constants.GRAVITY * delta
-			
 			# Check for edge ahead and turn around
-			if is_edge_ahead():
+			elif is_edge_ahead():
 				_edge_raycast.target_position.x *= -1
 				_animated_sprite.flip_h = !_animated_sprite.flip_h
 			
@@ -55,6 +63,10 @@ func _physics_process(delta: float) -> void:
 func is_edge_ahead() -> bool:
 	var collider = _edge_raycast.get_collider()
 	return !(collider and collider != Player)
+	
+func receive_knockback(lr_direction: int, knockback_strength: float, duration: float = 0.3) -> void:
+	knockback_time = duration
+	knockback_velocity = lr_direction * knockback_strength * Vector2.ONE
 
 func apply_knockback_to_player(player: Player) -> void:
 		# Temporarily disable floor detection
@@ -68,8 +80,7 @@ func apply_knockback_to_player(player: Player) -> void:
 		var collision_angle = direction_to_player.angle()
 		var opposite_angle = collision_angle
 		var launch_direction = Vector2(cos(opposite_angle), sin(opposite_angle))
-		var knockback_force = 1500.0
-		player.knockback(launch_direction, knockback_force, true)
+		player.knockback_player(launch_direction, knockback_strength, true)
 		
 		# Restore our floor settings
 		await get_tree().create_timer(0.1).timeout
@@ -86,8 +97,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		var already_stunned = player.stun(stun_time)
 		if already_stunned:
 			return
-			
+		
 		print("You took damage")
-			
+		
 		apply_knockback_to_player(player)
 		player.deal_damage(damage)

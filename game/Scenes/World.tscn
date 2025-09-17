@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://bfumbaprtnnwu"]
+[gd_scene load_steps=25 format=4 uid="uid://bfumbaprtnnwu"]
 
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
 [ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
@@ -107,9 +107,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dli4"]
 size = Vector2(722, 828)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_uvb3s"]
-radius = 14.9
-height = 103.2
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0dna"]
+size = Vector2(27, 97.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5aes"]
+size = Vector2(40, 40)
 
 [node name="SceneRoot" type="Node2D"]
 
@@ -133,7 +135,7 @@ script = ExtResource("3_r0dna")
 position = Vector2(0.2, 0.2)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_d2jk0")
-animation = &"Run"
+animation = &"Idle"
 
 [node name="Punch" type="Area2D" parent="Interactability/Player/PlayerSprite"]
 position = Vector2(62, -396)
@@ -142,15 +144,26 @@ position = Vector2(62, -396)
 position = Vector2(-135, 390)
 shape = SubResource("RectangleShape2D_5dli4")
 
-[node name="PlayerCollision" type="CollisionShape2D" parent="Interactability/Player"]
-position = Vector2(-8.4, 5.2)
-shape = SubResource("CapsuleShape2D_uvb3s")
+[node name="StandingCollision" type="CollisionShape2D" parent="Interactability/Player"]
+position = Vector2(-4.9, -1.1)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_r0dna")
+one_way_collision = true
+one_way_collision_margin = 0.0
+debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
+
+[node name="RollingCollision" type="CollisionShape2D" parent="Interactability/Player"]
+position = Vector2(0, 39)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_b5aes")
+disabled = true
 one_way_collision = true
 one_way_collision_margin = 0.0
 debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 
 [node name="Enemy" parent="Interactability" instance=ExtResource("18_irg3d")]
 position = Vector2(605, -1010)
+health = 5
 
 [node name="Fluff" parent="Interactability" instance=ExtResource("19_y8a40")]
 position = Vector2(-2518, -1500)

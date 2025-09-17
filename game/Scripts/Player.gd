@@ -4,35 +4,41 @@ class_name Player
 # --- State ---
 var health := 0
 var jump_count := 0
-var is_fastfalling := false
 var is_rolling := false
 var is_punching := false
 var stun_time := 0.0
 
 # --- References ---
-@onready var animated_sprite: AnimatedSprite2D = $PlayerSprite
-@onready var punch_hit_box: CollisionShape2D = $PlayerSprite/Punch/PunchHitbox
+@onready var _animated_sprite: AnimatedSprite2D = $PlayerSprite
+@onready var _standing_collision: CollisionShape2D = $StandingCollision
+@onready var _rolling_collision: CollisionShape2D = $RollingCollision
+@onready var _punch_hitbox: CollisionShape2D = $PlayerSprite/Punch/PunchHitbox
 
 var shader_material: ShaderMaterial
 
 # --- Lifecycle ---
 func _ready() -> void:
 	Global.Player = self
+	
 	health = Global.Constants.HEALTH
+	
+	_standing_collision.disabled = false
+	_rolling_collision.disabled = true
+	
 	_setup_flash_shader()
 
 func _process(delta: float) -> void:
-	if not is_alive():
-		_die()
+	if is_alive():
+		if process_stun(delta):
+			move_and_slide()
+			return
+			
+		_handle_animation()
 	
-	if process_stun(delta):
-		move_and_slide()
-		return
-	
-	_handle_animation()
 	move_and_slide()
 
 func _physics_process(delta: float) -> void:
+	_apply_dead_friction(delta)
 	_apply_gravity(delta)
 	
 	if stun_time > 0:
@@ -41,15 +47,11 @@ func _physics_process(delta: float) -> void:
 	if is_punching:
 		return
 	
-	punch_hit_box.disabled = true
+	_punch_hitbox.disabled = true
 	
 	_handle_jump()
+	_handle_roll()
 	
-	if is_rolling:
-		_apply_roll()
-		return
-	
-	_handle_fastfall(delta)
 	_handle_punch()
 	_handle_horizontal_movement(delta)
 
@@ -68,7 +70,7 @@ func _setup_flash_shader() -> void:
 	shader.code = shader_code
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
-	animated_sprite.material = shader_material
+	_animated_sprite.material = shader_material
 
 # --- Internal: Animation ---
 func _handle_animation() -> void:
@@ -78,31 +80,33 @@ func _handle_animation() -> void:
 		return
 	
 	var moving := false
-	# animated_sprite.speed_scale = 1
-	if Input.is_action_just_pressed("ui_down") and is_on_floor():
+	if Input.is_action_just_pressed("ui_down"):
 		_start_roll()
 		return
 
 	if Input.is_action_pressed("ui_right"):
-		animated_sprite.flip_h = false
+		_animated_sprite.flip_h = false
 		if is_on_floor():
-			animated_sprite.play("Run")
+			_animated_sprite.play("Run")
 			moving = true
 	elif Input.is_action_pressed("ui_left"):
-		animated_sprite.flip_h = true
+		_animated_sprite.flip_h = true
 		if is_on_floor():
-			animated_sprite.play("Run")
+			_animated_sprite.play("Run")
 			moving = true
 
 	if not moving:
-		animated_sprite.stop()
+		_animated_sprite.stop()
 		if is_on_floor():
-			# animated_sprite.speed_scale = 0.8*(velocity.x)/(Global.Constants.TOP_SPEED)
-			animated_sprite.play("Idle")
+			_animated_sprite.play("Idle")
 		else:
-			animated_sprite.play("Fall")
+			_animated_sprite.play("Fall")
 
 # --- Internal: Movement ---
+func _apply_dead_friction(delta: float) -> void:
+	if not is_alive():
+		velocity.x = move_toward(velocity.x, 0, Global.Constants.DEAD_DEACCELERATION * delta)
+
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
 		if jump_count <= 1:
@@ -118,20 +122,17 @@ func _handle_jump() -> void:
 			jump_count += 1
 			is_rolling = false
 
-func _apply_roll() -> void:
-	velocity.x = (-1 if animated_sprite.flip_h else 1) * Global.Constants.ROLL_VELOCITY
-	move_and_slide()
+func _handle_roll() -> void:
+	if is_rolling:
+		velocity.x = (-1 if _animated_sprite.flip_h else 1) * Global.Constants.ROLL_VELOCITY
+		move_and_slide()
 
 func _start_roll() -> void:
 	is_rolling = true
-	# animated_sprite.speed_scale = 5
-	animated_sprite.play("Roll")
-
-func _handle_fastfall(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_down") and not is_on_floor():
-		if velocity.y < 0:
-			velocity.y = Global.Constants.FASTFALL_INITIAL_VELOCITY
-		velocity.y += Global.Constants.FASTFALL_VELOCITY * delta
+	_animated_sprite.play("Roll")
+	
+	_standing_collision.disabled = true
+	_rolling_collision.disabled = false
 
 func _handle_horizontal_movement(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -156,48 +157,42 @@ func _handle_horizontal_movement(delta: float) -> void:
 
 func _handle_punch():
 	if Input.is_action_just_pressed("Punch"):
-		is_rolling=false
+		is_rolling = false
 		is_punching = true
-		animated_sprite.play("Punch")
-		var direction
-		if animated_sprite.flip_h: 
-			direction = -1 
-		else:
-			direction = 1
-		punch_hit_box.disabled = false
-		punch_hit_box.position= position + Vector2(200*direction,70)
-		print(position,punch_hit_box.position )
+		_animated_sprite.play("Punch")
 		
-		print("PUNCH!")
+		var direction = -1 if _animated_sprite.flip_h else 1
+		_punch_hitbox.position = Vector2(50 * direction, 0)
+		_punch_hitbox.disabled = false
+		
+		await get_tree().create_timer(0.1).timeout
+		_punch_hitbox.disabled = true
 
 # --- Internal: State ---
-func _die() -> void:
-	print("you r died")
-	animated_sprite.play("Death")
-	set_process(false)
+func kill() -> void:
+	print("Player died")
+	_animated_sprite.play("Death")
 
 # --- Callbacks ---
-func _onanimated_sprite_2d_animation_finished() -> void:
-	match animated_sprite.animation:
+func _on_animated_sprite_2d_animation_finished() -> void:
+	match _animated_sprite.animation:
 		"Roll":
 			is_rolling = false
+			_standing_collision.disabled = false
+			_rolling_collision.disabled = true
+			_animated_sprite.play("Idle")
 		"Punch":
 			is_punching = false
-			punch_hit_box.disabled = true
-			animated_sprite.play("Idle")
+			_punch_hitbox.disabled = true
+			_animated_sprite.play("Idle")
 
 func _on_punch_body_entered(body: Node2D) -> void:
-	print(body.get_class())
-	if body.is_class("Enemy") and body != self:
-		body.health -= 1
-		print("you hit") 
-		print(body)
-
-func _on_punch_body_exited(body: Node2D) -> void:
-	if body.is_class("Enemy") and body != self:
-		body.health -= 1
-		print("you hit") 
-		print(body)
+	if body is Enemy and body != self:
+		var enemy = body
+		print("Hit enemy: ", enemy)
+		enemy.health -= 1
+		enemy.receive_knockback(-1 if _animated_sprite.flip_h else 1, 1500.0)
+		_punch_hitbox.disabled = true
 
 # --- Public API: Stun ---
 func stun(time: float) -> bool:
@@ -213,11 +208,11 @@ func process_stun(delta: float) -> bool:
 	if is_stunned:
 		is_rolling = false
 		var white := (int(floor(stun_time * Global.Constants.FLASH_FREQUENCY)) % 2 == 0) if stun_time > delta else false
-		animated_sprite.material.set_shader_parameter("white", white)
+		_animated_sprite.material.set_shader_parameter("white", white)
 	return is_stunned
 	
 # --- Public API: Knockback ---
-func knockback(direction: Vector2, launch_force: float, ignore_current_velocity = true) -> void:
+func knockback_player(direction: Vector2, launch_force: float, ignore_current_velocity = true) -> void:
 	var new_velocity = direction * launch_force
 	
 	if ignore_current_velocity:
@@ -243,14 +238,8 @@ func deal_damage(amount := 1) -> int:
 
 func _change_health(delta: int) -> int:
 	health = max(0, health + delta)
+	if not is_alive(): kill()
 	return health
 
 func is_alive() -> bool:
 	return health > 0
-
-# --- Public API: States ---
-func get_roll() -> Dictionary:
-	return { "state": is_rolling, "direction": -1 if animated_sprite.flip_h else 1 }
-
-func get_fastfall() -> Dictionary:
-	return { "state": is_fastfalling }
