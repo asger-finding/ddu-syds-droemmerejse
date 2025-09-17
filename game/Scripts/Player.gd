@@ -7,7 +7,7 @@ var jump_count := 0
 var is_fastfalling := false
 var is_rolling := false
 var roll_direction := 0 # -1 (left) or 1 (right)
-
+var movement_locked = false
 @onready var _animated_sprite = $AnimatedSprite2D
 
 # --- Internal functions ---
@@ -17,6 +17,7 @@ func _ready() -> void:
 func _process(_delta):
 	# Movement animations
 	var moving = false
+	
 	if is_rolling == true: return
 
 	_animated_sprite.speed_scale = 1
@@ -55,6 +56,8 @@ func _process(_delta):
 		set_process(false)
 
 func _physics_process(delta: float) -> void:
+	if movement_locked:
+		return
 	# Gravity
 	if not is_on_floor():
 		if jump_count <= 1:
@@ -112,6 +115,7 @@ func _physics_process(delta: float) -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if _animated_sprite.animation == 'Roll':
 		is_rolling = false
+
 
 # --- Public methods ---
 
