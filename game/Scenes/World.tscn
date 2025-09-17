@@ -16,7 +16,7 @@ tile_set = ExtResource("2_u6nay")
 script = ExtResource("3_gjpho")
 
 [node name="EnemyKo" parent="PaperRoot" instance=ExtResource("3_p70al")]
-position = Vector2(-756, 59)
+position = Vector2(-790, 79)
 
 [node name="EnemyKo2" parent="PaperRoot" instance=ExtResource("3_p70al")]
 position = Vector2(-395, 177)

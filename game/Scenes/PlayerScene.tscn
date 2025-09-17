@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dftcpbshdx783"]
+[gd_scene load_steps=18 format=3 uid="uid://dftcpbshdx783"]
 
 [ext_resource type="Script" uid="uid://nta00bts7x8w" path="res://Scripts/Player.gd" id="1_2f2ij"]
 [ext_resource type="Texture2D" uid="uid://dpc1b1oshyt7q" path="res://Assets/Sprites/Fald.png" id="2_hkp03"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bjjs7c7dxfocr" path="res://Assets/Sprites/Løb 3.png" id="8_6newq"]
 [ext_resource type="Texture2D" uid="uid://c0nshynkped3c" path="res://Assets/Sprites/Wallslide.png" id="10_tu4k3"]
 [ext_resource type="PackedScene" uid="uid://sp858ls63win" path="res://Scenes/enemy_ko.tscn" id="12_8h68a"]
+[ext_resource type="PackedScene" uid="uid://cg7wxtqqfp1x" path="res://Scenes/enemy_drage.tscn" id="13_r53dp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_k5t3f"]
 animations = [{
@@ -19,7 +20,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("2_hkp03")
 }],
-"loop": true,
+"loop": false,
 "name": &"Fald",
 "speed": 5.0
 }, {
@@ -98,6 +99,8 @@ animation = &"Fald"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(3, -6)
 shape = SubResource("RectangleShape2D_yl1pn")
+one_way_collision = true
+one_way_collision_margin = 0.0
 debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -105,5 +108,8 @@ tile_set = SubResource("TileSet_t2xfb")
 
 [node name="EnemyKo" parent="." instance=ExtResource("12_8h68a")]
 position = Vector2(865, -134)
+
+[node name="EnemyDrage" parent="." instance=ExtResource("13_r53dp")]
+position = Vector2(-189, -1385)
 
 [connection signal="animation_finished" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_animation_finished"]
