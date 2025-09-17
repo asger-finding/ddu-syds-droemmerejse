@@ -1,11 +1,11 @@
 extends Enemy
 
-
+var dead = false
 var direction
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var _ray_cast_2d = $RayCast2D
 #@onready var _paper_layer = getPaperRoot/PaperLayer
-
+var health = 1
 func _physics_process(delta: float) -> void:
 	_animated_sprite.play("GodKo")
 	if _animated_sprite.flip_h:
@@ -28,7 +28,8 @@ func _physics_process(delta: float) -> void:
 			_animated_sprite.flip_h =false
 		else:
 			_animated_sprite.flip_h = true
-
+	if health <= 0:
+		death()
 	# Move and slide with floor detection
 	move_and_slide()
 func is_floor_ahead():
@@ -38,8 +39,14 @@ func is_floor_ahead():
 			return true
 		else:
 			return false
+func death():
+	hide()
+	set_process(false)
+	dead=true
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	if dead:
+		return
 	if body is Player:
 		print("You took damage")
 

@@ -21,10 +21,14 @@ func _process(delta: float) -> void:
 		Global.Constants.CAMERA_Y_FLOOR
 	)
 	
-	var target_velocity = player.velocity.length()
-	var smoothing = 5.0
+	# Smooth velocity tracking
+	var target_velocity := player.velocity.length()
+	var smoothing := 5.0
 	effective_velocity = lerp(effective_velocity, target_velocity, smoothing * delta)
 	
-	var zoom_factor = max(0, -exp(max(effective_velocity - 500, 0) * Global.Constants.CAMERA_ZOOM_PLAYER_SPEED_COEFF) + 2)
-	var target_zoom = lerp(Global.Constants.CAMERA_ZOOM_FURTHEST, Global.Constants.CAMERA_ZOOM_CLOSEST, zoom_factor)
+	# Stabilize zoom factor with clamp
+	var speed_over: float = max(effective_velocity - 500.0, 0.0)
+	var zoom_factor: float = clamp(-exp(speed_over * Global.Constants.CAMERA_ZOOM_PLAYER_SPEED_COEFF) + 2.0, 0.0, 1.0)
+	
+	var target_zoom: float = lerp(Global.Constants.CAMERA_ZOOM_FURTHEST, Global.Constants.CAMERA_ZOOM_CLOSEST, zoom_factor)
 	zoom = Vector2.ONE * target_zoom

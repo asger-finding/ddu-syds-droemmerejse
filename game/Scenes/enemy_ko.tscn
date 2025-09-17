@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://sp858ls63win"]
 
 [ext_resource type="Script" uid="uid://b4rusvdaja68k" path="res://Scripts/EnemyCow.gd" id="1_iudqm"]
-[ext_resource type="Texture2D" uid="uid://v4wg07iahw63" path="res://Assets/Sprites/Gertrud/bevægelse3.png" id="2_708xd"]
-[ext_resource type="Texture2D" uid="uid://brprdj662cl23" path="res://Assets/Sprites/Gertrud/bevægelse2.png" id="3_3cr4x"]
-[ext_resource type="Texture2D" uid="uid://cx2tf61pf7kum" path="res://Assets/Sprites/Gertrud/Unavngivet.png" id="4_dss6g"]
-[ext_resource type="Texture2D" uid="uid://dc4qtsr8uhrjq" path="res://Assets/Sprites/Otto/bevægelse2.png" id="5_40sr2"]
-[ext_resource type="Texture2D" uid="uid://cpumkdx7ukrej" path="res://Assets/Sprites/Otto/Unavngivet.png" id="6_sxtw2"]
-[ext_resource type="Texture2D" uid="uid://myl7t6t7mecu" path="res://Assets/Sprites/Dasiy/bevægelse2.png" id="7_es6dc"]
-[ext_resource type="Texture2D" uid="uid://b2bmqb3l5lxns" path="res://Assets/Sprites/Dasiy/bevægelse3.png" id="8_man6l"]
-[ext_resource type="Texture2D" uid="uid://cu6xsjqta7ha0" path="res://Assets/Sprites/Dasiy/Unavngivet.png" id="9_5opki"]
+[ext_resource type="Texture2D" uid="uid://v4wg07iahw63" path="res://Assets/Sprites/Gertrud/Enemy/frame_2.png" id="2_708xd"]
+[ext_resource type="Texture2D" uid="uid://brprdj662cl23" path="res://Assets/Sprites/Gertrud/Enemy/frame_0.png" id="3_3cr4x"]
+[ext_resource type="Texture2D" uid="uid://cx2tf61pf7kum" path="res://Assets/Sprites/Gertrud/Enemy/frame_1.png" id="4_dss6g"]
+[ext_resource type="Texture2D" uid="uid://dc4qtsr8uhrjq" path="res://Assets/Sprites/Otto/Enemy/frame_1.png" id="5_40sr2"]
+[ext_resource type="Texture2D" uid="uid://cpumkdx7ukrej" path="res://Assets/Sprites/Otto/Enemy/frame_0.png" id="6_sxtw2"]
+[ext_resource type="Texture2D" uid="uid://myl7t6t7mecu" path="res://Assets/Sprites/Daisy/Enemy/frame_1.png" id="7_es6dc"]
+[ext_resource type="Texture2D" uid="uid://b2bmqb3l5lxns" path="res://Assets/Sprites/Daisy/Enemy/frame_2.png" id="8_man6l"]
+[ext_resource type="Texture2D" uid="uid://cu6xsjqta7ha0" path="res://Assets/Sprites/Daisy/Enemy/frame_0.png" id="9_5opki"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_65xv6"]
 animations = [{
