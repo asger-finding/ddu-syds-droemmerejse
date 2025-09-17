@@ -1,9 +1,11 @@
 extends Enemy
 
-
+var health = 1
+var dead = false
 var direction
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var _ray_cast_2d = $RayCast2D
+@onready var _collision_shape_2d = $CollisionShape2D
 #@onready var _paper_layer = getPaperRoot/PaperLayer
 
 func _physics_process(delta: float) -> void:
@@ -28,7 +30,9 @@ func _physics_process(delta: float) -> void:
 			_animated_sprite.flip_h =false
 		else:
 			_animated_sprite.flip_h = true
-
+	if health <= 0:
+		death()
+		
 	# Move and slide with floor detection
 	move_and_slide()
 func is_floor_ahead():
@@ -38,8 +42,13 @@ func is_floor_ahead():
 			return true
 		else:
 			return false
-		
-		
+			
+func death():
+	hide()
+	set_process(false)
+	set_physics_process(false)
+	_collision_shape_2d.disabled = true
+	dead=true
 	
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:

@@ -76,7 +76,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"Run",
-"speed": 10.0
+"speed": 17.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -96,7 +96,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye8ic"]
-size = Vector2(339, 956)
+size = Vector2(722, 828)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ye8ic"]
 radius = 14.9
@@ -132,16 +132,13 @@ position = Vector2(0.2, 0.2)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_k5t3f")
 animation = &"Punch"
-frame = 1
-frame_progress = 1.0
 
 [node name="Punch" type="Area2D" parent="Player/AnimatedSprite2D"]
 position = Vector2(62, -396)
 
 [node name="Punchhitbox" type="CollisionShape2D" parent="Player/AnimatedSprite2D/Punch"]
-position = Vector2(-138, 454)
+position = Vector2(-135, 390)
 shape = SubResource("RectangleShape2D_ye8ic")
-disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(-8.4, 5.2)
@@ -167,3 +164,4 @@ position = Vector2(-2645, -1330)
 
 [connection signal="animation_finished" from="Player/AnimatedSprite2D" to="Player" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Player/AnimatedSprite2D/Punch" to="Player" method="_on_punch_body_entered"]
+[connection signal="body_exited" from="Player/AnimatedSprite2D/Punch" to="Player" method="_on_punch_body_exited"]

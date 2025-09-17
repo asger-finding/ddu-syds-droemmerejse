@@ -68,11 +68,6 @@ func _handle_animation() -> void:
 		return
 	if is_punching:
 		return
-	
-	if is_on_floor() and not moving:
-		_animated_sprite.play("Stand")
-	elif not moving:
-		_animated_sprite.play("Fald")
 		
 	var moving := false
 	_animated_sprite.speed_scale = 1
@@ -93,6 +88,11 @@ func _handle_animation() -> void:
 
 	if not moving:
 		_animated_sprite.stop()
+		if is_on_floor():
+			_animated_sprite.speed_scale = 0.8*(velocity.x)/(Global.Constants.TOP_SPEED)
+			_animated_sprite.play("Stand")
+		else:
+			_animated_sprite.play("Fald")
 
 # --- Internal: Movement ---
 func _apply_gravity(delta: float) -> void:
@@ -187,7 +187,14 @@ func _on_punch_body_entered(body: Node2D) -> void:
 		print(body)
 	else:
 		pass # Replace with function body.
-
+func _on_punch_body_exited(body: Node2D) -> void:
+	if body.is_class("CharacterBody2D") and body != self:
+		body.health -=1
+		print("you hit") 
+		print(body)
+	pass # Replace with function body.
+	
+	
 # --- Public API: Stun ---
 func stun(time: float) -> bool:
 	if stun_time > 0:
