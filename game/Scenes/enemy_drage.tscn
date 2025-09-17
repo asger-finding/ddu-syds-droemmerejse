@@ -1,14 +1,14 @@
 [gd_scene load_steps=13 format=3 uid="uid://cg7wxtqqfp1x"]
 
-[ext_resource type="Script" uid="uid://chinuu5l1b8i3" path="res://Scenes/Enemy_Drage.gd" id="1_wfv3y"]
-[ext_resource type="Texture2D" uid="uid://v4wg07iahw63" path="res://Assets/Sprites/Gertrud/bevægelse3.png" id="2_k8mom"]
-[ext_resource type="Texture2D" uid="uid://brprdj662cl23" path="res://Assets/Sprites/Gertrud/bevægelse2.png" id="3_guxhk"]
-[ext_resource type="Texture2D" uid="uid://cx2tf61pf7kum" path="res://Assets/Sprites/Gertrud/Unavngivet.png" id="4_wd4th"]
-[ext_resource type="Texture2D" uid="uid://dc4qtsr8uhrjq" path="res://Assets/Sprites/Otto/bevægelse2.png" id="5_5f8e6"]
-[ext_resource type="Texture2D" uid="uid://cpumkdx7ukrej" path="res://Assets/Sprites/Otto/Unavngivet.png" id="6_owxny"]
-[ext_resource type="Texture2D" uid="uid://myl7t6t7mecu" path="res://Assets/Sprites/Dasiy/bevægelse2.png" id="7_6xjuc"]
-[ext_resource type="Texture2D" uid="uid://b2bmqb3l5lxns" path="res://Assets/Sprites/Dasiy/bevægelse3.png" id="8_5vlrs"]
-[ext_resource type="Texture2D" uid="uid://cu6xsjqta7ha0" path="res://Assets/Sprites/Dasiy/Unavngivet.png" id="9_rdvsr"]
+[ext_resource type="Script" uid="uid://j0agtpoju646" path="res://Scenes/Enemy_Drage.gd" id="1_wfv3y"]
+[ext_resource type="Texture2D" uid="uid://v4wg07iahw63" path="res://Assets/Sprites/Gertrud/Enemy/frame_2.png" id="2_k8mom"]
+[ext_resource type="Texture2D" uid="uid://brprdj662cl23" path="res://Assets/Sprites/Gertrud/Enemy/frame_0.png" id="3_guxhk"]
+[ext_resource type="Texture2D" uid="uid://cx2tf61pf7kum" path="res://Assets/Sprites/Gertrud/Enemy/frame_1.png" id="4_wd4th"]
+[ext_resource type="Texture2D" uid="uid://dc4qtsr8uhrjq" path="res://Assets/Sprites/Otto/Enemy/frame_1.png" id="5_5f8e6"]
+[ext_resource type="Texture2D" uid="uid://cpumkdx7ukrej" path="res://Assets/Sprites/Otto/Enemy/frame_0.png" id="6_owxny"]
+[ext_resource type="Texture2D" uid="uid://myl7t6t7mecu" path="res://Assets/Sprites/Daisy/Enemy/frame_1.png" id="7_6xjuc"]
+[ext_resource type="Texture2D" uid="uid://b2bmqb3l5lxns" path="res://Assets/Sprites/Daisy/Enemy/frame_2.png" id="8_5vlrs"]
+[ext_resource type="Texture2D" uid="uid://cu6xsjqta7ha0" path="res://Assets/Sprites/Daisy/Enemy/frame_0.png" id="9_rdvsr"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_65xv6"]
 animations = [{
