@@ -7,14 +7,43 @@ var jump_count := 0
 var is_fastfalling := false
 var is_rolling := false
 var roll_direction := 0 # -1 (left) or 1 (right)
+var stun_time := 0.0
+
+var shader_material: ShaderMaterial
 
 @onready var _animated_sprite = $AnimatedSprite2D
 
 # --- Internal functions ---
 func _ready() -> void:
 	Global.Player = self
+	
+	var shader_code = '''
+	shader_type canvas_item;
+	uniform bool white = false;
 
-func _process(_delta):
+	void fragment() {
+		vec4 tex = texture(TEXTURE, UV);
+		if (white) {
+			COLOR = vec4(1.0, 1.0, 1.0, tex.a); // full white flash
+		} else {
+			COLOR = tex;
+		}
+	}
+	'''
+	var shader = Shader.new()
+	shader.code = shader_code
+
+	shader_material = ShaderMaterial.new()
+	shader_material.shader = shader
+	
+	_animated_sprite.material = shader_material
+
+func _process(delta):
+	var is_stunned = process_stun(delta)
+	if is_stunned:
+		move_and_slide()
+		return
+	
 	# Movement animations
 	var moving = false
 	if is_rolling == true: return
@@ -114,6 +143,27 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 		is_rolling = false
 
 # --- Public methods ---
+
+# Stun method
+func stun(time: float) -> bool:
+	var already_stunned = stun_time > 0
+	if already_stunned:
+		return true
+
+	stun_time = time
+	return false
+	
+func process_stun(delta: float) -> bool:
+	stun_time = max(0, stun_time - delta)
+	var is_stunned = stun_time > 0
+	
+	if is_stunned:
+		is_rolling = false
+		
+		# Flash player white
+		var white = (int(floor(stun_time * 5)) % 2 == 0) if stun_time > delta else false
+		_animated_sprite.material.set_shader_parameter('white', white)
+	return is_stunned
 
 # Health methods
 func get_health() -> int:

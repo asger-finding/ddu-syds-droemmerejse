@@ -45,7 +45,11 @@ func is_floor_ahead():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
 		print("You took damage")
-		body.is_rolling=false
+		
+		var already_stunned = body.stun(1.0)
+		if already_stunned:
+			return
+		
 		var direction = -1 if Global.Player._animated_sprite.flip_h else 1
 		body.velocity += Vector2(1000*(-direction),-1500)
 		body.velocity.x = move_toward(
