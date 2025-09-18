@@ -20,15 +20,11 @@ var distance_traversed := 0.0 # px
 var knockback_time := 0.0
 var knockback_velocity := Vector2.ZERO
 var player_inside = false
-var player_temp
 
 func _ready() -> void:
 	_animated_sprite.play(enemy_class)
 
 func _process(_delta: float) -> void:
-	if player_inside:
-		hit_player()
-		print("inside")
 	if health <= 0:
 		kill()
 
@@ -100,25 +96,17 @@ func kill() -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	player_inside = true
-	player_temp = body
-	hit_player( )
+	hit_body(body)
 	
-func hit_player():
-	print(player_temp)
-	if player_temp is Player:
-		var player = player_temp
+func hit_body(body):
+	if body is Player:
+		var player = body
 		var already_stunned = player.stun(stun_time)
-		print(player.stun(stun_time))
 		if already_stunned:
 			return
-			
-		print("You took damage")
+		
 		apply_knockback_to_player(player)
 		player.deal_damage(damage)
-		
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	print("out")
 	player_inside = false
-	player_temp = ""
-	pass # Replace with function body.

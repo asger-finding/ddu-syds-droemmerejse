@@ -216,7 +216,6 @@ func knockback_player(direction: Vector2, launch_force: float, ignore_current_ve
 	var new_velocity = direction * launch_force
 	
 	if ignore_current_velocity:
-		print(new_velocity)
 		velocity = new_velocity
 	else:
 		velocity += new_velocity

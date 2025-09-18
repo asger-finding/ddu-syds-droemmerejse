@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dvgyylh74b5qg"
-path="res://.godot/imported/butterfly_1.png-d67e6e63b04e4f5fa81819cf2b42564d.ctex"
+path="res://.godot/imported/butterfly_1.png-0f3176e705802a7616c2fbcc9e24fd74.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BackDrop/Drawings/butterfly_1.png"
-dest_files=["res://.godot/imported/butterfly_1.png-d67e6e63b04e4f5fa81819cf2b42564d.ctex"]
+source_file="res://Assets/Backdrop/Drawings/butterfly_1.png"
+dest_files=["res://.godot/imported/butterfly_1.png-0f3176e705802a7616c2fbcc9e24fd74.ctex"]
 
 [params]
 
