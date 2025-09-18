@@ -1,12 +1,24 @@
 extends Sprite2D
+class_name Scrap
 
-var collect=0
+const FLOAT_AMPLITUDE: float = 40.0    # how many pixels to float up/down
+const FLOAT_SPEED: float = 2.0         # how fast the floating motion is
+
+var _float_timer: float = 0.0
+var _base_position: float
+
+func _ready() -> void:
+	_base_position = global_position.y
+
+func _process(delta: float) -> void:
+	_handle_floating_motion(delta)
+
+func _handle_floating_motion(delta: float) -> void:
+	_float_timer += delta
+	var float_offset = sin(_float_timer * FLOAT_SPEED) * FLOAT_AMPLITUDE
+	global_position.y = _base_position + float_offset
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
-		collect+=1
-		hide()
-		set_process(false)
-		if collect ==1:
-			Global.Inventory.add_scrap(1)
-	pass # Replace with function body.
+		Global.Inventory.add_scrap(1)
+		queue_free()
