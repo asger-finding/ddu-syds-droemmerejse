@@ -68,7 +68,7 @@ sprite_frames = SubResource("SpriteFrames_65xv6")
 animation = &"Cow"
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Hurtbox_Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 32)
 shape = SubResource("RectangleShape2D_1k0mi")
 one_way_collision = true
@@ -77,13 +77,17 @@ one_way_collision_margin = 88.5
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
 
-[node name="Detect" type="CollisionShape2D" parent="Area2D"]
+[node name="Hit" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_r53dp")
 
 [node name="Edge Raycast" type="RayCast2D" parent="."]
 position = Vector2(0, 151)
-target_position = Vector2(-76, 35)
+target_position = Vector2(-152, 41)
+
+[node name="Wall Raycast" type="RayCast2D" parent="."]
+position = Vector2(0, 3)
+target_position = Vector2(-202, -5)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -14,6 +14,7 @@ class_name Enemy
 
 @onready var _animated_sprite = $AnimatedSprite2D
 @onready var _edge_raycast = $"Edge Raycast"
+@onready var _wall_raycast = $"Wall Raycast"
 
 # Private
 var distance_traversed := 0.0 # px
@@ -47,6 +48,9 @@ func _physics_process(delta: float) -> void:
 			elif is_edge_ahead():
 				_edge_raycast.target_position.x *= -1
 				_animated_sprite.flip_h = !_animated_sprite.flip_h
+			elif not is_wall_ahead():
+				_wall_raycast.target_position.x *= -1
+				_animated_sprite.flip_h = !_animated_sprite.flip_h
 			
 		"Dragon", "Shark":
 			velocity.x = speed * (-1 if _animated_sprite.flip_h else 1)
@@ -63,6 +67,9 @@ func _physics_process(delta: float) -> void:
 
 func is_edge_ahead() -> bool:
 	var collider = _edge_raycast.get_collider()
+	return !(collider and collider != Player)
+func is_wall_ahead() -> bool:
+	var collider = _wall_raycast.get_collider()
 	return !(collider and collider != Player)
 	
 func receive_knockback(lr_direction: int, strength: float, duration: float = 0.3) -> void:
