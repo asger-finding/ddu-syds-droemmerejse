@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmm55quhpdw32"
-path="res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"
+uid="uid://dc10x1ilk6lo6"
+path="res://.godot/imported/sommerfugl 2.png-82bf00c128b07e33e7d24c76057a9d39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BackDrop/Clouds/cloud_4.png"
-dest_files=["res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"]
+source_file="res://Assets/BackDrop/sommerfugle/sommerfugl 2.png"
+dest_files=["res://.godot/imported/sommerfugl 2.png-82bf00c128b07e33e7d24c76057a9d39.ctex"]
 
 [params]
 

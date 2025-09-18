@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmm55quhpdw32"
-path="res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"
+uid="uid://byxjk82porvhd"
+path="res://.godot/imported/rumskib.png-5027664d29657e234c47bbec8d684574.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BackDrop/Clouds/cloud_4.png"
-dest_files=["res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"]
+source_file="res://Assets/BackDrop/detaljer platform/rumskib.png"
+dest_files=["res://.godot/imported/rumskib.png-5027664d29657e234c47bbec8d684574.ctex"]
 
 [params]
 

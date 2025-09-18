@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmm55quhpdw32"
-path="res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"
+uid="uid://dmi2d5oy3rkuq"
+path="res://.godot/imported/sommerrfugl 1.png-4f4a093c9443ff5777adafa467be88b3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BackDrop/Clouds/cloud_4.png"
-dest_files=["res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"]
+source_file="res://Assets/BackDrop/Skyer/sommerrfugl 1.png"
+dest_files=["res://.godot/imported/sommerrfugl 1.png-4f4a093c9443ff5777adafa467be88b3.ctex"]
 
 [params]
 

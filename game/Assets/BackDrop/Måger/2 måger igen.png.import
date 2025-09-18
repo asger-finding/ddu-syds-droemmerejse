@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmm55quhpdw32"
-path="res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"
+uid="uid://drxtbeiwlu5jf"
+path="res://.godot/imported/2 måger igen.png-e44e089d12e9a6f63888c7c2e276ab68.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BackDrop/Clouds/cloud_4.png"
-dest_files=["res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"]
+source_file="res://Assets/BackDrop/Måger/2 måger igen.png"
+dest_files=["res://.godot/imported/2 måger igen.png-e44e089d12e9a6f63888c7c2e276ab68.ctex"]
 
 [params]
 

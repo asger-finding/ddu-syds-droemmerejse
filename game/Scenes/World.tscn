@@ -107,8 +107,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dli4"]
 size = Vector2(1000, 1044)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r0dna"]
-size = Vector2(25.8, 101)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r0dna"]
+radius = 9.1
+height = 80.6
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5aes"]
 size = Vector2(40, 40)
@@ -141,22 +142,22 @@ frame_progress = 1.0
 
 [node name="Punch" type="Area2D" parent="Interactability/Player/PlayerSprite"]
 position = Vector2(62, -396)
+collision_layer = 4
+collision_mask = 2
 
 [node name="PunchHitbox" type="CollisionShape2D" parent="Interactability/Player/PlayerSprite/Punch"]
 position = Vector2(-97, 498)
 shape = SubResource("RectangleShape2D_5dli4")
 
 [node name="StandingCollision" type="CollisionShape2D" parent="Interactability/Player"]
-position = Vector2(-3.3, 12.5)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_r0dna")
+position = Vector2(-3.2, 23.2)
+shape = SubResource("CapsuleShape2D_r0dna")
 one_way_collision = true
 one_way_collision_margin = 0.0
 debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 
 [node name="RollingCollision" type="CollisionShape2D" parent="Interactability/Player"]
 position = Vector2(0, 43)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_b5aes")
 disabled = true
 one_way_collision = true

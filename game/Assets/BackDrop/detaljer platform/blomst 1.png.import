@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmm55quhpdw32"
-path="res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"
+uid="uid://ccu3b48b4d0yx"
+path="res://.godot/imported/blomst 1.png-8c18350f4f8dd5cd27751118ad433bac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/BackDrop/Clouds/cloud_4.png"
-dest_files=["res://.godot/imported/cloud_4.png-22ff37c4fcc48fe6566b62623484d29f.ctex"]
+source_file="res://Assets/BackDrop/detaljer platform/blomst 1.png"
+dest_files=["res://.godot/imported/blomst 1.png-8c18350f4f8dd5cd27751118ad433bac.ctex"]
 
 [params]
 
