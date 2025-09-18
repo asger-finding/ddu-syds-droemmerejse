@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://nta00bts7x8w" path="res://Scripts/Player.gd" id="3_r0dna"]
 [ext_resource type="Texture2D" uid="uid://c7dcw8syiv6x6" path="res://Assets/Sprites/Player/Death/frame_0.png" id="4_b5aes"]
 [ext_resource type="Texture2D" uid="uid://ivti0mx0003c" path="res://Assets/Sprites/Player/Fall/frame_0.png" id="5_w0bku"]
-[ext_resource type="Texture2D" uid="uid://65k375fygsoh" path="res://Assets/Sprites/Player/Idle/frame_0.png" id="6_0ao37"]
+[ext_resource type="Texture2D" uid="uid://65k375fygsoh" path="res://Assets/Sprites/Player/Stand/frame_0.png" id="6_0ao37"]
 [ext_resource type="Texture2D" uid="uid://stvh0hkkhb44" path="res://Assets/Sprites/Player/Punch/frame_0.png" id="7_d3ars"]
 [ext_resource type="Texture2D" uid="uid://dc2nfstjuel0a" path="res://Assets/Sprites/Player/Roll/frame_0.png" id="8_l11rc"]
 [ext_resource type="Texture2D" uid="uid://cfgs5yicoapak" path="res://Assets/Sprites/Player/Roll/frame_1.png" id="9_w86vl"]
@@ -679,7 +679,5 @@ enemy_class = "Dragon"
 position = Vector2(-1531, -1702)
 enemy_class = "Dragon"
 
-[connection signal="animation_changed" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_player_sprite_animation_changed"]
 [connection signal="animation_finished" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Interactability/Player/PlayerSprite/Punch" to="Interactability/Player" method="_on_punch_body_entered"]
-[connection signal="body_exited" from="Interactability/Player/PlayerSprite/Punch" to="Interactability/Player" method="_on_punch_body_exited"]

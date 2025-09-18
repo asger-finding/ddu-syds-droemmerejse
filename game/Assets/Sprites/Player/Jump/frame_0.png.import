@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck4mr2mbcwals"
-path="res://.godot/imported/sun.png-6f78c997104881b49dfa6bba5462d419.ctex"
+uid="uid://blhyepbnqswaj"
+path="res://.godot/imported/frame_0.png-92ada95d9e217e9f29bf6ea1c8c6defe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backdrop/sun.png"
-dest_files=["res://.godot/imported/sun.png-6f78c997104881b49dfa6bba5462d419.ctex"]
+source_file="res://Assets/Sprites/Player/Jump/frame_0.png"
+dest_files=["res://.godot/imported/frame_0.png-92ada95d9e217e9f29bf6ea1c8c6defe.ctex"]
 
 [params]
 
