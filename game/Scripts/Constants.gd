@@ -21,7 +21,7 @@ const FLOOR_DEACCELERATION := 7000.0 # x component deacceleration when touching 
 const AIR_DEACCELERATION := 1000.0 # x component deacceleration in the air
 const DEAD_DEACCELERATION := 3000.0 # x component deacceleration when our player dies
 const JUMP_VELOCITY := 2800.0
-const ROLL_VELOCITY := 1200.0
+const ROLL_VELOCITY := 1600.0
 const FLASH_FREQUENCY := 5.0
 
 # Camera follow configuration

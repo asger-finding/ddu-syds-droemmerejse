@@ -19,6 +19,7 @@ class_name Enemy
 var distance_traversed := 0.0 # px
 var knockback_time := 0.0
 var knockback_velocity := Vector2.ZERO
+var player_inside = false
 
 func _ready() -> void:
 	_animated_sprite.play(enemy_class)
@@ -94,13 +95,19 @@ func kill() -> void:
 	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player:
-		var player = body
-		var already_stunned = player.stun(stun_time)
-		if already_stunned:
-			return
-		
-		print("You took damage")
-		
-		apply_knockback_to_player(player)
-		player.deal_damage(damage)
+	player_inside = true
+	while player_inside:
+		if body is Player:
+			var player = body
+			var already_stunned = player.stun(stun_time)
+			if already_stunned:
+				return
+			
+			print("You took damage")
+			
+			apply_knockback_to_player(player)
+			player.deal_damage(damage)
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	player_inside = false
+	pass # Replace with function body.

@@ -51,7 +51,8 @@ func _physics_process(delta: float) -> void:
 	_handle_jump()
 	_handle_roll()
 	_handle_punch()
-	_handle_horizontal_movement(delta)
+	if not is_rolling:
+		_handle_horizontal_movement(delta)
 
 # --- Internal: Shader ---
 func _setup_flash_shader() -> void:
@@ -133,7 +134,6 @@ func _start_roll() -> void:
 
 func _handle_horizontal_movement(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
-
 	if direction != 0:
 		if direction * velocity.x <= 0:
 			velocity.x = direction * Global.Constants.START_SPEED
