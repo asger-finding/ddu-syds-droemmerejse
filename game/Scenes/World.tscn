@@ -165,15 +165,15 @@ debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 
 [node name="WallRayLeft" type="RayCast2D" parent="Interactability/Player"]
 position = Vector2(-2.59961, 0)
-scale = Vector2(1, 1)
 target_position = Vector2(-30, 0)
 
 [node name="WallRayRight" type="RayCast2D" parent="Interactability/Player"]
 position = Vector2(-2.6, 0)
 target_position = Vector2(30, 0)
 
-[node name="WallRayLeft" type="RayCast2D" parent="Interactability/Player"]
-target_position = Vector2(-30, 0)
+[node name="WallRayTop" type="RayCast2D" parent="Interactability/Player"]
+position = Vector2(-2.6, 30)
+target_position = Vector2(0, -69)
 
 [node name="Enemy" parent="Interactability" instance=ExtResource("18_irg3d")]
 position = Vector2(606, -1058)
