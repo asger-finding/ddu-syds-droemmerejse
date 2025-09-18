@@ -11,6 +11,9 @@ var did_wall_jump := false
 var stun_time := 0.0
 var slide_dir = 0
 var wall_jump_air_control := 1.0
+var ground_buffer_time: float = 0.05
+var ground_buffer_timer: float = 0.0
+var was_grounded_recently: bool = false
 
 # --- References ---
 @onready var _animated_sprite: AnimatedSprite2D = $PlayerSprite
@@ -64,9 +67,10 @@ func _process(delta: float) -> void:
 	
 	var was_stunned := process_stun(delta)
 	if was_stunned:
-		_animated_sprite.play("Fall")
+		_animated_sprite.play("Hurt")
 		return
 	
+	_update_ground_buffer(delta)
 	_handle_animation()
 
 func _physics_process(delta: float) -> void:
@@ -115,39 +119,55 @@ func _setup_flash_shader() -> void:
 	_animated_sprite.material = shader_material
 
 # --- Internal: Animation ---
+func _update_ground_buffer(delta: float) -> void:
+	if is_on_floor():
+		ground_buffer_timer = ground_buffer_time
+		was_grounded_recently = true
+	else:
+		ground_buffer_timer -= delta
+		if ground_buffer_timer <= 0.0:
+			was_grounded_recently = false
+
 func _handle_animation() -> void:
-	_animated_sprite.speed_scale=1
+	_animated_sprite.speed_scale = 1
+	
 	if is_rolling:
 		return
 	if is_punching:
 		return
+	if stun_time > 0.0:
+		return
 	
-	var moving := false
 	if Input.is_action_just_pressed("ui_down"):
 		_start_roll()
 		return
 	else:
 		_stop_roll()
-
+	
 	if Input.is_action_pressed("ui_right"):
 		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / TOP_SPEED
 		_animated_sprite.flip_h = false
-		if is_on_floor():
+		if was_grounded_recently:
 			_animated_sprite.play("Run")
-			moving = true
-
+			return
+	
 	if Input.is_action_pressed("ui_left"):
 		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / TOP_SPEED
 		_animated_sprite.flip_h = true
-		if is_on_floor():
+		if was_grounded_recently:
 			_animated_sprite.play("Run")
-			moving = true
-	if moving:
+			return
+	
+	_animated_sprite.stop()
+	if is_wall_sliding:
+		_animated_sprite.play("Wallslide")
 		return
-	if not moving:
-		_animated_sprite.stop()
-		if is_on_floor():
-			_animated_sprite.play("Idle")
+	
+	if was_grounded_recently:
+		_animated_sprite.play("Idle")
+	else:
+		if velocity.y <= 0:
+			_animated_sprite.play("Jump")
 		else:
 			_animated_sprite.play("Fall")
 
@@ -169,7 +189,7 @@ func _handle_wall_slide():
 	var input_dir = Input.get_axis("ui_left", "ui_right")
 
 	if wall_dir != 0 and not is_on_floor() and velocity.y > 0:
-	# require pressing towards the wall
+		# require pressing towards the wall
 		if sign(input_dir) == wall_dir:
 			is_wall_sliding = true
 			velocity.y = WALL_SLIDE_SPEED
@@ -219,8 +239,6 @@ func _stop_roll() -> void:
 	
 	_standing_collision.disabled = false
 	_rolling_collision.disabled = true
-	
-	_animated_sprite.play("Idle")
 
 func _handle_horizontal_movement(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -282,13 +300,13 @@ func _handle_punch():
 
 # --- Internal: State ---
 func kill() -> void:
-	print("Player died")
 	_animated_sprite.play("Death")
 
 # --- Callbacks ---
 func _on_animated_sprite_2d_animation_finished() -> void:
 	match _animated_sprite.animation:
 		"Roll":
+			# Continue to roll if we are below a roof
 			if is_rolling and _wall_ray_top and _wall_ray_top.is_colliding():
 				_animated_sprite.play("Roll")
 			else:

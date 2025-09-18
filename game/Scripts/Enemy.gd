@@ -76,7 +76,7 @@ func is_wall_ahead() -> bool:
 func receive_knockback(lr_direction: int, strength: float, duration: float = 0.3) -> void:
 	knockback_time = duration
 	var base_direction = Vector2(lr_direction, 0)
-	var knockback_direction = base_direction.rotated(deg_to_rad(-30))
+	var knockback_direction = base_direction.rotated(deg_to_rad(-30 * lr_direction))
 	knockback_velocity = knockback_direction * strength
 
 func apply_knockback_to_player(player: Player) -> void:
@@ -134,5 +134,5 @@ func hit_body(body):
 		apply_knockback_to_player(player)
 		player.deal_damage(damage)
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
+func _on_area_2d_body_exited(_body: Node2D) -> void:
 	player_inside = false

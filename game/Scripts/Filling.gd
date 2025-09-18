@@ -14,7 +14,6 @@ const FLOAT_AMPLITUDE: float = 40.0    # how many pixels to float up/down
 const FLOAT_SPEED: float = 2.0         # how fast the floating motion is
 
 @onready var _ray = $Area2D/RayCast2D
-@onready var _area = $Area2D
 
 # internals
 var velocity: Vector2 = Vector2.ZERO
