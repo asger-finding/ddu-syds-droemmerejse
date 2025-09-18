@@ -28,19 +28,26 @@ func _ready() -> void:
 	_setup_flash_shader()
 
 func _process(delta: float) -> void:
-	if is_alive():
-		if process_stun(delta):
-			return
-			
-		_handle_animation()
-		
 	move_and_slide()
+	
+	if not is_alive():
+		return
+	
+	var was_stunned := process_stun(delta)
+	if was_stunned:
+		_animated_sprite.play("Fall")
+		return
+	
+	_handle_animation()
+
 
 func _physics_process(delta: float) -> void:
 	_apply_dead_friction(delta)
 	_apply_gravity(delta)
 	
-	if stun_time > 0:
+	if stun_time > 0.0:
+		is_rolling = false
+		is_punching = false
 		return
 	
 	if is_punching:
@@ -51,6 +58,7 @@ func _physics_process(delta: float) -> void:
 	_handle_jump()
 	_handle_roll()
 	_handle_punch()
+	
 	if not is_rolling:
 		_handle_horizontal_movement(delta)
 
@@ -198,6 +206,7 @@ func _on_punch_body_entered(body: Node2D) -> void:
 
 # --- Public API: Stun ---
 func stun(time: float) -> bool:
+	print('Calling stun on Player')
 	if stun_time > 0:
 		return true
 	stun_time = time
