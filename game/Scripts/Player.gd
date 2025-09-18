@@ -19,6 +19,7 @@ var wall_jump_air_control := 1.0
 @onready var _punch_hitbox: CollisionShape2D = $PlayerSprite/Punch/PunchHitbox
 @onready var _wall_ray_left: RayCast2D = $WallRayLeft
 @onready var _wall_ray_right: RayCast2D = $WallRayRight
+@onready var _wall_ray_top: RayCast2D = $WallRayTop
 
 # Player constants
 const HEALTH := 5
@@ -119,6 +120,8 @@ func _handle_animation() -> void:
 	if Input.is_action_just_pressed("ui_down"):
 		_start_roll()
 		return
+	else:
+		_stop_roll()
 
 	if Input.is_action_pressed("ui_right"):
 		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / TOP_SPEED
@@ -188,7 +191,7 @@ func is_touching_wall() -> int:
 
 func _handle_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept"):
-		if is_on_floor() or jump_count < MAX_JUMPS:
+		if jump_count < MAX_JUMPS:
 			velocity.y = -JUMP_VELOCITY
 			jump_count += 1
 			is_rolling = false
@@ -199,10 +202,19 @@ func _handle_roll() -> void:
 
 func _start_roll() -> void:
 	is_rolling = true
-	_animated_sprite.play("Roll")
 	
 	_standing_collision.disabled = true
 	_rolling_collision.disabled = false
+	
+	_animated_sprite.play("Roll")
+	
+func _stop_roll() -> void:
+	is_rolling = false
+	
+	_standing_collision.disabled = false
+	_rolling_collision.disabled = true
+	
+	_animated_sprite.play("Idle")
 
 func _handle_horizontal_movement(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
@@ -271,10 +283,10 @@ func kill() -> void:
 func _on_animated_sprite_2d_animation_finished() -> void:
 	match _animated_sprite.animation:
 		"Roll":
-			is_rolling = false
-			_standing_collision.disabled = false
-			_rolling_collision.disabled = true
-			_animated_sprite.play("Idle")
+			if is_rolling and _wall_ray_top and _wall_ray_top.is_colliding():
+				_animated_sprite.play("Roll")
+			else:
+				_stop_roll()
 		"Punch":
 			is_punching = false
 			_punch_hitbox.disabled = true

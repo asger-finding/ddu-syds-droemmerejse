@@ -163,11 +163,19 @@ one_way_collision = true
 one_way_collision_margin = 0.0
 debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 
+[node name="WallRayLeft" type="RayCast2D" parent="Interactability/Player"]
+position = Vector2(-2.59961, 0)
+scale = Vector2(1, 1)
+target_position = Vector2(-30, 0)
+
 [node name="WallRayRight" type="RayCast2D" parent="Interactability/Player"]
+position = Vector2(-2.6, 0)
 target_position = Vector2(30, 0)
 
-[node name="WallRayLeft" type="RayCast2D" parent="Interactability/Player"]
-target_position = Vector2(-30, 0)
+[node name="WallRayTop" type="RayCast2D" parent="Interactability/Player"]
+position = Vector2(-2.6, 30)
+scale = Vector2(1, 1)
+target_position = Vector2(0, -68)
 
 [node name="Enemy" parent="Interactability" instance=ExtResource("18_irg3d")]
 position = Vector2(606, -1058)
@@ -467,6 +475,7 @@ position = Vector2(16831, -5250)
 [node name="Scrap37" parent="." instance=ExtResource("20_n1aqv")]
 position = Vector2(16831, -5020)
 
+[connection signal="animation_changed" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_player_sprite_animation_changed"]
 [connection signal="animation_finished" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Interactability/Player/PlayerSprite/Punch" to="Interactability/Player" method="_on_punch_body_entered"]
 [connection signal="body_exited" from="Interactability/Player/PlayerSprite/Punch" to="Interactability/Player" method="_on_punch_body_exited"]
