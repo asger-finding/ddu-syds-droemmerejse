@@ -8,7 +8,7 @@ class_name Enemy
 @export_range(0, 500.0) var speed: float = 100.0
 @export_range(0.0, 3000.0) var knockback_strength: float = 1500.0
 @export_range(0.0, 2.0, 0.1, "suffix:s") var stun_time: float = 0.5
-@export_range(0, 20) var fluff: int = 5
+@export_range(0, 20) var filling: int = 5
 
 # Path enemy specific property
 @export_range(0.0, 5000.0, 50.0, "suffix:px") var flight_or_swim_distance: float = 1000.0
@@ -101,7 +101,7 @@ func apply_knockback_to_player(player: Player) -> void:
 # Spawn at the scene root level:
 
 func spawn_drops() -> void:
-	if fluff <= 0:
+	if filling <= 0:
 		return
 	
 	var filling_scene = preload("res://Scenes/CollectibleFilling.tscn")
@@ -109,7 +109,7 @@ func spawn_drops() -> void:
 	var scene_root = get_tree().current_scene
 	var drop_position = global_position
 	
-	for i in range(fluff):
+	for i in range(filling):
 		var filling = filling_scene.instantiate()
 		
 		filling.filling_frame = randi() % 6

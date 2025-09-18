@@ -92,5 +92,5 @@ func _is_near_ground() -> bool:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
-		Global.Inventory.add_fluff(1)
+		Global.Inventory.add_filling(1)
 		queue_free()

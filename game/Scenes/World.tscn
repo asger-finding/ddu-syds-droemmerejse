@@ -603,7 +603,7 @@ health = 5
 speed = 185.714
 knockback_strength = 3000.0
 stun_time = 1.0
-fluff = 20
+filling = 20
 
 [node name="Enemy5" parent="Enemy Group" instance=ExtResource("18_irg3d")]
 position = Vector2(15553, -2482)
