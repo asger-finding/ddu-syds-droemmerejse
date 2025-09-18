@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b5ynfljfkr20f"
-path="res://.godot/imported/devil_0.png-1cbe5b6ef4110fffc27dad60f3bf983a.ctex"
+path="res://.godot/imported/devil_0.png-8e36d46a69383b266b32a960e6808502.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backdrop/Drawings/devil_0.png"
-dest_files=["res://.godot/imported/devil_0.png-1cbe5b6ef4110fffc27dad60f3bf983a.ctex"]
+source_file="res://Assets/BackDrop/Drawings/devil_0.png"
+dest_files=["res://.godot/imported/devil_0.png-8e36d46a69383b266b32a960e6808502.ctex"]
 
 [params]
 
