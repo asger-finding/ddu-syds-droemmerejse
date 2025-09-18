@@ -98,15 +98,23 @@ func apply_knockback_to_player(player: Player) -> void:
 		player.floor_stop_on_slope = original_floor_stop
 		player.floor_snap_length = original_floor_snap
 
+# Spawn at the scene root level:
+
 func spawn_drops() -> void:
+	if fluff <= 0:
+		return
+	
 	var filling_scene = preload("res://Scenes/CollectibleFilling.tscn")
+	
+	var scene_root = get_tree().current_scene
+	var drop_position = global_position
 	
 	for i in range(fluff):
 		var filling = filling_scene.instantiate()
+		
 		filling.filling_frame = randi() % 6
 		
 		var spawn_offset = Vector2(randf_range(-10, 10), randf_range(-5, 5))
-		filling.global_position = global_position + spawn_offset
 		
 		var random_angle = randf_range(-70, 70)
 		var random_speed = randf_range(500, 2000)
@@ -114,7 +122,8 @@ func spawn_drops() -> void:
 		var velocity_direction = Vector2.UP.rotated(deg_to_rad(random_angle))
 		filling.initial_velocity = velocity_direction * random_speed
 		
-		get_parent().add_child(filling)
+		scene_root.add_child(filling)
+		filling.global_position = drop_position + spawn_offset
 
 func kill() -> void:
 	spawn_drops()
