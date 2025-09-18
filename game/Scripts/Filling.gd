@@ -26,6 +26,8 @@ func _ready() -> void:
 	var path := "res://Assets/Collectibles/filling_%s.png" % filling_frame
 	assert(ResourceLoader.exists(path), "Filling texture frame not found: " + path)
 	
+	texture = load(path)
+	
 	velocity = initial_velocity
 	
 	_ray.target_position = Vector2(0, HOVER_HEIGHT + 30.0)
