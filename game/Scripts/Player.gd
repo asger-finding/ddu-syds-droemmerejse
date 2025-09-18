@@ -6,13 +6,35 @@ var health := 0
 var jump_count := 0
 var is_rolling := false
 var is_punching := false
+var is_wall_sliding = false
+var did_wall_jump := false
 var stun_time := 0.0
+var slide_dir = 0
+var wall_jump_air_control := 1.0
 
 # --- References ---
 @onready var _animated_sprite: AnimatedSprite2D = $PlayerSprite
 @onready var _standing_collision: CollisionShape2D = $StandingCollision
 @onready var _rolling_collision: CollisionShape2D = $RollingCollision
 @onready var _punch_hitbox: CollisionShape2D = $PlayerSprite/Punch/PunchHitbox
+@onready var _wall_ray_left: RayCast2D = $WallRayLeft
+@onready var _wall_ray_right: RayCast2D = $WallRayRight
+
+# Player constants
+const HEALTH := 5
+const MAX_JUMPS := 2
+const START_SPEED := 400.0
+const TOP_SPEED := 2000.0
+const ACCELERATION := 3000.0
+const FLOOR_DEACCELERATION := 7000.0 # x component deacceleration when touching floor
+const AIR_DEACCELERATION := 1000.0 # x component deacceleration in the air
+const DEAD_DEACCELERATION := 3000.0 # x component deacceleration when our player dies
+const JUMP_VELOCITY := 2800.0
+const ROLL_VELOCITY := 1600.0
+const FLASH_FREQUENCY := 5.0
+const WALL_SLIDE_SPEED = 200.0
+const WALL_JUMP_SPEED = 3000.0
+const WALL_JUMP_LOCK_TIME := 0.45
 
 var shader_material: ShaderMaterial
 
@@ -20,7 +42,7 @@ var shader_material: ShaderMaterial
 func _ready() -> void:
 	Global.Player = self
 	
-	health = Global.Constants.HEALTH
+	health = HEALTH
 	
 	_standing_collision.disabled = false
 	_rolling_collision.disabled = true
@@ -40,10 +62,15 @@ func _process(delta: float) -> void:
 	
 	_handle_animation()
 
-
 func _physics_process(delta: float) -> void:
 	_apply_dead_friction(delta)
 	_apply_gravity(delta)
+	
+	print(wall_jump_air_control)
+	if did_wall_jump:
+		wall_jump_air_control = clamp(wall_jump_air_control + delta / WALL_JUMP_LOCK_TIME, 0.0, 1.0)
+		if wall_jump_air_control >= 1.0:
+			did_wall_jump = false
 	
 	if stun_time > 0.0:
 		is_rolling = false
@@ -55,6 +82,8 @@ func _physics_process(delta: float) -> void:
 	
 	_punch_hitbox.disabled = true
 	
+	_handle_wall_slide()
+	_handle_wall_jump()
 	_handle_jump()
 	_handle_roll()
 	_handle_punch()
@@ -93,14 +122,14 @@ func _handle_animation() -> void:
 		return
 
 	if Input.is_action_pressed("ui_right"):
-		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / Global.Constants.TOP_SPEED
+		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / TOP_SPEED
 		_animated_sprite.flip_h = false
 		if is_on_floor():
 			_animated_sprite.play("Run")
 			moving = true
 
 	if Input.is_action_pressed("ui_left"):
-		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / Global.Constants.TOP_SPEED
+		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / TOP_SPEED
 		_animated_sprite.flip_h = true
 		if is_on_floor():
 			_animated_sprite.play("Run")
@@ -117,7 +146,7 @@ func _handle_animation() -> void:
 # --- Internal: Movement ---
 func _apply_dead_friction(delta: float) -> void:
 	if not is_alive():
-		velocity.x = move_toward(velocity.x, 0, Global.Constants.DEAD_DEACCELERATION * delta)
+		velocity.x = move_toward(velocity.x, 0, DEAD_DEACCELERATION * delta)
 
 func _apply_gravity(delta: float) -> void:
 	if not is_on_floor():
@@ -127,16 +156,47 @@ func _apply_gravity(delta: float) -> void:
 	else:
 		jump_count = 0
 
+func _handle_wall_slide():
+	var wall_dir = is_touching_wall()
+	var input_dir = Input.get_axis("ui_left", "ui_right")
+
+	if wall_dir != 0 and not is_on_floor() and velocity.y > 0:
+	# require pressing towards the wall
+		if sign(input_dir) == wall_dir:
+			is_wall_sliding = true
+			velocity.y = WALL_SLIDE_SPEED
+			slide_dir = wall_dir
+		else:
+			is_wall_sliding = false
+	else:
+		is_wall_sliding = false
+
+func _handle_wall_jump():
+	if is_wall_sliding and Input.is_action_just_pressed("ui_up"):
+		var angle = deg_to_rad(55)
+		velocity.x = -slide_dir * (WALL_JUMP_SPEED * cos(angle))
+		velocity.y = - (WALL_JUMP_SPEED * sin(angle))
+		is_wall_sliding = false
+		did_wall_jump = true
+		wall_jump_air_control = 0.0
+
+func is_touching_wall() -> int:
+	if _wall_ray_left.is_colliding():
+		return -1   # wall on left
+	if _wall_ray_right.is_colliding():
+		return 1    # wall on right
+	return 0
+
 func _handle_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept"):
-		if is_on_floor() or jump_count < Global.Constants.MAX_JUMPS:
-			velocity.y = -Global.Constants.JUMP_VELOCITY
+		if is_on_floor() or jump_count < MAX_JUMPS:
+			velocity.y = -JUMP_VELOCITY
 			jump_count += 1
 			is_rolling = false
 
 func _handle_roll() -> void:
 	if is_rolling:
-		velocity.x = (-1 if _animated_sprite.flip_h else 1) * Global.Constants.ROLL_VELOCITY
+		velocity.x = (-1 if _animated_sprite.flip_h else 1) * ROLL_VELOCITY
 
 func _start_roll() -> void:
 	is_rolling = true
@@ -147,23 +207,47 @@ func _start_roll() -> void:
 
 func _handle_horizontal_movement(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
+
+	if did_wall_jump and wall_jump_air_control == 0.0: 
+		return
+
 	if direction != 0:
-		if direction * velocity.x <= 0:
-			velocity.x = direction * Global.Constants.START_SPEED
+		var target_x = direction * TOP_SPEED
+		
+		# When wall_jump_air_control is 1.0 (full control), we use snap behavior
+		if wall_jump_air_control >= 1.0:
+			if direction * velocity.x <= 0:
+				velocity.x = direction * START_SPEED
+			else:
+				var ratio: float = abs(velocity.x) / TOP_SPEED
+				var diff := ratio - 0.5
+				var sigma := 0.36
+				var peak_accel := 2000.0
+				var dynamic_accel := peak_accel * exp(-(diff * diff) / (2.0 * sigma * sigma))
+				velocity.x = move_toward(
+					velocity.x,
+					target_x,
+					dynamic_accel * delta
+				)
 		else:
-			var ratio: float = abs(velocity.x) / Global.Constants.TOP_SPEED
+			# Always ease for wall jump transitions
+			var ratio: float = abs(velocity.x) / TOP_SPEED
 			var diff := ratio - 0.5
 			var sigma := 0.36
 			var peak_accel := 2000.0
 			var dynamic_accel := peak_accel * exp(-(diff * diff) / (2.0 * sigma * sigma))
+
 			velocity.x = move_toward(
 				velocity.x,
-				direction * Global.Constants.TOP_SPEED,
-				dynamic_accel * delta
+				target_x,
+				dynamic_accel * delta * wall_jump_air_control
 			)
 	else:
-		var deaccel: float = Global.Constants.FLOOR_DEACCELERATION if is_on_floor() else Global.Constants.AIR_DEACCELERATION
-		velocity.x = move_toward(velocity.x, 0, deaccel * delta)
+		var deaccel: float = FLOOR_DEACCELERATION if is_on_floor() else AIR_DEACCELERATION
+		if wall_jump_air_control >= 1.0:
+			velocity.x = move_toward(velocity.x, 0, deaccel * delta)
+		else:
+			velocity.x = move_toward(velocity.x, 0, deaccel * delta * wall_jump_air_control)
 
 func _handle_punch():
 	if Input.is_action_just_pressed("Punch"):
@@ -172,11 +256,12 @@ func _handle_punch():
 		_animated_sprite.play("Punch")
 		
 		var direction = -1 if _animated_sprite.flip_h else 1
-		_punch_hitbox.position = Vector2(50 * direction, 0)
+		_punch_hitbox.position.x += 400 * direction
 		_punch_hitbox.disabled = false
 		
 		await get_tree().create_timer(0.1).timeout
 		_punch_hitbox.disabled = true
+		_punch_hitbox.position.x -= 400 * direction
 
 # --- Internal: State ---
 func kill() -> void:
@@ -218,7 +303,7 @@ func process_stun(delta: float) -> bool:
 
 	if is_stunned:
 		is_rolling = false
-		var white := (int(floor(stun_time * Global.Constants.FLASH_FREQUENCY)) % 2 == 0) if stun_time >= delta else false
+		var white := (int(floor(stun_time * FLASH_FREQUENCY)) % 2 == 0) if stun_time >= delta else false
 		_animated_sprite.material.set_shader_parameter("white", white)
 	return is_stunned
 	

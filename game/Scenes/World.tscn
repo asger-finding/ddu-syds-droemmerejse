@@ -105,7 +105,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5dli4"]
-size = Vector2(1000, 1044)
+size = Vector2(300, 1044)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r0dna"]
 radius = 12.0
@@ -157,12 +157,17 @@ debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
 
 [node name="RollingCollision" type="CollisionShape2D" parent="Interactability/Player"]
 position = Vector2(0, 46.3)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_b5aes")
 disabled = true
 one_way_collision = true
 one_way_collision_margin = 0.0
 debug_color = Color(0.735591, 1.63645e-06, 0.425898, 0.42)
+
+[node name="WallRayRight" type="RayCast2D" parent="Interactability/Player"]
+target_position = Vector2(30, 0)
+
+[node name="WallRayLeft" type="RayCast2D" parent="Interactability/Player"]
+target_position = Vector2(-30, 0)
 
 [node name="Enemy" parent="Interactability" instance=ExtResource("18_irg3d")]
 position = Vector2(606, -1058)

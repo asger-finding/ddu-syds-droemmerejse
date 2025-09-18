@@ -31,7 +31,7 @@ func update_health():
 	for child in hearts_container.get_children():
 		child.queue_free()
 	
-	var max_health = Global.Constants.HEALTH
+	var max_health = Global.Player.HEALTH
 	var current = Global.Player.get_health()
 
 	# Create new sprites
