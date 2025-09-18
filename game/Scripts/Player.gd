@@ -53,7 +53,13 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	move_and_slide()
 	
+	if position.x < 0:
+		kill()
+	
 	if not is_alive():
+		return
+	elif position.y > 0:
+		deal_damage(get_health())
 		return
 	
 	var was_stunned := process_stun(delta)
