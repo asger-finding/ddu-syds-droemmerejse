@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bfumbaprtnnwu" path="res://Scenes/World.tscn" id="2_24d08"]
 [ext_resource type="Script" uid="uid://y1k8o0ynu5yh" path="res://Scripts/Global.gd" id="3_cwqeq"]
 [ext_resource type="Script" uid="uid://c3omvkqoxj37v" path="res://Scripts/Inventory.gd" id="3_f5i44"]
-[ext_resource type="Script" path="res://Scripts/Overlay.gd" id="3_g0d6c"]
+[ext_resource type="Script" uid="uid://dl0cglho8jpui" path="res://Scripts/Overlay.gd" id="3_g0d6c"]
 [ext_resource type="Script" path="res://Scripts/CameraFollowPlayer.gd" id="5_3ipfy"]
 [ext_resource type="Script" path="res://Scripts/Backdrop.gd" id="6_g1ltr"]
 [ext_resource type="FontFile" uid="uid://b6ixxpdy5in1g" path="res://Fonts/Schoolbell-Regular.ttf" id="8_n0g3p"]
