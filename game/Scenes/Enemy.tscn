@@ -53,10 +53,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1k0mi"]
-size = Vector2(287, 270)
+size = Vector2(297, 328)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r53dp"]
-size = Vector2(400, 335)
+size = Vector2(349, 385)
 
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -69,7 +69,7 @@ animation = &"Cow"
 flip_h = true
 
 [node name="Hurtbox_Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, 32)
+position = Vector2(-19.5, 3)
 shape = SubResource("RectangleShape2D_1k0mi")
 one_way_collision = true
 one_way_collision_margin = 88.5
@@ -78,7 +78,7 @@ one_way_collision_margin = 88.5
 collision_layer = 0
 
 [node name="Hit" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(0, -1.5)
+position = Vector2(-25.5, 23.5)
 shape = SubResource("RectangleShape2D_r53dp")
 
 [node name="Edge Raycast" type="RayCast2D" parent="."]
@@ -87,7 +87,7 @@ target_position = Vector2(-152, 41)
 
 [node name="Wall Raycast" type="RayCast2D" parent="."]
 position = Vector2(0, 3)
-target_position = Vector2(-202, -5)
+target_position = Vector2(-220, -5)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

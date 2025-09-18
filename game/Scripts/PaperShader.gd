@@ -113,7 +113,6 @@ void fragment() {
 	material = shader_material
 
 func _process(_delta: float) -> void:
-	return
 	var cam_zoom = get_viewport().get_camera_2d().zoom.x
 	if shader_material:
 		shader_material.set_shader_parameter('tile_size', 12.0 * cam_zoom)
