@@ -66,7 +66,6 @@ func _physics_process(delta: float) -> void:
 	_apply_dead_friction(delta)
 	_apply_gravity(delta)
 	
-	print(wall_jump_air_control)
 	if did_wall_jump:
 		wall_jump_air_control = clamp(wall_jump_air_control + delta / WALL_JUMP_LOCK_TIME, 0.0, 1.0)
 		if wall_jump_air_control >= 1.0:
@@ -284,14 +283,12 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_punch_body_entered(body: Node2D) -> void:
 	if body is Enemy and body != self:
 		var enemy = body
-		print("Hit enemy: ", enemy)
 		enemy.health -= 1
 		enemy.receive_knockback(-1 if _animated_sprite.flip_h else 1, 1500.0)
 		_punch_hitbox.disabled = true
 
 # --- Public API: Stun ---
 func stun(time: float) -> bool:
-	print('Calling stun on Player')
 	if stun_time > 0:
 		return true
 	stun_time = time

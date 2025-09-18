@@ -8,10 +8,8 @@ var original_size
 
 func _ready():
 	original_size = size
-	if material is ShaderMaterial:
-		shader_material = material as ShaderMaterial
-	else:
-		print("Error: Node needs a ShaderMaterial with the crumpled paper shader")
+	assert(material is ShaderMaterial, "Node needs a ShaderMaterial with the crumpled paper shader")
+	shader_material = material as ShaderMaterial
 
 func _process(_delta):
 	if camera_reference and shader_material:

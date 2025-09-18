@@ -8,5 +8,5 @@
 texture = ExtResource("2_nkhrt")
 script = ExtResource("3_cu64b")
 
-[node name="CollisionShape2D" parent="Area2D" index="0"]
+[node name="CollisionShape2D" parent="Area2D" index="1"]
 position = Vector2(-1, -1)

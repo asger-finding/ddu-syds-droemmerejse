@@ -30,4 +30,3 @@ func remove_follower(identifier: String) -> void:
 
 	var index = Followers.find(identifier)
 	var popped = Followers.pop_at(index)
-	print('Popped: ', popped)
