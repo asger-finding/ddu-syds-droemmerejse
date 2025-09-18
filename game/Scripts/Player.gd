@@ -174,8 +174,8 @@ func _handle_wall_slide():
 		is_wall_sliding = false
 
 func _handle_wall_jump():
-	if is_wall_sliding and Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept"):
-		var angle = deg_to_rad(55)
+	if is_wall_sliding and (Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept")):
+		var angle = PI * 60.0 / 180.0
 		velocity.x = -slide_dir * (WALL_JUMP_SPEED * cos(angle))
 		velocity.y = - (WALL_JUMP_SPEED * sin(angle))
 		is_wall_sliding = false
