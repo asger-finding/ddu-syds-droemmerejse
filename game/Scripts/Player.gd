@@ -85,12 +85,14 @@ func _handle_animation() -> void:
 		return
 
 	if Input.is_action_pressed("ui_right"):
-		_animated_sprite.speed_scale *= 1.6 + (velocity.x/Global.Constants.TOP_SPEED)
+		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / Global.Constants.TOP_SPEED
 		_animated_sprite.flip_h = false
 		if is_on_floor():
 			_animated_sprite.play("Run")
 			moving = true
+
 	if Input.is_action_pressed("ui_left"):
+		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / Global.Constants.TOP_SPEED
 		_animated_sprite.flip_h = true
 		if is_on_floor():
 			_animated_sprite.play("Run")
