@@ -13,7 +13,7 @@
 [ext_resource type="Shader" path="res://Shaders/Drawing.gdshader" id="9_bsue6"]
 [ext_resource type="Texture2D" uid="uid://ck4mr2mbcwals" path="res://Assets/Backdrop/sun.png" id="9_ebfx1"]
 [ext_resource type="Texture2D" uid="uid://d2butkivrlbho" path="res://Assets/HUD/Scrap/frame.png" id="10_hbe7s"]
-[ext_resource type="Shader" uid="uid://bj33mdq7bwfmq" path="res://Shaders/CrumbledPaper.gdshader" id="11_hbe7s"]
+[ext_resource type="Shader" path="res://Shaders/CrumbledPaper.gdshader" id="11_hbe7s"]
 [ext_resource type="Script" uid="uid://2wmk6vtet1jv" path="res://Scripts/DeathHUD.gd" id="15_cxe32"]
 [ext_resource type="Shader" uid="uid://bqoitfi71frqv" path="res://Shaders/Death.gdshader" id="16_vf7dw"]
 
