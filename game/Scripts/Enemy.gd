@@ -26,10 +26,6 @@ var player_inside = false
 func _ready() -> void:
 	_animated_sprite.play(enemy_class)
 
-func _process(_delta: float) -> void:
-	if health <= 0:
-		kill()
-
 func _physics_process(delta: float) -> void:
 	if knockback_time > 0:
 		knockback_time -= delta
@@ -69,10 +65,23 @@ func _physics_process(delta: float) -> void:
 func is_edge_ahead() -> bool:
 	var collider = _edge_raycast.get_collider()
 	return !(collider and collider != Player)
+
 func is_wall_ahead() -> bool:
 	var collider = _wall_raycast.get_collider()
 	return !(collider and collider != Player)
+
+func hit(body_that_hit_me: Node2D, hitpoints: int) -> void:
+	health -= hitpoints
+	if health <= 0:
+		kill()
+		return
 	
+	match enemy_class:
+		"Cow":
+			var lr_direction = -1 if (global_position.x - body_that_hit_me.global_position.x) > 0 else 1
+			_edge_raycast.target_position.x = abs(_edge_raycast.target_position.x) * lr_direction
+			_animated_sprite.flip_h = true if lr_direction == -1 else false
+
 func receive_knockback(lr_direction: int, strength: float, duration: float = 0.3) -> void:
 	knockback_time = duration
 	var base_direction = Vector2(lr_direction, 0)

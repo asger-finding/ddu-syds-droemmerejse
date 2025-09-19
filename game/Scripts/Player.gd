@@ -320,7 +320,7 @@ func _on_animated_sprite_2d_animation_finished() -> void:
 func _on_punch_body_entered(body: Node2D) -> void:
 	if body is Enemy and body != self:
 		var enemy = body
-		enemy.health -= 1
+		enemy.hit(self, 1)
 		enemy.receive_knockback(-1 if _animated_sprite.flip_h else 1, 1500.0)
 		_punch_hitbox.disabled = true
 
