@@ -18,12 +18,12 @@ func _process(_delta):
 		last_health = current
 		update_health()
 	
-	if Global.Inventory.Filling != last_filling:
-		last_filling = Global.Inventory.Filling
+	if Global.Inventory.filling != last_filling:
+		last_filling = Global.Inventory.filling
 		update_collectibles()
 	
-	if Global.Inventory.Scrap != last_scrap:
-		last_scrap = Global.Inventory.Scrap
+	if Global.Inventory.scrap != last_scrap:
+		last_scrap = Global.Inventory.scrap
 		update_collectibles()
 
 func update_health():
@@ -58,5 +58,5 @@ func update_health():
 		hearts_container.add_child(holder)
 
 func update_collectibles():
-	filling_label.text = str(Global.Inventory.Filling)
-	scrap_label.text   = str(Global.Inventory.Scrap)
+	filling_label.text = str(Global.Inventory.filling)
+	scrap_label.text   = str(Global.Inventory.scrap)

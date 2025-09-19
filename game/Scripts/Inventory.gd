@@ -1,9 +1,9 @@
 extends Node
 
 # --- Inventory state ---
-var Scrap = 0
-var Filling = 0
-var Followers = []
+var scrap = 0
+var filling = 0
+var followers = []
 
 # --- Lifecycle ---
 func _ready():
@@ -12,21 +12,21 @@ func _ready():
 # --- Public API: Inventory ---
 func add_scrap(num: int) -> void:
 	assert(num > 0, 'Tried to add zero or less scrap to inventory')
+	
+	scrap += num
 
-	Scrap += num
-
-func add_fluff(num: int) -> void:
+func add_filling(num: int) -> void:
 	assert(num > 0, 'Tried to add zero or less scrap to inventory')
-
-	Filling += num
+	
+	filling += num
 
 func add_follower(identifier: String) -> void:
 	assert(identifier in Global.Constants.Followers, 'Follower ID does not exist')
 	
-	Followers.push_front(identifier)
+	followers.push_front(identifier)
 
 func remove_follower(identifier: String) -> void:
 	assert(identifier in Global.Constants.Followers, 'Follower ID does not exist')
-
-	var index = Followers.find(identifier)
-	var popped = Followers.pop_at(index)
+	
+	var index = followers.find(identifier)
+	var popped = followers.pop_at(index)

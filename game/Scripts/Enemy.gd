@@ -8,7 +8,7 @@ class_name Enemy
 @export_range(0, 500.0) var speed: float = 100.0
 @export_range(0.0, 3000.0) var knockback_strength: float = 1500.0
 @export_range(0.0, 2.0, 0.1, "suffix:s") var stun_time: float = 0.5
-@export_range(0, 20) var fluff: int = 5
+@export_range(0, 20) var filling: int = 5
 
 # Path enemy specific property
 @export_range(0.0, 5000.0, 50.0, "suffix:px") var flight_or_swim_distance: float = 1000.0
@@ -76,7 +76,7 @@ func is_wall_ahead() -> bool:
 func receive_knockback(lr_direction: int, strength: float, duration: float = 0.3) -> void:
 	knockback_time = duration
 	var base_direction = Vector2(lr_direction, 0)
-	var knockback_direction = base_direction.rotated(deg_to_rad(-30))
+	var knockback_direction = base_direction.rotated(deg_to_rad(-30 * lr_direction))
 	knockback_velocity = knockback_direction * strength
 
 func apply_knockback_to_player(player: Player) -> void:
@@ -98,15 +98,23 @@ func apply_knockback_to_player(player: Player) -> void:
 		player.floor_stop_on_slope = original_floor_stop
 		player.floor_snap_length = original_floor_snap
 
+# Spawn at the scene root level:
+
 func spawn_drops() -> void:
+	if filling <= 0:
+		return
+	
 	var filling_scene = preload("res://Scenes/CollectibleFilling.tscn")
 	
-	for i in range(fluff):
+	var scene_root = get_tree().current_scene
+	var drop_position = global_position
+	
+	for i in range(filling):
 		var filling = filling_scene.instantiate()
+		
 		filling.filling_frame = randi() % 6
 		
 		var spawn_offset = Vector2(randf_range(-10, 10), randf_range(-5, 5))
-		filling.global_position = global_position + spawn_offset
 		
 		var random_angle = randf_range(-70, 70)
 		var random_speed = randf_range(500, 2000)
@@ -114,7 +122,8 @@ func spawn_drops() -> void:
 		var velocity_direction = Vector2.UP.rotated(deg_to_rad(random_angle))
 		filling.initial_velocity = velocity_direction * random_speed
 		
-		get_parent().add_child(filling)
+		scene_root.add_child(filling)
+		filling.global_position = drop_position + spawn_offset
 
 func kill() -> void:
 	spawn_drops()
@@ -134,5 +143,5 @@ func hit_body(body):
 		apply_knockback_to_player(player)
 		player.deal_damage(damage)
 
-func _on_area_2d_body_exited(body: Node2D) -> void:
+func _on_area_2d_body_exited(_body: Node2D) -> void:
 	player_inside = false

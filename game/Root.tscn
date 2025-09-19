@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cq4gf0ctpud42"]
+[gd_scene load_steps=20 format=3 uid="uid://cq4gf0ctpud42"]
 
 [ext_resource type="Script" uid="uid://63qhft3d562w" path="res://Scripts/Constants.gd" id="1_24d08"]
 [ext_resource type="Script" uid="uid://bed1661ujgmmn" path="res://Scripts/GameController.gd" id="1_uu6xs"]
@@ -6,13 +6,14 @@
 [ext_resource type="Script" uid="uid://y1k8o0ynu5yh" path="res://Scripts/Global.gd" id="3_cwqeq"]
 [ext_resource type="Script" uid="uid://c3omvkqoxj37v" path="res://Scripts/Inventory.gd" id="3_f5i44"]
 [ext_resource type="Script" uid="uid://dl0cglho8jpui" path="res://Scripts/Overlay.gd" id="3_g0d6c"]
-[ext_resource type="Script" uid="uid://botyddwy7pgi" path="res://Scripts/CameraFollowPlayer.gd" id="5_3ipfy"]
-[ext_resource type="Script" uid="uid://dn02ekxewi45q" path="res://Scripts/Backdrop.gd" id="6_g1ltr"]
+[ext_resource type="Script" path="res://Scripts/CameraFollowPlayer.gd" id="5_3ipfy"]
+[ext_resource type="Script" path="res://Scripts/Backdrop.gd" id="6_g1ltr"]
 [ext_resource type="FontFile" uid="uid://b6ixxpdy5in1g" path="res://Fonts/Schoolbell-Regular.ttf" id="8_n0g3p"]
 [ext_resource type="Texture2D" uid="uid://cpe2c0i8bj32q" path="res://Assets/HUD/Filling/frame.png" id="9_8hd61"]
-[ext_resource type="Texture2D" uid="uid://ck4mr2mbcwals" path="res://Assets/BackDrop/sun.png" id="9_ebfx1"]
+[ext_resource type="Shader" uid="uid://cx0kddqltc7lu" path="res://Shaders/Drawing.gdshader" id="9_bsue6"]
+[ext_resource type="Texture2D" uid="uid://ck4mr2mbcwals" path="res://Assets/Backdrop/sun.png" id="9_ebfx1"]
 [ext_resource type="Texture2D" uid="uid://d2butkivrlbho" path="res://Assets/HUD/Scrap/frame.png" id="10_hbe7s"]
-[ext_resource type="Shader" path="res://Shaders/CrumbledPaper.gdshader" id="11_hbe7s"]
+[ext_resource type="Shader" uid="uid://bj33mdq7bwfmq" path="res://Shaders/CrumbledPaper.gdshader" id="11_hbe7s"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g1ltr"]
 shader = ExtResource("11_hbe7s")
@@ -25,6 +26,11 @@ shader_parameter/noise_scale = 50.0
 shader_parameter/detail_scale = 148.951
 shader_parameter/camera_offset = Vector2(0, 0)
 shader_parameter/parallax_strength = 0.1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cxe32"]
+shader = ExtResource("9_bsue6")
+shader_parameter/opacity = 0.664
+shader_parameter/blend_mode = 1
 
 [sub_resource type="LabelSettings" id="LabelSettings_2qvp8"]
 font = ExtResource("8_n0g3p")
@@ -75,7 +81,8 @@ script = ExtResource("5_3ipfy")
 layer = -1
 
 [node name="Sun" type="Sprite2D" parent="Scene/Camera/Static Background"]
-position = Vector2(1063, 65)
+material = SubResource("ShaderMaterial_cxe32")
+position = Vector2(1103, 31)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("9_ebfx1")
 

@@ -14,7 +14,6 @@ const FLOAT_AMPLITUDE: float = 40.0    # how many pixels to float up/down
 const FLOAT_SPEED: float = 2.0         # how fast the floating motion is
 
 @onready var _ray = $Area2D/RayCast2D
-@onready var _area = $Area2D
 
 # internals
 var velocity: Vector2 = Vector2.ZERO
@@ -93,5 +92,5 @@ func _is_near_ground() -> bool:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Player:
-		Global.Inventory.add_fluff(1)
+		Global.Inventory.add_filling(1)
 		queue_free()
