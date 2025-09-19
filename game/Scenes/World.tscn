@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=4 uid="uid://bfumbaprtnnwu"]
+[gd_scene load_steps=52 format=4 uid="uid://bfumbaprtnnwu"]
 
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
 [ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
@@ -41,7 +41,12 @@
 [ext_resource type="Texture2D" uid="uid://2rsedpiuths6" path="res://Assets/Backdrop/Drawings/dinosaur_0.png" id="37_bbwj2"]
 [ext_resource type="Texture2D" uid="uid://dvgyylh74b5qg" path="res://Assets/Backdrop/Drawings/butterfly_1.png" id="38_ivfu3"]
 [ext_resource type="Texture2D" uid="uid://dwh7bgen6cqko" path="res://Assets/Backdrop/Arrows/pil 1.png" id="41_d4o7i"]
+[ext_resource type="Texture2D" uid="uid://blicajc30lin" path="res://Assets/Backdrop/Drawings/sommerfugl 3.png" id="41_ivfu3"]
 [ext_resource type="Texture2D" uid="uid://7ckmew1l7d6x" path="res://Assets/Backdrop/Arrows/pil 3.png" id="42_bbwj2"]
+[ext_resource type="Texture2D" uid="uid://cufcei5mxmdsw" path="res://Assets/Backdrop/Drawings/flora_6.png" id="44_fq1sc"]
+[ext_resource type="Texture2D" uid="uid://cqn6oa5fgja7h" path="res://Assets/Backdrop/Drawings/flora_2.png" id="45_ivbkn"]
+[ext_resource type="Texture2D" uid="uid://bpf6gqopqypau" path="res://Assets/Backdrop/Drawings/flora_4.png" id="46_0fglf"]
+[ext_resource type="Texture2D" uid="uid://scs2eloxe7qd" path="res://Assets/Backdrop/Drawings/flora_5.png" id="47_0fglf"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d2jk0"]
 animations = [{
@@ -948,8 +953,15 @@ texture = ExtResource("34_uvb3s")
 [node name="Devil3" type="Sprite2D" parent="Interactability/Foreground"]
 show_behind_parent = true
 z_index = 6
-position = Vector2(1861, 3164)
+position = Vector2(-1550, 4808)
 texture = ExtResource("33_5dli4")
+
+[node name="Sommerfugl3" type="Sprite2D" parent="Interactability/Foreground"]
+z_index = 6
+position = Vector2(990, 3645)
+rotation = -6.28319
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("41_ivfu3")
 
 [node name="Pil1" type="Sprite2D" parent="."]
 position = Vector2(27527, -2655)
@@ -959,6 +971,27 @@ texture = ExtResource("41_d4o7i")
 [node name="Pil3" type="Sprite2D" parent="."]
 position = Vector2(18644, -340)
 texture = ExtResource("42_bbwj2")
+
+[node name="Flora6" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(19416.5, -1026.5)
+scale = Vector2(1.50729, 1.39867)
+texture = ExtResource("44_fq1sc")
+
+[node name="Flora2" type="Sprite2D" parent="."]
+position = Vector2(36375, -2475)
+texture = ExtResource("45_ivbkn")
+
+[node name="Flora4" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(44386, -3800)
+rotation = 1.1973
+texture = ExtResource("46_0fglf")
+
+[node name="Flora5" type="Sprite2D" parent="."]
+z_index = 6
+position = Vector2(44260, -13741)
+texture = ExtResource("47_0fglf")
 
 [connection signal="animation_changed" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_player_sprite_animation_changed"]
 [connection signal="animation_finished" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_animated_sprite_2d_animation_finished"]
