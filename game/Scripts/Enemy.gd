@@ -146,7 +146,7 @@ func hit_body(body):
 	if body is Player:
 		var player = body
 		var already_stunned = player.stun(stun_time)
-		if already_stunned:
+		if already_stunned or player.is_punching:
 			return
 		
 		apply_knockback_to_player(player)
