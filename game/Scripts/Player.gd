@@ -38,7 +38,7 @@ const ROLL_VELOCITY := 2200.0
 const FLASH_FREQUENCY := 5.0
 const WALL_SLIDE_SPEED = 200.0
 const WALL_JUMP_SPEED = 3000.0
-const WALL_JUMP_LOCK_TIME := 0.45
+const WALL_JUMP_LOCK_TIME := 0.35
 
 var shader_material: ShaderMaterial
 
