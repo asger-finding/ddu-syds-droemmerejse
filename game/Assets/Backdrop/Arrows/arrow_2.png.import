@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blicajc30lin"
-path="res://.godot/imported/sommerfugl 3.png-f74a10bfe18f40c130e22f46b83c737d.ctex"
+uid="uid://b4jxchvj0ytv7"
+path="res://.godot/imported/arrow_2.png-fd15e24b868b44483ffd97a6513ff2de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backdrop/Drawings/sommerfugl 3.png"
-dest_files=["res://.godot/imported/sommerfugl 3.png-f74a10bfe18f40c130e22f46b83c737d.ctex"]
+source_file="res://Assets/Backdrop/Arrows/arrow_2.png"
+dest_files=["res://.godot/imported/arrow_2.png-fd15e24b868b44483ffd97a6513ff2de.ctex"]
 
 [params]
 

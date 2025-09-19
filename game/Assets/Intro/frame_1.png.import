@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7ckmew1l7d6x"
-path="res://.godot/imported/pil 3.png-55a455a89d439bbfebdc1da7ff8a8813.ctex"
+uid="uid://bk1ljlasehvak"
+path="res://.godot/imported/frame_1.png-42bf329cb352ffdd9a05ee24cfedd7ae.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backdrop/Arrows/pil 3.png"
-dest_files=["res://.godot/imported/pil 3.png-55a455a89d439bbfebdc1da7ff8a8813.ctex"]
+source_file="res://Assets/Intro/frame_1.png"
+dest_files=["res://.godot/imported/frame_1.png-42bf329cb352ffdd9a05ee24cfedd7ae.ctex"]
 
 [params]
 

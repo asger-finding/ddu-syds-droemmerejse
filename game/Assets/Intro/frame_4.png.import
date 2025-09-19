@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dwh7bgen6cqko"
-path="res://.godot/imported/pil 1.png-b60fe586188214fa2c926c7ca4e3c2e3.ctex"
+uid="uid://j77jtre005kr"
+path="res://.godot/imported/frame_4.png-f1a84eaed5cc8807f8d419ce65f924d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backdrop/Arrows/pil 1.png"
-dest_files=["res://.godot/imported/pil 1.png-b60fe586188214fa2c926c7ca4e3c2e3.ctex"]
+source_file="res://Assets/Intro/frame_4.png"
+dest_files=["res://.godot/imported/frame_4.png-f1a84eaed5cc8807f8d419ce65f924d2.ctex"]
 
 [params]
 

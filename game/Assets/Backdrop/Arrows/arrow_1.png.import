@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5m0t236g1jo3"
-path="res://.godot/imported/flora_5.png-1af5fa70d73e2980d70c68588cb42f78.ctex"
+uid="uid://b27jdrnxtt0lq"
+path="res://.godot/imported/arrow_1.png-78baf6bec9d7e2411c59638d9c57cdaf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Backdrop/Drawings/flora_5.png"
-dest_files=["res://.godot/imported/flora_5.png-1af5fa70d73e2980d70c68588cb42f78.ctex"]
+source_file="res://Assets/Backdrop/Arrows/arrow_1.png"
+dest_files=["res://.godot/imported/arrow_1.png-78baf6bec9d7e2411c59638d9c57cdaf.ctex"]
 
 [params]
 
