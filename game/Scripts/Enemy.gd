@@ -97,7 +97,8 @@ func apply_knockback_to_player(player: Player) -> void:
 		
 		# Apply knockback
 		var direction_to_player = (player.global_position - global_position).normalized()
-		var collision_angle = direction_to_player.angle()
+		var lr_direction = sign(direction_to_player.x)
+		var collision_angle = direction_to_player.angle() - deg_to_rad(45) * lr_direction
 		var opposite_angle = collision_angle
 		var launch_direction = Vector2(cos(opposite_angle), sin(opposite_angle))
 		player.knockback_player(launch_direction, knockback_strength, true)
@@ -106,8 +107,6 @@ func apply_knockback_to_player(player: Player) -> void:
 		await get_tree().create_timer(0.1).timeout
 		player.floor_stop_on_slope = original_floor_stop
 		player.floor_snap_length = original_floor_snap
-
-# Spawn at the scene root level:
 
 func spawn_drops() -> void:
 	if filling <= 0:
