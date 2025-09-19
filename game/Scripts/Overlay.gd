@@ -56,6 +56,7 @@ func update_health():
 
 		holder.add_child(heart)
 		hearts_container.add_child(holder)
+		hearts_container.move_child(holder, 0)
 
 func update_collectibles():
 	filling_label.text = str(Global.Inventory.filling)
