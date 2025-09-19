@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cq4gf0ctpud42"]
+[gd_scene load_steps=24 format=3 uid="uid://cq4gf0ctpud42"]
 
 [ext_resource type="Script" uid="uid://63qhft3d562w" path="res://Scripts/Constants.gd" id="1_24d08"]
 [ext_resource type="Script" uid="uid://bed1661ujgmmn" path="res://Scripts/GameController.gd" id="1_uu6xs"]
@@ -13,7 +13,9 @@
 [ext_resource type="Shader" path="res://Shaders/Drawing.gdshader" id="9_bsue6"]
 [ext_resource type="Texture2D" uid="uid://ck4mr2mbcwals" path="res://Assets/Backdrop/sun.png" id="9_ebfx1"]
 [ext_resource type="Texture2D" uid="uid://d2butkivrlbho" path="res://Assets/HUD/Scrap/frame.png" id="10_hbe7s"]
-[ext_resource type="Shader" path="res://Shaders/CrumbledPaper.gdshader" id="11_hbe7s"]
+[ext_resource type="Shader" uid="uid://bj33mdq7bwfmq" path="res://Shaders/CrumbledPaper.gdshader" id="11_hbe7s"]
+[ext_resource type="Script" uid="uid://2wmk6vtet1jv" path="res://Scripts/DeathHUD.gd" id="15_cxe32"]
+[ext_resource type="Shader" uid="uid://bqoitfi71frqv" path="res://Shaders/Death.gdshader" id="16_vf7dw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g1ltr"]
 shader = ExtResource("11_hbe7s")
@@ -46,6 +48,23 @@ font_color = Color(0, 0, 0, 1)
 font = ExtResource("8_n0g3p")
 font_size = 40
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4qeq3"]
+shader = ExtResource("16_vf7dw")
+shader_parameter/vignette_strength = 1.0
+shader_parameter/vignette_radius = 0.9
+shader_parameter/camera_zoom = Vector2(0.5, 0.5)
+shader_parameter/grayscale_amount = 0.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_vf7dw"]
+font = ExtResource("8_n0g3p")
+font_size = 160
+font_color = Color(1, 0, 0.0166664, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
 
 [node name="GameController" type="Node"]
 script = ExtResource("1_uu6xs")
@@ -147,3 +166,21 @@ label_settings = SubResource("LabelSettings_8hd61")
 layout_mode = 2
 texture = ExtResource("10_hbe7s")
 expand_mode = 2
+
+[node name="DeathHUD" type="CanvasLayer" parent="Scene/Camera"]
+script = ExtResource("15_cxe32")
+
+[node name="DeathScreen" type="ColorRect" parent="Scene/Camera/DeathHUD"]
+visible = false
+material = SubResource("ShaderMaterial_4qeq3")
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="DeathText" type="Label" parent="Scene/Camera/DeathHUD"]
+visible = false
+offset_left = 80.0
+offset_top = 228.0
+offset_right = 1093.0
+offset_bottom = 448.0
+text = "av altså mand :("
+label_settings = SubResource("LabelSettings_vf7dw")
