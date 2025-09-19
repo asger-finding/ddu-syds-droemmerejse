@@ -33,8 +33,8 @@ const ACCELERATION := 3000.0
 const FLOOR_DEACCELERATION := 7000.0 # x component deacceleration when touching floor
 const AIR_DEACCELERATION := 1000.0 # x component deacceleration in the air
 const DEAD_DEACCELERATION := 3000.0 # x component deacceleration when our player dies
-const JUMP_VELOCITY := 2800.0
-const ROLL_VELOCITY := 1600.0
+const JUMP_VELOCITY := 2850.0
+const ROLL_VELOCITY := 2200.0
 const FLASH_FREQUENCY := 5.0
 const WALL_SLIDE_SPEED = 200.0
 const WALL_JUMP_SPEED = 3000.0
@@ -207,6 +207,7 @@ func _handle_wall_jump():
 		is_wall_sliding = false
 		did_wall_jump = true
 		wall_jump_air_control = 0.0
+		
 
 func is_touching_wall() -> int:
 	if _wall_ray_left.is_colliding():
