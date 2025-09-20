@@ -322,7 +322,7 @@ func _on_punch_body_entered(body: Node2D) -> void:
 		var enemy = body
 		enemy.hit(self, 1)
 		enemy.receive_knockback(-1 if _animated_sprite.flip_h else 1, 1500.0)
-		_punch_hitbox.disabled = true
+		_punch_hitbox.set_deferred("disabled", true)
 
 # --- Public API: Stun ---
 func stun(time: float) -> bool:
