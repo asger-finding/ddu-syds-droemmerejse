@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cq4gf0ctpud42"]
+[gd_scene load_steps=23 format=3 uid="uid://cq4gf0ctpud42"]
 
 [ext_resource type="Script" uid="uid://63qhft3d562w" path="res://Scripts/Constants.gd" id="1_24d08"]
 [ext_resource type="Script" uid="uid://bed1661ujgmmn" path="res://Scripts/GameController.gd" id="1_uu6xs"]
@@ -20,12 +20,12 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g1ltr"]
 shader = ExtResource("11_hbe7s")
 shader_parameter/paper_scale = 1.396
-shader_parameter/wrinkle_strength = 0.316
-shader_parameter/crease_intensity = 0.613
+shader_parameter/wrinkle_strength = 0.361
+shader_parameter/crease_intensity = 0.866
 shader_parameter/paper_color = Color(0.975929, 0.949341, 0.992931, 1)
-shader_parameter/shadow_color = Color(5.77569e-07, 0.459435, 0.688951, 1)
+shader_parameter/shadow_color = Color(0.2208, 0.5336, 0.69, 1)
 shader_parameter/noise_scale = 50.0
-shader_parameter/detail_scale = 148.951
+shader_parameter/detail_scale = 154.386
 shader_parameter/camera_offset = Vector2(0, 0)
 shader_parameter/parallax_strength = 0.1
 
@@ -34,20 +34,17 @@ shader = ExtResource("9_bsue6")
 shader_parameter/opacity = 0.664
 shader_parameter/blend_mode = 1
 
-[sub_resource type="LabelSettings" id="LabelSettings_2qvp8"]
-font = ExtResource("8_n0g3p")
-font_size = 50
-font_color = Color(0, 0, 0, 1)
-
 [sub_resource type="LabelSettings" id="LabelSettings_n0g3p"]
 font = ExtResource("8_n0g3p")
 font_size = 40
-font_color = Color(0, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_8hd61"]
 font = ExtResource("8_n0g3p")
 font_size = 40
-font_color = Color(0, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4qeq3"]
 shader = ExtResource("16_vf7dw")
@@ -125,20 +122,12 @@ offset_bottom = 70.0
 scale = Vector2(0.35, 0.35)
 alignment = 2
 
-[node name="HealthText" type="Label" parent="Scene/Camera/HUD/Game Overlay"]
-visible = false
-layout_mode = 0
-offset_right = 134.0
-offset_bottom = 69.0
-text = "Health"
-label_settings = SubResource("LabelSettings_2qvp8")
-
 [node name="FillingContainer" type="HBoxContainer" parent="Scene/Camera/HUD/Game Overlay"]
 layout_mode = 2
-offset_left = 18.0
-offset_top = 55.0
-offset_right = 160.0
-offset_bottom = 138.0
+offset_left = 24.0
+offset_top = 54.0
+offset_right = 166.0
+offset_bottom = 137.0
 
 [node name="FillingLabel" type="Label" parent="Scene/Camera/HUD/Game Overlay/FillingContainer"]
 layout_mode = 2
@@ -152,10 +141,9 @@ expand_mode = 2
 
 [node name="ScrapContainer" type="HBoxContainer" parent="Scene/Camera/HUD/Game Overlay"]
 layout_mode = 0
-offset_left = 18.0
-offset_top = 131.0
-offset_right = 159.0
-offset_bottom = 214.0
+offset_top = 125.0
+offset_right = 141.0
+offset_bottom = 208.0
 
 [node name="ScrapLabel" type="Label" parent="Scene/Camera/HUD/Game Overlay/ScrapContainer"]
 layout_mode = 2

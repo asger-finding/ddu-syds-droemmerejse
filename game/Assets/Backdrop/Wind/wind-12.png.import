@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nnhnvcu1kw2y"
-path="res://.godot/imported/frame_0.png-9e058934b9fce0efa8b07cdff5884f07.ctex"
+uid="uid://bbve0bq8x5k5u"
+path="res://.godot/imported/wind-12.png-5bfdbca40d72151f15a1bed202c40904.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Player/Stand/frame_0.png"
-dest_files=["res://.godot/imported/frame_0.png-9e058934b9fce0efa8b07cdff5884f07.ctex"]
+source_file="res://Assets/Backdrop/Wind/wind-12.png"
+dest_files=["res://.godot/imported/wind-12.png-5bfdbca40d72151f15a1bed202c40904.ctex"]
 
 [params]
 

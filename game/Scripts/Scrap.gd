@@ -9,6 +9,7 @@ var _base_position: float
 
 func _ready() -> void:
 	_base_position = global_position.y
+	rotation = randf_range(-0.7, 0.7)
 
 func _process(delta: float) -> void:
 	_handle_floating_motion(delta)

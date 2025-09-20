@@ -1,5 +1,8 @@
 extends TileMapLayer
 
+@export var line_color = Vector3(0.6, 0.6, 0.67)
+@export var shadow_color = Color(0, 0, 0, 0.3)
+
 var shader_material: ShaderMaterial
 
 func _ready() -> void:
@@ -106,8 +109,8 @@ void fragment() {
 
 	shader_material = ShaderMaterial.new()
 	shader_material.shader = shader
-	shader_material.set_shader_parameter('line_color', Vector3(0.7, 0.6, 0.7))
-	shader_material.set_shader_parameter('shadow_color', Color(0,0,0,0.3))
+	shader_material.set_shader_parameter('line_color', line_color)
+	shader_material.set_shader_parameter('shadow_color', shadow_color)
 	shader_material.set_shader_parameter('blur_std', 1.0)
 
 	material = shader_material
