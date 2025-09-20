@@ -13,7 +13,7 @@
 [sub_resource type="SpriteFrames" id="SpriteFrames_skevf"]
 animations = [{
 "frames": [{
-"duration": 6.0,
+"duration": 10.0,
 "texture": ExtResource("2_iffca")
 }, {
 "duration": 2.0,
