@@ -862,17 +862,17 @@ position = Vector2(24365, -11854)
 [node name="Enemy23" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
 position = Vector2(26522, -13093)
 
-[node name="Foreground" type="Node2D" parent="Interactability"]
+[node name="Foreground" type="Node2D" parent="."]
 position = Vector2(29050, -5205)
 
-[node name="Dinosaur1" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Dinosaur1" type="Sprite2D" parent="Foreground"]
 top_level = true
 z_index = 6
 position = Vector2(21168, -1940)
 rotation = -0.373566
 texture = ExtResource("37_bbwj2")
 
-[node name="Ufo0" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Ufo0" type="Sprite2D" parent="Foreground"]
 top_level = true
 z_index = 6
 position = Vector2(7263, 166)
@@ -880,39 +880,39 @@ rotation = 0.470461
 scale = Vector2(1.36075, 1.36349)
 texture = ExtResource("35_crxrm")
 
-[node name="Flora2" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Flora2" type="Sprite2D" parent="Foreground"]
 top_level = true
 z_index = 6
 position = Vector2(24862, -2732)
 texture = ExtResource("32_d2jk0")
 
-[node name="Ufo1" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Ufo1" type="Sprite2D" parent="Foreground"]
 top_level = true
 z_index = 6
 position = Vector2(33557, -1846)
 texture = ExtResource("35_crxrm")
 
-[node name="Butterfly0" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Butterfly0" type="Sprite2D" parent="Foreground"]
 top_level = true
 z_index = 6
 position = Vector2(6354, -1166)
 rotation = -0.38685
 texture = ExtResource("36_d4o7i")
 
-[node name="Dinosaur0" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Dinosaur0" type="Sprite2D" parent="Foreground"]
 top_level = true
 z_index = 6
 position = Vector2(6173, -3070)
 texture = ExtResource("37_bbwj2")
 
-[node name="Devil0" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Devil0" type="Sprite2D" parent="Foreground"]
 top_level = true
 z_index = 6
 position = Vector2(12844, -3345)
 rotation = 0.352163
 texture = ExtResource("33_5dli4")
 
-[node name="Butterfly2" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Butterfly2" type="Sprite2D" parent="Foreground"]
 top_level = true
 z_index = 6
 position = Vector2(19917, -3931)
@@ -920,144 +920,144 @@ rotation = 0.357333
 scale = Vector2(1.23999, 1.23999)
 texture = ExtResource("38_ivfu3")
 
-[node name="Butterfly3" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Butterfly3" type="Sprite2D" parent="Foreground"]
 z_index = 6
 position = Vector2(17215, -408)
 rotation = -0.71733
 texture = ExtResource("36_d4o7i")
 
-[node name="Butterfly4" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Butterfly4" type="Sprite2D" parent="Foreground"]
 z_index = 6
 position = Vector2(15246, -2117)
 rotation = 1.16937
 texture = ExtResource("38_ivfu3")
 
-[node name="Dinosaur2" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Dinosaur2" type="Sprite2D" parent="Foreground"]
 z_index = 6
 position = Vector2(17191, -3990)
 rotation = 0.226893
 texture = ExtResource("37_bbwj2")
 
-[node name="Ufo2" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Ufo2" type="Sprite2D" parent="Foreground"]
 z_index = 6
 position = Vector2(15246, -6228)
 rotation = -1.5708
 texture = ExtResource("35_crxrm")
 
-[node name="Devil2" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Devil2" type="Sprite2D" parent="Foreground"]
 z_index = 6
 position = Vector2(18352, -8442)
 texture = ExtResource("33_5dli4")
 
-[node name="Flora3" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Flora3" type="Sprite2D" parent="Foreground"]
 z_index = 6
 position = Vector2(21278, -7898)
 rotation = 0.342303
 scale = Vector2(-0.705, 0.6)
 texture = ExtResource("34_uvb3s")
 
-[node name="Devil3" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Devil3" type="Sprite2D" parent="Foreground"]
 show_behind_parent = true
 z_index = 6
 position = Vector2(-1550, 4808)
 texture = ExtResource("33_5dli4")
 
-[node name="Sommerfugl3" type="Sprite2D" parent="Interactability/Foreground"]
+[node name="Sommerfugl3" type="Sprite2D" parent="Foreground"]
 z_index = 6
 position = Vector2(-134.999, 3136)
 rotation = -6.83681
 scale = Vector2(1.53398, 1.53398)
 texture = ExtResource("41_ivfu3")
 
-[node name="Pil1" type="Sprite2D" parent="."]
-position = Vector2(27486, -2539)
+[node name="Pil1" type="Sprite2D" parent="Foreground"]
+position = Vector2(-1564, 2666)
 rotation = 1.5708
 texture = ExtResource("41_d4o7i")
 
-[node name="Pil3" type="Sprite2D" parent="."]
-position = Vector2(18739, -374)
+[node name="Pil3" type="Sprite2D" parent="Foreground"]
+position = Vector2(-10311, 4831)
 rotation = -0.417881
 texture = ExtResource("42_bbwj2")
 
-[node name="Flora6" type="Sprite2D" parent="."]
+[node name="Flora6" type="Sprite2D" parent="Foreground"]
 z_index = 6
-position = Vector2(19988, -2829)
+position = Vector2(-9062, 2376)
 scale = Vector2(1.50729, 1.39867)
 texture = ExtResource("44_fq1sc")
 
-[node name="Flora2" type="Sprite2D" parent="."]
-position = Vector2(36383, -2452)
+[node name="Flora4" type="Sprite2D" parent="Foreground"]
+position = Vector2(7333, 2753)
 texture = ExtResource("45_ivbkn")
 
-[node name="Flora4" type="Sprite2D" parent="."]
+[node name="Flora5" type="Sprite2D" parent="Foreground"]
 z_index = 6
-position = Vector2(41217, -5708)
+position = Vector2(12167, -503)
 rotation = 1.1973
 scale = Vector2(0.488026, 0.488026)
 texture = ExtResource("46_0fglf")
 
-[node name="Flora5" type="Sprite2D" parent="."]
+[node name="Flora7" type="Sprite2D" parent="Foreground"]
 z_index = 6
-position = Vector2(41449, -4256)
+position = Vector2(12399, 949)
 texture = ExtResource("47_0fglf")
 
-[node name="Flora1" type="Sprite2D" parent="."]
-position = Vector2(18091, -419)
+[node name="Flora1" type="Sprite2D" parent="Foreground"]
+position = Vector2(-10959, 4786)
 rotation = 0.109304
 texture = ExtResource("34_uvb3s")
 
-[node name="Seagull2" type="Sprite2D" parent="."]
-position = Vector2(8668, -2317)
+[node name="Seagull2" type="Sprite2D" parent="Foreground"]
+position = Vector2(-20382, 2888)
 texture = ExtResource("30_uvb3s")
 
-[node name="Cloud0" type="Sprite2D" parent="."]
-position = Vector2(48015, -8411)
+[node name="Cloud0" type="Sprite2D" parent="Foreground"]
+position = Vector2(18965, -3206)
 texture = ExtResource("21_7dsfl")
 
-[node name="Cloud7" type="Sprite2D" parent="."]
-position = Vector2(47404, -10164)
+[node name="Cloud7" type="Sprite2D" parent="Foreground"]
+position = Vector2(18354, -4959)
 texture = ExtResource("25_irg3d")
 
-[node name="Cloud5" type="Sprite2D" parent="."]
-position = Vector2(47877, -10568)
+[node name="Cloud5" type="Sprite2D" parent="Foreground"]
+position = Vector2(18827, -5363)
 texture = ExtResource("24_ao4cr")
 
-[node name="Arrow3" type="Sprite2D" parent="."]
-position = Vector2(40767, -2955)
-rotation = -3.08892
-scale = Vector2(-1.5, 1.5)
+[node name="Arrow3" type="Sprite2D" parent="Foreground"]
+position = Vector2(11717, 2250)
+rotation = 0.0526725
+scale = Vector2(1.5, -1.5)
 texture = ExtResource("48_qtjmb")
 
-[node name="Wind-01" type="Sprite2D" parent="."]
-position = Vector2(42531, -5551)
+[node name="Wind-01" type="Sprite2D" parent="Foreground"]
+position = Vector2(13481, -346)
 scale = Vector2(3.76667, 3.76667)
 texture = ExtResource("49_rfukx")
 
-[node name="Wind-02" type="Sprite2D" parent="."]
-position = Vector2(40763, -5339)
+[node name="Wind-02" type="Sprite2D" parent="Foreground"]
+position = Vector2(11713, -134)
 scale = Vector2(2.98, 2.98)
 texture = ExtResource("50_irs1d")
 
-[node name="Wind-03" type="Sprite2D" parent="."]
-position = Vector2(43148, -5212)
+[node name="Wind-03" type="Sprite2D" parent="Foreground"]
+position = Vector2(14098, -7)
 scale = Vector2(3.24667, 3.24667)
 texture = ExtResource("51_ofme6")
 
-[node name="Wind-04" type="Sprite2D" parent="."]
-position = Vector2(41691, -5437)
+[node name="Wind-04" type="Sprite2D" parent="Foreground"]
+position = Vector2(12641, -232)
 scale = Vector2(2.80667, 2.80667)
 texture = ExtResource("52_jdyvg")
 
-[node name="Cloud8" type="Sprite2D" parent="."]
-position = Vector2(42157, -5871)
+[node name="Cloud8" type="Sprite2D" parent="Foreground"]
+position = Vector2(13107, -666)
 texture = ExtResource("25_irg3d")
 
-[node name="Cloud2" type="Sprite2D" parent="."]
-position = Vector2(43094, -5668)
+[node name="Cloud2" type="Sprite2D" parent="Foreground"]
+position = Vector2(14044, -463)
 texture = ExtResource("27_n1aqv")
 
-[node name="Arrow1" type="Sprite2D" parent="."]
-position = Vector2(12075, -2665)
+[node name="Arrow1" type="Sprite2D" parent="Foreground"]
+position = Vector2(-16975, 2540)
 rotation = -2.5913
 texture = ExtResource("53_irs1d")
 
