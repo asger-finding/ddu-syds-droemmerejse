@@ -12,6 +12,12 @@ html, body, #canvas {
 }
 
 body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 	color: white;
 	background-color: black;
 	overflow: hidden;
@@ -89,15 +95,36 @@ body {
 	text-align: center;
 	z-index: 1;
 }
+
+#content {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+    align-items: center;
+}
+
+#gamefooter {
+	width: 860px;
+	font-size: 12px;
+	font-family: monospace;
+	text-align: center;
+}
 		</style>
 		<link id="-gd-engine-icon" rel="icon" type="image/png" href="syds-droemmerejse.icon.png" />
 <link rel="apple-touch-icon" href="syds-droemmerejse.apple-touch-icon.png"/>
 
 	</head>
 	<body>
-		<canvas id="canvas">
-			Your browser does not support the canvas tag.
-		</canvas>
+		<div id="content">
+			<canvas id="canvas">
+				Your browser does not support the canvas tag.
+			</canvas>
+			<div id="gamefooter">
+				Et spil udviklet af Asger Finding, Emilie Frost Lillelund, Kristine Bylov Tvergaard & Sirius William Voss
+				</br>
+				DDU 2025 | H. C. Ørsted Gymnasiet | 2D spilprojektet - teknikugen | <a href="https://github.com/asger-finding/ddu-syds-droemmerejse" target="_blank">Kildekode</a>
+			</div>
+		</div>
 
 		<noscript>
 			Your browser does not support JavaScript.
