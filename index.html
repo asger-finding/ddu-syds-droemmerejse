@@ -140,10 +140,15 @@ body {
 		</div>
 
 		<script src="index.js"></script>
-		<script>
+	<script>
 const GODOT_CONFIG = {"args":[],"canvasResizePolicy":1,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":32213856,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
+
+const closeTab = () => {
+	window.close?.();
+	window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+}
 
 (function () {
 	const statusOverlay = document.getElementById('status');
@@ -152,6 +157,7 @@ const engine = new Engine(GODOT_CONFIG);
 
 	let initializing = true;
 	let statusMode = '';
+	let gameInstance = null;
 
 	function setStatusMode(mode) {
 		if (statusMode === mode || !initializing) {
@@ -239,10 +245,31 @@ const engine = new Engine(GODOT_CONFIG);
 					statusProgress.removeAttribute('max');
 				}
 			},
-		}).then(() => {
+			'onExit': function(status_code) {
+				// This is called when get_tree().quit() is executed
+				console.log('Game exited with code:', status_code);
+				closeTab();
+			}
+		}).then(instance => {
 			setStatusMode('hidden');
+			gameInstance = instance;
+			
+			if (gameInstance && gameInstance.canvas) {
+				gameInstance.canvas.addEventListener('webglcontextlost', () => {
+					console.log('WebGL context lost - game may have exited');
+					setTimeout(closeTab, 1000); // Small delay in case it's recoverable
+				});
+			}
 		}, displayFailureNotice);
 	}
+
+	window.addEventListener('beforeunload', () => {
+		if (gameInstance) {
+			try {
+				gameInstance.requestQuit();
+			} catch (e) {}
+		}
+	});
 }());
 		</script>
 	</body>
