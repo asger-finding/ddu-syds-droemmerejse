@@ -3,12 +3,12 @@ extends Camera2D
 # --- State ---
 var effective_velocity := 0.0
 
-# Constants
+# --- Constants ---
 const FOLLOW_X_INTERPOLATION_SPEED = 8.5 # lerp weight
-const FOLLOW_Y_INTERPOLATION_SPEED = 85 # lerp weight
+const FOLLOW_Y_INTERPOLATION_SPEED = 12.0 # lerp weight
 const CAMERA_Y_FLOOR = 0 # px
 const CAMERA_ZOOM_CLOSEST = 0.4 # coeff of furthest we are zoomed in
-const CAMERA_ZOOM_FURTHEST = 0.05 # coeff of furthest we can zoom out
+const CAMERA_ZOOM_FURTHEST = 0.1 # coeff of furthest we can zoom out
 const CAMERA_ZOOM_PLAYER_SPEED_COEFF = 0.0001 # how fast should we zoom out according to player speed
 
 func _process(delta: float) -> void:
@@ -20,16 +20,21 @@ func _process(delta: float) -> void:
 		# Player is dead. Intentionally do nothing.
 		return
 	
-	position.x = lerp(position.x, player.position.x, FOLLOW_X_INTERPOLATION_SPEED * delta)
+	# Decay smoothing
+	var x_decay = exp(-FOLLOW_X_INTERPOLATION_SPEED * delta)
+	var y_decay = exp(-FOLLOW_Y_INTERPOLATION_SPEED * delta)
+	
+	position.x = lerp(player.position.x, position.x, x_decay)
 	position.y = min(
-		lerp(position.y, player.position.y, FOLLOW_Y_INTERPOLATION_SPEED * delta),
+		lerp(player.position.y, position.y, y_decay),
 		CAMERA_Y_FLOOR
 	)
 	
 	# Smooth velocity tracking
 	var target_velocity := player.velocity.length()
 	var smoothing := 5.0
-	effective_velocity = lerp(effective_velocity, target_velocity, smoothing * delta)
+	var velocity_weight = clamp(smoothing * delta, 0.0, 1.0)
+	effective_velocity = lerp(effective_velocity, target_velocity, velocity_weight)
 	
 	# Stabilize zoom factor
 	var speed_over: float = max(effective_velocity - 500.0, 0.0)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=24 format=3 uid="uid://b6catodorh3mu"]
 
 [ext_resource type="Shader" uid="uid://bj33mdq7bwfmq" path="res://Shaders/CrumbledPaper.gdshader" id="1_3so38"]
-[ext_resource type="Script" path="res://Scripts/Backdrop.gd" id="2_3cx6b"]
+[ext_resource type="Script" uid="uid://dn02ekxewi45q" path="res://Scripts/Backdrop.gd" id="2_3cx6b"]
 [ext_resource type="PackedScene" uid="uid://bfumbaprtnnwu" path="res://Scenes/World.tscn" id="3_wxwew"]
-[ext_resource type="Script" path="res://Scripts/CameraFollowPlayer.gd" id="4_acvyw"]
+[ext_resource type="Script" uid="uid://botyddwy7pgi" path="res://Scripts/CameraFollowPlayer.gd" id="4_acvyw"]
 [ext_resource type="Shader" uid="uid://cx0kddqltc7lu" path="res://Shaders/Drawing.gdshader" id="5_alh3a"]
 [ext_resource type="Texture2D" uid="uid://ck4mr2mbcwals" path="res://Assets/Backdrop/sun.png" id="6_4q8tf"]
 [ext_resource type="Script" uid="uid://dl0cglho8jpui" path="res://Scripts/Overlay.gd" id="7_x3xnh"]
