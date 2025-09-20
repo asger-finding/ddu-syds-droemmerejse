@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b6catodorh3mu"]
+[gd_scene load_steps=24 format=3 uid="uid://b6catodorh3mu"]
 
 [ext_resource type="Shader" uid="uid://bj33mdq7bwfmq" path="res://Shaders/CrumbledPaper.gdshader" id="1_3so38"]
 [ext_resource type="Script" path="res://Scripts/Backdrop.gd" id="2_3cx6b"]
@@ -12,6 +12,10 @@
 [ext_resource type="Texture2D" uid="uid://d2butkivrlbho" path="res://Assets/HUD/Scrap/frame.png" id="10_rajel"]
 [ext_resource type="Script" uid="uid://2wmk6vtet1jv" path="res://Scripts/DeathHUD.gd" id="11_vvhu1"]
 [ext_resource type="Shader" uid="uid://bqoitfi71frqv" path="res://Shaders/Death.gdshader" id="12_lbihj"]
+[ext_resource type="Texture2D" uid="uid://cby0347efatav" path="res://Assets/DeathScreen/try-again-icon.png" id="13_wxwew"]
+[ext_resource type="Texture2D" uid="uid://cftghwy0ry4kl" path="res://Assets/DeathScreen/give-up-icon.png" id="14_acvyw"]
+[ext_resource type="Script" uid="uid://di4vwkpp2kh0j" path="res://Scripts/TryAgainButton.gd" id="14_alh3a"]
+[ext_resource type="Script" uid="uid://b2wiguib2yok5" path="res://Scripts/GiveUpButton.gd" id="16_alh3a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_raj38"]
 shader = ExtResource("1_3so38")
@@ -58,6 +62,16 @@ outline_color = Color(0, 0, 0, 1)
 shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wxwew"]
+font = ExtResource("8_8r6kd")
+font_size = 60
+font_color = Color(1, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
 
 [node name="Game" type="Node2D"]
 
@@ -158,3 +172,41 @@ offset_right = 1093.0
 offset_bottom = 448.0
 text = "av altså mand :("
 label_settings = SubResource("LabelSettings_i4lct")
+
+[node name="TryAgainButton" type="Button" parent="Camera/DeathHUD/DeathText"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 209.0
+offset_right = 477.0
+offset_bottom = 317.0
+theme_type_variation = &"FlatButton"
+icon = ExtResource("13_wxwew")
+script = ExtResource("14_alh3a")
+
+[node name="TryAgainText" type="Label" parent="Camera/DeathHUD/DeathText/TryAgainButton"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 6.0
+offset_right = 337.0
+offset_bottom = 89.0
+text = "prøv igen"
+label_settings = SubResource("LabelSettings_wxwew")
+
+[node name="GiveUpButton" type="Button" parent="Camera/DeathHUD/DeathText"]
+layout_mode = 0
+offset_left = 602.0
+offset_top = 200.0
+offset_right = 875.0
+offset_bottom = 312.0
+theme_type_variation = &"FlatButton"
+icon = ExtResource("14_acvyw")
+script = ExtResource("16_alh3a")
+
+[node name="GiveUpText" type="Label" parent="Camera/DeathHUD/DeathText/GiveUpButton"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 12.0
+offset_right = 256.0
+offset_bottom = 95.0
+text = "giv op!"
+label_settings = SubResource("LabelSettings_wxwew")
