@@ -51,6 +51,7 @@ func _physics_process(delta: float) -> void:
 			
 		"Dragon", "Shark":
 			velocity.x = speed * (-1 if _animated_sprite.flip_h else 1)
+			velocity.y = 0
 			
 			# Track distance traveled
 			distance_traversed += abs(velocity.x) * delta
@@ -86,7 +87,11 @@ func receive_knockback(lr_direction: int, strength: float, duration: float = 0.3
 	knockback_time = duration
 	var base_direction = Vector2(lr_direction, 0)
 	var knockback_direction = base_direction.rotated(deg_to_rad(-30 * lr_direction))
-	knockback_velocity = knockback_direction * strength
+	match enemy_class:
+		"Cow":
+			knockback_velocity = knockback_direction * strength
+		"Dragon", "Shark":
+			knockback_velocity.x = knockback_direction.x * strength
 
 func apply_knockback_to_player(player: Player) -> void:
 		# Temporarily disable floor detection
