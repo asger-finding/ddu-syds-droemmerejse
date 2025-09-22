@@ -1061,6 +1061,15 @@ position = Vector2(-16975, 2540)
 rotation = -2.5913
 texture = ExtResource("53_irs1d")
 
+[node name="Void" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Void"]
+position = Vector2(1319, -4157)
+scale = Vector2(100, 100)
+color = Color(0.0728426, 0.0728426, 0.0728426, 1)
+polygon = PackedVector2Array(-14, 42, -4, 1377, 2191, 1377, 2198.86, 41.99)
+vertex_colors = PackedColorArray(0, 0, 0, 1, 0.20871, 0.20871, 0.20871, 1, 0.329158, 0.329158, 0.329158, 1, 0.466181, 0.466181, 0.466181, 0.921569, 0.835294, 0.835294, 0.835294, 0.85098)
+
 [connection signal="animation_changed" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_player_sprite_animation_changed"]
 [connection signal="animation_finished" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Interactability/Player/PlayerSprite/Punch" to="Interactability/Player" method="_on_punch_body_entered"]
