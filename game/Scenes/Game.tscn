@@ -22,12 +22,12 @@ shader = ExtResource("1_3so38")
 shader_parameter/paper_scale = 1.396
 shader_parameter/wrinkle_strength = 0.361
 shader_parameter/crease_intensity = 0.866
-shader_parameter/paper_color = Color(0.975929, 0.949341, 0.992931, 1)
-shader_parameter/shadow_color = Color(0.2208, 0.5336, 0.69, 1)
+shader_parameter/paper_color = Color(0.98241, 0.9702, 0.99, 1)
+shader_parameter/shadow_color = Color(0.5175, 0.6325, 0.69, 1)
 shader_parameter/noise_scale = 50.0
 shader_parameter/detail_scale = 154.386
 shader_parameter/camera_offset = Vector2(0, 0)
-shader_parameter/parallax_strength = 0.1
+shader_parameter/parallax_strength = 0.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8e0uq"]
 shader = ExtResource("5_alh3a")
@@ -83,7 +83,6 @@ follow_viewport_enabled = true
 material = SubResource("ShaderMaterial_raj38")
 offset_right = 2304.0
 offset_bottom = 1296.0
-pivot_offset = Vector2(1000, 500)
 script = ExtResource("2_3cx6b")
 camera_reference = NodePath("../../Camera")
 parallax_speed = 0.1
