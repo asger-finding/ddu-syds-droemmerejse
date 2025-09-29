@@ -12,6 +12,8 @@ func _ready() -> void:
 	rotation = randf_range(-0.7, 0.7)
 
 func _process(delta: float) -> void:
+	if Global.PauseHUD.paused:
+		return
 	_handle_floating_motion(delta)
 
 func _handle_floating_motion(delta: float) -> void:

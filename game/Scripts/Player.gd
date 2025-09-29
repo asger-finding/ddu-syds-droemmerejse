@@ -54,6 +54,8 @@ func _ready() -> void:
 	_setup_flash_shader()
 
 func _process(delta: float) -> void:
+	if Global.PauseHUD.paused:
+		return
 	move_and_slide()
 	
 	if position.x < 0:
@@ -74,6 +76,8 @@ func _process(delta: float) -> void:
 	_handle_animation()
 
 func _physics_process(delta: float) -> void:
+	if Global.PauseHUD.paused:
+		return
 	_apply_dead_friction(delta)
 	_apply_gravity(delta)
 	
@@ -129,6 +133,11 @@ func _update_ground_buffer(delta: float) -> void:
 			was_grounded_recently = false
 
 func _handle_animation() -> void:
+	if Global.PauseHUD.paused:
+		_animated_sprite.pause()
+		return
+	else:
+		_animated_sprite.play()
 	_animated_sprite.speed_scale = 1
 	
 	if is_rolling:
@@ -157,7 +166,6 @@ func _handle_animation() -> void:
 		if was_grounded_recently:
 			_animated_sprite.play("Run")
 			return
-	
 	_animated_sprite.stop()
 	if is_wall_sliding:
 		_animated_sprite.play("Wallslide")
@@ -228,6 +236,8 @@ func _handle_roll() -> void:
 		velocity.x = (-1 if _animated_sprite.flip_h else 1) * ROLL_VELOCITY
 
 func _start_roll() -> void:
+	if Global.PauseHUD.paused:
+		return
 	is_rolling = true
 	
 	_standing_collision.disabled = true
@@ -236,6 +246,8 @@ func _start_roll() -> void:
 	_animated_sprite.play("Roll")
 	
 func _stop_roll() -> void:
+	if Global.PauseHUD.paused:
+		return
 	is_rolling = false
 	
 	_standing_collision.disabled = false

@@ -1,6 +1,6 @@
-[gd_scene load_steps=24 format=3 uid="uid://b6catodorh3mu"]
+[gd_scene load_steps=26 format=3 uid="uid://b6catodorh3mu"]
 
-[ext_resource type="Shader" uid="uid://bj33mdq7bwfmq" path="res://Shaders/CrumbledPaper.gdshader" id="1_3so38"]
+[ext_resource type="Shader" path="res://Shaders/CrumbledPaper.gdshader" id="1_3so38"]
 [ext_resource type="Script" uid="uid://dn02ekxewi45q" path="res://Scripts/Backdrop.gd" id="2_3cx6b"]
 [ext_resource type="PackedScene" uid="uid://bfumbaprtnnwu" path="res://Scenes/World.tscn" id="3_wxwew"]
 [ext_resource type="Script" uid="uid://botyddwy7pgi" path="res://Scripts/CameraFollowPlayer.gd" id="4_acvyw"]
@@ -16,6 +16,8 @@
 [ext_resource type="Texture2D" uid="uid://cftghwy0ry4kl" path="res://Assets/DeathScreen/give-up-icon.png" id="14_acvyw"]
 [ext_resource type="Script" uid="uid://di4vwkpp2kh0j" path="res://Scripts/TryAgainButton.gd" id="14_alh3a"]
 [ext_resource type="Script" uid="uid://b2wiguib2yok5" path="res://Scripts/GiveUpButton.gd" id="16_alh3a"]
+[ext_resource type="Script" uid="uid://vc5mgp7yj82q" path="res://Scenes/PauseHUD.gd" id="17_4q8tf"]
+[ext_resource type="Script" uid="uid://b2ahdboifpw5f" path="res://Scenes/ResumeButton.gd" id="18_x3xnh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_raj38"]
 shader = ExtResource("1_3so38")
@@ -201,6 +203,62 @@ icon = ExtResource("14_acvyw")
 script = ExtResource("16_alh3a")
 
 [node name="GiveUpText" type="Label" parent="Camera/DeathHUD/DeathText/GiveUpButton"]
+layout_mode = 0
+offset_left = 104.0
+offset_top = 12.0
+offset_right = 256.0
+offset_bottom = 95.0
+text = "giv op!"
+label_settings = SubResource("LabelSettings_wxwew")
+
+[node name="PauseHUD" type="CanvasLayer" parent="Camera"]
+script = ExtResource("17_4q8tf")
+
+[node name="PauseScreen" type="ColorRect" parent="Camera/PauseHUD"]
+visible = false
+material = SubResource("ShaderMaterial_356ba")
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="PauseText" type="Label" parent="Camera/PauseHUD"]
+offset_left = 73.0
+offset_top = 161.0
+offset_right = 1312.0
+offset_bottom = 381.0
+text = "drøm pauset    "
+label_settings = SubResource("LabelSettings_i4lct")
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="Camera/PauseHUD/PauseText"]
+layout_mode = 0
+offset_left = 125.0
+offset_top = 209.0
+offset_right = 477.0
+offset_bottom = 317.0
+theme_type_variation = &"FlatButton"
+icon = ExtResource("13_wxwew")
+script = ExtResource("18_x3xnh")
+
+[node name="TryAgainText" type="Label" parent="Camera/PauseHUD/PauseText/ResumeButton"]
+layout_mode = 0
+offset_left = 122.0
+offset_top = 6.0
+offset_right = 337.0
+offset_bottom = 89.0
+text = "genoptag"
+label_settings = SubResource("LabelSettings_wxwew")
+
+[node name="GiveUpButton" type="Button" parent="Camera/PauseHUD/PauseText"]
+layout_mode = 0
+offset_left = 602.0
+offset_top = 200.0
+offset_right = 875.0
+offset_bottom = 312.0
+theme_type_variation = &"FlatButton"
+icon = ExtResource("14_acvyw")
+script = ExtResource("16_alh3a")
+
+[node name="GiveUpText" type="Label" parent="Camera/PauseHUD/PauseText/GiveUpButton"]
 layout_mode = 0
 offset_left = 104.0
 offset_top = 12.0
