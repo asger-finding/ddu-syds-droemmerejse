@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+
+    <title>Syd's Drømmerejse</title>
+    <link rel="icon" type="image/png" href="game/syds-droemmerejse.icon.png" />
+    <link rel="apple-touch-icon" href="game/syds-droemmerejse.apple-touch-icon.png" />
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="game/index.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <canvas id="canvas"></canvas>
+        <div id="gamefooter">
+            Et spil udviklet af Asger Finding, Emilie Frost Lillelund, Kristine Bylov Tvergaard & Sirius William Voss
+            <br>
+            DDU 2025 | H. C. Ørsted Gymnasiet | 2D spilprojektet - teknikugen | <a
+                href="https://github.com/asger-finding/ddu-syds-droemmerejse" target="_blank">Kildekode</a>
+            <br><br>
+            Inputs: Venstre: ←, Højre: →, Hop: ↑/Mellemrum, Rul: ↓, Slå: X
+        </div>
+    </div>
+
+    <noscript>
+        Din browser understøtter ikke JavaScript. Det er nødvændigt for at køre spillet.
+    </noscript>
+
+    <div id="status">
+        <img id="status-splash" src="game/index.png" alt="Loading...">
+        <progress id="status-progress"></progress>
+        <div id="status-notice"></div>
+    </div>
+
+    <script>
+        const GODOT_CONFIG = {
+            "args": [],
+            "canvasResizePolicy": 2,
+            "ensureCrossOriginIsolationHeaders": true,
+            "executable": "game/index",
+            "experimentalVK": false,
+            "focusCanvas": true,
+            "gdextensionLibs": []
+        };
+        const engine = new Engine(GODOT_CONFIG);
+
+        const closeTab = () => {
+            window.close?.();
+            window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
+        };
+
+        const statusOverlay = document.getElementById('status');
+        const statusProgress = document.getElementById('status-progress');
+
+        statusOverlay.style.visibility = 'visible';
+        statusProgress.style.display = 'block';
+
+        engine.startGame({
+            'onProgress': function (current, total) {
+                if (current > 0 && total > 0) {
+                    statusProgress.value = current;
+                    statusProgress.max = total;
+                }
+            },
+            'onExit': function (status_code) {
+                console.log('Spillet lukkede med fejlkode:', status_code);
+                closeTab();
+            }
+        }).then(() => {
+            statusOverlay.remove();
+        }).catch(err => {
+            console.error('Game failed to load:', err);
+            document.getElementById('status-notice').textContent = 'Kunne ikke indlæse spillet: ' + err.message;
+            document.getElementById('status-notice').style.display = 'block';
+            statusProgress.style.display = 'none';
+        });
+    </script>
+</body>
+
+</html>
