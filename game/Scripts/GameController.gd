@@ -21,4 +21,10 @@ func load_scene(scene_name: String) -> void:
 	assert(scene_resource, 'Tried to load scene, but provided scene path was not found')
 
 	scene_instance = scene_resource.instantiate()
+	call_deferred("_add_scene")
+
+func _add_scene():
+	scene_instance.visible = false
 	scene.add_child(scene_instance)
+	await get_tree().process_frame
+	scene_instance.visible = true

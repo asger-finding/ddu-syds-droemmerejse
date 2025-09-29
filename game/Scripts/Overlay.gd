@@ -41,12 +41,14 @@ func update_health():
 
 		var heart = AnimatedSprite2D.new()
 		var frames = SpriteFrames.new()
+		
 		frames.add_animation("Alive")
-		frames.add_frame("Alive", preload("res://Assets/HUD/Health/Alive/frame_0.png"))
-		frames.add_frame("Alive", preload("res://Assets/HUD/Health/Alive/frame_1.png"))
+		frames.add_frame("Alive", preload("res://Assets/GameHUD/Health/Alive/frame_0.png"))
+		frames.add_frame("Alive", preload("res://Assets/GameHUD/Health/Alive/frame_1.png"))
+		
 		frames.add_animation("Dead")
-		frames.add_frame("Dead", preload("res://Assets/HUD/Health/Dead/frame_0.png"))
-		frames.add_frame("Dead", preload("res://Assets/HUD/Health/Dead/frame_1.png"))
+		frames.add_frame("Dead", preload("res://Assets/GameHUD/Health/Dead/frame_0.png"))
+		frames.add_frame("Dead", preload("res://Assets/GameHUD/Health/Dead/frame_1.png"))
 
 		heart.frames = frames
 		heart.animation = "Alive" if (i < current) else "Dead"

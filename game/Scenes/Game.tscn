@@ -8,15 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://ck4mr2mbcwals" path="res://Assets/Backdrop/sun.png" id="6_4q8tf"]
 [ext_resource type="Script" uid="uid://dl0cglho8jpui" path="res://Scripts/Overlay.gd" id="7_x3xnh"]
 [ext_resource type="FontFile" uid="uid://b6ixxpdy5in1g" path="res://Fonts/Schoolbell-Regular.ttf" id="8_8r6kd"]
-[ext_resource type="Texture2D" uid="uid://cpe2c0i8bj32q" path="res://Assets/HUD/Filling/frame.png" id="9_tfod6"]
-[ext_resource type="Texture2D" uid="uid://d2butkivrlbho" path="res://Assets/HUD/Scrap/frame.png" id="10_rajel"]
-[ext_resource type="Script" uid="uid://2wmk6vtet1jv" path="res://Scripts/DeathHUD.gd" id="11_vvhu1"]
+[ext_resource type="Texture2D" uid="uid://cpe2c0i8bj32q" path="res://Assets/GameHUD/Filling/frame.png" id="9_tfod6"]
+[ext_resource type="Texture2D" uid="uid://d2butkivrlbho" path="res://Assets/GameHUD/Scrap/frame.png" id="10_rajel"]
+[ext_resource type="Script" uid="uid://2wmk6vtet1jv" path="res://Scripts/HUD/DeathHUD.gd" id="11_vvhu1"]
 [ext_resource type="Shader" uid="uid://bqoitfi71frqv" path="res://Shaders/Death.gdshader" id="12_lbihj"]
-[ext_resource type="Texture2D" uid="uid://cby0347efatav" path="res://Assets/DeathScreen/try-again-icon.png" id="13_wxwew"]
-[ext_resource type="Texture2D" uid="uid://cftghwy0ry4kl" path="res://Assets/DeathScreen/give-up-icon.png" id="14_acvyw"]
+[ext_resource type="Texture2D" uid="uid://cby0347efatav" path="res://Assets/DeathHUD/try-again-icon.png" id="13_wxwew"]
+[ext_resource type="Texture2D" uid="uid://cftghwy0ry4kl" path="res://Assets/DeathHUD/give-up-icon.png" id="14_acvyw"]
 [ext_resource type="Script" uid="uid://di4vwkpp2kh0j" path="res://Scripts/Buttons/TryAgainButton.gd" id="14_alh3a"]
 [ext_resource type="Script" uid="uid://b2wiguib2yok5" path="res://Scripts/Buttons/GiveUpButton.gd" id="16_alh3a"]
-[ext_resource type="Script" uid="uid://vc5mgp7yj82q" path="res://Scripts/PauseHUD.gd" id="17_4q8tf"]
+[ext_resource type="Script" uid="uid://vc5mgp7yj82q" path="res://Scripts/HUD/PauseHUD.gd" id="17_4q8tf"]
 [ext_resource type="Script" uid="uid://b2ahdboifpw5f" path="res://Scripts/Buttons/ResumeButton.gd" id="18_x3xnh"]
 [ext_resource type="Script" uid="uid://crgk5v2isrv2p" path="res://Scenes/Shop.gd" id="19_8r6kd"]
 
@@ -143,9 +143,9 @@ position = Vector2(47.0001, 31)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("6_4q8tf")
 
-[node name="HUD" type="CanvasLayer" parent="Camera"]
+[node name="GameHUD" type="CanvasLayer" parent="Camera"]
 
-[node name="Game Overlay" type="Control" parent="Camera/HUD"]
+[node name="Game Overlay" type="Control" parent="Camera/GameHUD"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 1016.0
@@ -154,7 +154,7 @@ offset_right = 1056.0
 offset_bottom = 50.0
 script = ExtResource("7_x3xnh")
 
-[node name="HealthContainer" type="HBoxContainer" parent="Camera/HUD/Game Overlay"]
+[node name="HealthContainer" type="HBoxContainer" parent="Camera/GameHUD/Game Overlay"]
 layout_mode = 0
 offset_left = -183.0
 offset_top = 30.0
@@ -163,35 +163,35 @@ offset_bottom = 70.0
 scale = Vector2(0.35, 0.35)
 alignment = 2
 
-[node name="FillingContainer" type="HBoxContainer" parent="Camera/HUD/Game Overlay"]
+[node name="FillingContainer" type="HBoxContainer" parent="Camera/GameHUD/Game Overlay"]
 layout_mode = 2
 offset_left = 24.0
 offset_top = 54.0
 offset_right = 166.0
 offset_bottom = 137.0
 
-[node name="FillingLabel" type="Label" parent="Camera/HUD/Game Overlay/FillingContainer"]
+[node name="FillingLabel" type="Label" parent="Camera/GameHUD/Game Overlay/FillingContainer"]
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_i0vto")
 
-[node name="FillingIcon" type="TextureRect" parent="Camera/HUD/Game Overlay/FillingContainer"]
+[node name="FillingIcon" type="TextureRect" parent="Camera/GameHUD/Game Overlay/FillingContainer"]
 layout_mode = 2
 texture = ExtResource("9_tfod6")
 expand_mode = 2
 
-[node name="ScrapContainer" type="HBoxContainer" parent="Camera/HUD/Game Overlay"]
+[node name="ScrapContainer" type="HBoxContainer" parent="Camera/GameHUD/Game Overlay"]
 layout_mode = 0
 offset_top = 125.0
 offset_right = 141.0
 offset_bottom = 208.0
 
-[node name="ScrapLabel" type="Label" parent="Camera/HUD/Game Overlay/ScrapContainer"]
+[node name="ScrapLabel" type="Label" parent="Camera/GameHUD/Game Overlay/ScrapContainer"]
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_3jf1l")
 
-[node name="ScrapIcon" type="TextureRect" parent="Camera/HUD/Game Overlay/ScrapContainer"]
+[node name="ScrapIcon" type="TextureRect" parent="Camera/GameHUD/Game Overlay/ScrapContainer"]
 layout_mode = 2
 texture = ExtResource("10_rajel")
 expand_mode = 2

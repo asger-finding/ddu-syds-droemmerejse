@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=4 uid="uid://bfumbaprtnnwu"]
+[gd_scene load_steps=59 format=4 uid="uid://bfumbaprtnnwu"]
 
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
 [ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
@@ -20,7 +20,6 @@
 [ext_resource type="Texture2D" uid="uid://c2wjqxenckvc5" path="res://Assets/Sprites/Player/Run/frame_4.png" id="16_371b6"]
 [ext_resource type="Texture2D" uid="uid://c0g0iborlmxnt" path="res://Assets/Sprites/Player/Wallslide/frame_0.png" id="17_ao4cr"]
 [ext_resource type="PackedScene" uid="uid://sp858ls63win" path="res://Scenes/Enemy.tscn" id="18_irg3d"]
-[ext_resource type="PackedScene" uid="uid://bmll3giptxv7o" path="res://Scenes/CollectibleFilling.tscn" id="19_y8a40"]
 [ext_resource type="PackedScene" uid="uid://drv412exw06io" path="res://Scenes/CollectibleScrap.tscn" id="20_n1aqv"]
 [ext_resource type="Texture2D" uid="uid://rnho28up8306" path="res://Assets/Backdrop/Clouds/cloud_0.png" id="21_7dsfl"]
 [ext_resource type="Texture2D" uid="uid://ca2gkoiq0s1d2" path="res://Assets/Backdrop/Clouds/cloud_6.png" id="22_mq4nq"]
@@ -246,9 +245,6 @@ target_position = Vector2(30, 0)
 [node name="WallRayTop" type="RayCast2D" parent="Interactability/Player"]
 position = Vector2(-2.6, 30)
 target_position = Vector2(0, -69)
-
-[node name="Fluff" parent="Interactability" instance=ExtResource("19_y8a40")]
-position = Vector2(-2518, -1500)
 
 [node name="Background elements" type="Node2D" parent="Interactability"]
 position = Vector2(29050, -5205)
@@ -647,9 +643,6 @@ position = Vector2(16044, -3481)
 [node name="Scrap4" parent="Interactability/Scrap Group" instance=ExtResource("20_n1aqv")]
 position = Vector2(16696, -3481)
 
-[node name="Scrap" parent="Interactability/Scrap Group" instance=ExtResource("20_n1aqv")]
-position = Vector2(-1648, -632)
-
 [node name="Scrap95" parent="Interactability/Scrap Group" instance=ExtResource("20_n1aqv")]
 position = Vector2(10571, -304)
 
@@ -767,16 +760,6 @@ position = Vector2(51130, -14277)
 [node name="Enemy group" type="Node2D" parent="Interactability"]
 position = Vector2(30780, -3763)
 
-[node name="Enemy" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
-position = Vector2(-30174, 2705)
-health = 5
-
-[node name="Flying Enemy" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
-position = Vector2(-31363, 2971)
-enemy_class = "Dragon"
-speed = 500.0
-flight_or_swim_distance = 1600.0
-
 [node name="Enemy2" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
 position = Vector2(-19745, 3488)
 
@@ -858,16 +841,6 @@ light_mask = 9
 visibility_layer = 9
 position = Vector2(-1531, -1702)
 enemy_class = "Dragon"
-
-[node name="Enemy19" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
-position = Vector2(-30174, 2705)
-health = 5
-
-[node name="Flying Enemy3" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
-position = Vector2(-31363, 2971)
-enemy_class = "Dragon"
-speed = 500.0
-flight_or_swim_distance = 1600.0
 
 [node name="Enemy20" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
 position = Vector2(24508, -9446)
