@@ -68,10 +68,11 @@ func _process(delta: float) -> void:
 		deal_damage(get_health())
 		return
 	
+	# Drop shadow shader
 	var direction = -1 if _animated_sprite.flip_h else 1
 	var shadow_exp = max(min(velocity.y / 4000.0, 1), 0)
-	var shadow_offset = Vector2(shadow_exp * 10.0 * direction, shadow_exp * 80.0)
-	shader_material.set_shader_parameter("blur_std", max(shadow_exp * 15.0, 4.0))
+	var shadow_offset = Vector2(shadow_exp * 35.0 * direction, shadow_exp * 80.0)
+	shader_material.set_shader_parameter("blur_std", max(shadow_exp * 20.0, 4.0))
 	shader_material.set_shader_parameter("shadow_offset", shadow_offset)
 	
 	var was_stunned := process_stun(delta)
