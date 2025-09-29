@@ -14,6 +14,7 @@ config/name="Syd's Drømmerejse"
 run/main_scene="uid://cq4gf0ctpud42"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://cjukndtemmwwi"
 
 [autoload]
 
@@ -24,6 +25,12 @@ Global="*res://Scripts/Global.gd"
 window/size/window_width_override=1152
 window/size/window_height_override=648
 window/stretch/mode="canvas_items"
+
+[importer_defaults]
+
+animation_library={
+&"animation/fps": 60.0
+}
 
 [input]
 
