@@ -17,13 +17,18 @@ var paused = false
 var just_paused
 func _ready():
 	Global.PauseHUD = self
+	Node.PROCESS_MODE_ALWAYS
 
 func _process(delta: float) -> void:
+	Node.PROCESS_MODE_ALWAYS
+	
 	if Input.is_action_just_pressed("Pause"):
 		if paused == false:
 			paused=true 
+			get_tree().paused=true
 		else:
 			paused = false
+			get_tree().paused=false
 		print(paused)
 	if paused:
 		if not just_paused:

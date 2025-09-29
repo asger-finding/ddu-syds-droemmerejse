@@ -27,9 +27,6 @@ func _ready() -> void:
 	_animated_sprite.play(enemy_class)
 
 func _physics_process(delta: float) -> void:
-	if Global.PauseHUD.paused:
-		_animated_sprite.stop()
-		return
 	_animated_sprite.play(enemy_class)
 	if knockback_time > 0:
 		knockback_time -= delta
