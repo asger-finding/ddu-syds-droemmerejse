@@ -14,6 +14,9 @@ var wall_jump_air_control := 1.0
 var ground_buffer_time: float = 0.05
 var ground_buffer_timer: float = 0.0
 var was_grounded_recently: bool = false
+var has_cow = false
+var has_dragon = false
+var has_shark = false
 
 # --- References ---
 @onready var _animated_sprite: AnimatedSprite2D = $PlayerSprite

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://b6catodorh3mu"]
+[gd_scene load_steps=27 format=3 uid="uid://b6catodorh3mu"]
 
 [ext_resource type="Shader" path="res://Shaders/CrumbledPaper.gdshader" id="1_3so38"]
 [ext_resource type="Script" uid="uid://dn02ekxewi45q" path="res://Scripts/Backdrop.gd" id="2_3cx6b"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://b2wiguib2yok5" path="res://Scripts/GiveUpButton.gd" id="16_alh3a"]
 [ext_resource type="Script" uid="uid://vc5mgp7yj82q" path="res://Scenes/PauseHUD.gd" id="17_4q8tf"]
 [ext_resource type="Script" uid="uid://b2ahdboifpw5f" path="res://Scenes/ResumeButton.gd" id="18_x3xnh"]
+[ext_resource type="Script" uid="uid://crgk5v2isrv2p" path="res://Scenes/Shop.gd" id="19_8r6kd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_raj38"]
 shader = ExtResource("1_3so38")
@@ -266,3 +267,6 @@ offset_right = 256.0
 offset_bottom = 95.0
 text = "giv op!"
 label_settings = SubResource("LabelSettings_wxwew")
+
+[node name="ShopHUD" type="CanvasLayer" parent="Camera"]
+script = ExtResource("19_8r6kd")
