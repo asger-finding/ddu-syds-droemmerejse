@@ -57,10 +57,6 @@ func _ready() -> void:
 	_setup_flash_shader()
 
 func _process(delta: float) -> void:
-	#if Global.PauseHUD.paused:
-	#	get_tree().paused = true
-	#else:
-	#	get_tree().paused = false
 	move_and_slide()
 	
 	if position.x < 0:

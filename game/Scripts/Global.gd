@@ -7,5 +7,4 @@ var Player
 var Constants
 var EnemyParent
 var PaperTileMap
-var PauseHUD
 var Shop
