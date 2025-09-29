@@ -5,3 +5,4 @@ func _ready():
 	
 func _button_pressed() -> void:
 	Global.PauseHUD.paused=false
+	get_tree().paused=false
