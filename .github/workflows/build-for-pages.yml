@@ -2,8 +2,7 @@ name: "godot-ci export"
 on: push
 
 env:
-  GODOT_VERSION: 4.4.1  
-  EXPORT_NAME: game
+  GODOT_VERSION: 4.4.1
   PROJECT_PATH: game
 
 jobs:
@@ -27,22 +26,12 @@ jobs:
       - name: Web Build
         run: |
           mkdir -p public/game
-          EXPORT_DIR="$(readlink -f public/game)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/index.html"
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: web
-          path: public/game
-
-      - name: Install rsync
-        run: |
-          apt-get update && apt-get install -y rsync
+          godot --headless --verbose --export-release "Web" ../public/game/index.html
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           branch: gh-pages
           folder: public
+          clean: false
