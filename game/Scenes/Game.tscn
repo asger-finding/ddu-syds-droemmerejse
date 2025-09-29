@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://b6catodorh3mu"]
+[gd_scene load_steps=31 format=3 uid="uid://b6catodorh3mu"]
 
 [ext_resource type="Shader" uid="uid://bj33mdq7bwfmq" path="res://Shaders/CrumbledPaper.gdshader" id="1_3so38"]
 [ext_resource type="Script" uid="uid://dn02ekxewi45q" path="res://Scripts/Backdrop.gd" id="2_3cx6b"]
@@ -56,6 +56,36 @@ shader_parameter/vignette_radius = 0.9
 shader_parameter/camera_zoom = Vector2(0.5, 0.5)
 shader_parameter/grayscale_amount = 0.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_tfod6"]
+font = ExtResource("8_8r6kd")
+font_size = 160
+font_color = Color(1, 0, 0, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(5, 5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_rajel"]
+font = ExtResource("8_8r6kd")
+font_size = 60
+font_color = Color(1, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_vvhu1"]
+font = ExtResource("8_8r6kd")
+font_size = 60
+font_color = Color(1, 0, 0, 1)
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 3
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(2, 2)
+
 [sub_resource type="LabelSettings" id="LabelSettings_i4lct"]
 font = ExtResource("8_8r6kd")
 font_size = 120
@@ -65,20 +95,20 @@ shadow_size = 10
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(5, 5)
 
-[sub_resource type="LabelSettings" id="LabelSettings_wxwew"]
+[sub_resource type="LabelSettings" id="LabelSettings_8r6kd"]
 font = ExtResource("8_8r6kd")
 font_size = 60
-font_color = Color(1, 0.592798, 0.532572, 1)
+font_color = Color(2.98411e-06, 0.857276, 0.491533, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(2, 2)
 
-[sub_resource type="LabelSettings" id="LabelSettings_8r6kd"]
+[sub_resource type="LabelSettings" id="LabelSettings_wxwew"]
 font = ExtResource("8_8r6kd")
 font_size = 60
-font_color = Color(2.98411e-06, 0.857276, 0.491533, 1)
+font_color = Color(1, 0.592798, 0.532572, 1)
 outline_size = 8
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 3
@@ -182,7 +212,7 @@ offset_top = 161.0
 offset_right = 1086.0
 offset_bottom = 381.0
 text = "av altså mand :("
-label_settings = SubResource("LabelSettings_i4lct")
+label_settings = SubResource("LabelSettings_tfod6")
 
 [node name="TryAgainButton" type="Button" parent="Camera/DeathHUD/DeathText"]
 layout_mode = 0
@@ -201,7 +231,7 @@ offset_top = 6.0
 offset_right = 337.0
 offset_bottom = 89.0
 text = "prøv igen"
-label_settings = SubResource("LabelSettings_wxwew")
+label_settings = SubResource("LabelSettings_rajel")
 
 [node name="GiveUpButton" type="Button" parent="Camera/DeathHUD/DeathText"]
 layout_mode = 0
@@ -220,13 +250,14 @@ offset_top = 12.0
 offset_right = 256.0
 offset_bottom = 95.0
 text = "giv op!"
-label_settings = SubResource("LabelSettings_wxwew")
+label_settings = SubResource("LabelSettings_vvhu1")
 
 [node name="PauseHUD" type="CanvasLayer" parent="Camera"]
 process_mode = 3
 script = ExtResource("17_4q8tf")
 
 [node name="PauseText" type="Label" parent="Camera/PauseHUD"]
+visible = false
 offset_left = -68.0
 offset_top = 212.0
 offset_right = 1209.0

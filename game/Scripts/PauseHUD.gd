@@ -10,6 +10,9 @@ func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _process(delta: float) -> void:
+	if not Global.Player.is_alive():
+		return
+	
 	if Input.is_action_just_pressed("Pause"):
 		get_tree().paused = !get_tree().paused
 	
