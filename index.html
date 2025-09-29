@@ -12,12 +12,6 @@ html, body, #canvas {
 }
 
 body {
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 	color: white;
 	background-color: black;
 	overflow: hidden;
@@ -95,39 +89,15 @@ body {
 	text-align: center;
 	z-index: 1;
 }
-
-#content {
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-    align-items: center;
-}
-
-#gamefooter {
-	width: 860px;
-	font-size: 12px;
-	font-family: monospace;
-	text-align: center;
-}
 		</style>
-		<link id="-gd-engine-icon" rel="icon" type="image/png" href="syds-droemmerejse.icon.png" />
-<link rel="apple-touch-icon" href="syds-droemmerejse.apple-touch-icon.png"/>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
 
 	</head>
 	<body>
-		<div id="content">
-			<canvas id="canvas">
-				Your browser does not support the canvas tag.
-			</canvas>
-			<div id="gamefooter">
-				Et spil udviklet af Asger Finding, Emilie Frost Lillelund, Kristine Bylov Tvergaard & Sirius William Voss
-				</br>
-				DDU 2025 | H. C. Ørsted Gymnasiet | 2D spilprojektet - teknikugen | <a href="https://github.com/asger-finding/ddu-syds-droemmerejse" target="_blank">Kildekode</a>
-				</br>
-				</br>
-				Inputs: Venstre: ←, Højre: →, Hop: ↑/Mellemrum, Rul: ↓, Slå: X
-			</div>
-		</div>
+		<canvas id="canvas">
+			Your browser does not support the canvas tag.
+		</canvas>
 
 		<noscript>
 			Your browser does not support JavaScript.
@@ -140,15 +110,10 @@ body {
 		</div>
 
 		<script src="index.js"></script>
-	<script>
-const GODOT_CONFIG = {"args":[],"canvasResizePolicy":1,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":32213856,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
+		<script>
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":1,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":32219936,"index.wasm":43699190},"focusCanvas":true,"gdextensionLibs":[]};
 const GODOT_THREADS_ENABLED = false;
 const engine = new Engine(GODOT_CONFIG);
-
-const closeTab = () => {
-	window.close?.();
-	window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-}
 
 (function () {
 	const statusOverlay = document.getElementById('status');
@@ -157,7 +122,6 @@ const closeTab = () => {
 
 	let initializing = true;
 	let statusMode = '';
-	let gameInstance = null;
 
 	function setStatusMode(mode) {
 		if (statusMode === mode || !initializing) {
@@ -245,31 +209,10 @@ const closeTab = () => {
 					statusProgress.removeAttribute('max');
 				}
 			},
-			'onExit': function(status_code) {
-				// This is called when get_tree().quit() is executed
-				console.log('Game exited with code:', status_code);
-				closeTab();
-			}
-		}).then(instance => {
+		}).then(() => {
 			setStatusMode('hidden');
-			gameInstance = instance;
-			
-			if (gameInstance && gameInstance.canvas) {
-				gameInstance.canvas.addEventListener('webglcontextlost', () => {
-					console.log('WebGL context lost - game may have exited');
-					setTimeout(closeTab, 1000); // Small delay in case it's recoverable
-				});
-			}
 		}, displayFailureNotice);
 	}
-
-	window.addEventListener('beforeunload', () => {
-		if (gameInstance) {
-			try {
-				gameInstance.requestQuit();
-			} catch (e) {}
-		}
-	});
 }());
 		</script>
 	</body>
