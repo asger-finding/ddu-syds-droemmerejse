@@ -326,13 +326,16 @@ func is_touching_wall() -> int:
 	return 0
 
 func _handle_jump() -> void:
-	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept") and not is_wall_sliding:
 		if jump_count < MAX_JUMPS:
 			if is_rolling and _wall_ray_top.is_colliding():
 				return
 			velocity.y = -JUMP_VELOCITY
 			jump_count += 1
 			is_rolling = false
+		elif jump_count == MAX_JUMPS and "DRAGON" in Global.Inventory.followers:
+			velocity.y= -JUMP_VELOCITY
+			Global.Inventory.remove_follower("DRAGON")
 
 func _handle_roll() -> void:
 	if is_rolling:

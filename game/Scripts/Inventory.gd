@@ -40,7 +40,7 @@ func add_follower(identifier: String) -> void:
 
 func remove_follower(identifier: String) -> void:
 	assert(identifier in Global.Constants.FOLLOWERS, 'Follower ID does not exist')
-	if Global.Constants.FOLLOWERS in followers:
+	if identifier in followers:
 		var index = followers.find(identifier)
 		var popped = followers.pop_at(index)
 	else:
