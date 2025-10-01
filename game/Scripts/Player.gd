@@ -14,9 +14,7 @@ var wall_jump_air_control := 1.0
 var ground_buffer_time: float = 0.05
 var ground_buffer_timer: float = 0.0
 var was_grounded_recently: bool = false
-var has_cow = false
-var has_dragon = false
-var has_shark = false
+
 
 # --- References ---
 @onready var _animated_sprite: AnimatedSprite2D = $PlayerSprite
@@ -26,6 +24,7 @@ var has_shark = false
 @onready var _wall_ray_left: RayCast2D = $WallRayLeft
 @onready var _wall_ray_right: RayCast2D = $WallRayRight
 @onready var _wall_ray_top: RayCast2D = $WallRayTop
+@onready var _dragon_sprite: AnimatedSprite2D = $DragonFollower
 
 # Player constants
 const HEALTH := 5
@@ -82,6 +81,7 @@ func _process(delta: float) -> void:
 	
 	_update_ground_buffer(delta)
 	_handle_animation()
+	_follower_animations()
 
 func _physics_process(delta: float) -> void:
 	
@@ -104,8 +104,8 @@ func _physics_process(delta: float) -> void:
 	_punch_hitbox.disabled = true
 	
 	_handle_wall_slide()
-	_handle_wall_jump()
 	_handle_jump()
+	_handle_wall_jump()
 	_handle_roll()
 	_handle_punch()
 	
@@ -279,6 +279,22 @@ func _handle_animation() -> void:
 			_animated_sprite.play("Jump")
 		else:
 			_animated_sprite.play("Fall")
+func _follower_animations():
+	if "DRAGON" in Global.Inventory.followers:
+		var DragonPosition = Vector2(-52.2,-25.0)
+		_dragon_sprite.visible = true
+		_dragon_sprite.play("Flying")
+		if _animated_sprite.flip_h == true:
+			DragonPosition.x*=-1
+			_dragon_sprite.position=DragonPosition
+			_dragon_sprite.flip_h=true
+		else:
+			_dragon_sprite.position=DragonPosition
+			_dragon_sprite.flip_h=false
+	else:
+		_dragon_sprite.visible = false
+			
+	
 
 # --- Internal: Movement ---
 func _apply_dead_friction(delta: float) -> void:
@@ -326,7 +342,9 @@ func is_touching_wall() -> int:
 	return 0
 
 func _handle_jump() -> void:
-	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept") and not is_wall_sliding:
+	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept"):
+		if is_wall_sliding:
+			return
 		if jump_count < MAX_JUMPS:
 			if is_rolling and _wall_ray_top.is_colliding():
 				return
@@ -336,6 +354,7 @@ func _handle_jump() -> void:
 		elif "DRAGON" in Global.Inventory.followers:
 			velocity.y= -JUMP_VELOCITY
 			Global.Inventory.remove_follower("DRAGON")
+			
 
 func _handle_roll() -> void:
 	if is_rolling:

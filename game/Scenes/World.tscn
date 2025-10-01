@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=4 uid="uid://bfumbaprtnnwu"]
+[gd_scene load_steps=63 format=4 uid="uid://bfumbaprtnnwu"]
 
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
 [ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
@@ -21,7 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://c0g0iborlmxnt" path="res://Assets/Sprites/Player/Wallslide/frame_0.png" id="17_ao4cr"]
 [ext_resource type="PackedScene" uid="uid://sp858ls63win" path="res://Scenes/Enemy.tscn" id="18_irg3d"]
 [ext_resource type="PackedScene" uid="uid://drv412exw06io" path="res://Scenes/CollectibleScrap.tscn" id="20_n1aqv"]
+[ext_resource type="Texture2D" uid="uid://ctqhsxjdow14m" path="res://Assets/Sprites/Dragon/Follower/frame_0.png" id="20_ofme6"]
 [ext_resource type="Texture2D" uid="uid://rnho28up8306" path="res://Assets/Backdrop/Clouds/cloud_0.png" id="21_7dsfl"]
+[ext_resource type="Texture2D" uid="uid://jqpp7jsdr2nj" path="res://Assets/Sprites/Dragon/Follower/frame_1.png" id="21_jdyvg"]
+[ext_resource type="Texture2D" uid="uid://dbuxa6lx2fkf2" path="res://Assets/Sprites/Dragon/Follower/frame_2.png" id="22_jdyvg"]
 [ext_resource type="Texture2D" uid="uid://ca2gkoiq0s1d2" path="res://Assets/Backdrop/Clouds/cloud_6.png" id="22_mq4nq"]
 [ext_resource type="Texture2D" uid="uid://dap7respl0kd6" path="res://Assets/Backdrop/Clouds/cloud_8.png" id="23_371b6"]
 [ext_resource type="Texture2D" uid="uid://dxc0gg33oi0ax" path="res://Assets/Backdrop/Clouds/cloud_5.png" id="24_ao4cr"]
@@ -172,6 +175,26 @@ height = 101.6
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5aes"]
 size = Vector2(40, 33.4)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_26nav"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_ofme6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_jdyvg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ofme6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_jdyvg")
+}],
+"loop": true,
+"name": &"Flying",
+"speed": 5.0
+}]
+
 [node name="SceneRoot" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-1731.0, -12081.0]
 
@@ -245,6 +268,13 @@ target_position = Vector2(30, 0)
 [node name="WallRayTop" type="RayCast2D" parent="Interactability/Player"]
 position = Vector2(-2.6, 30)
 target_position = Vector2(0, -69)
+
+[node name="DragonFollower" type="AnimatedSprite2D" parent="Interactability/Player"]
+position = Vector2(-52.2, -24.9996)
+scale = Vector2(0.15, 0.15)
+sprite_frames = SubResource("SpriteFrames_26nav")
+animation = &"Flying"
+frame_progress = 0.6323
 
 [node name="Background elements" type="Node2D" parent="Interactability"]
 position = Vector2(29050, -5205)

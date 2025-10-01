@@ -6,8 +6,8 @@ const DragonPrice =15
 const SharkPrice=20
 const Prices = {"COW" : CowPrice, "DRAGON": DragonPrice, "SHARK": SharkPrice}
 # --- Inventory state ---
-var scrap = 0
-var filling = 0
+var scrap = 100
+var filling = 100
 var followers = []
 
 # --- Lifecycle ---
