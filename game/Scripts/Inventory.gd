@@ -1,5 +1,10 @@
 extends Node
 
+# --- Prices ---
+const CowPrice =10
+const DragonPrice =15
+const SharkPrice=20
+const Prices = {"COW" : CowPrice, "DRAGON": DragonPrice, "SHARK": SharkPrice}
 # --- Inventory state ---
 var scrap = 0
 var filling = 0
@@ -21,12 +26,22 @@ func add_filling(num: int) -> void:
 	filling += num
 
 func add_follower(identifier: String) -> void:
-	assert(identifier in Global.Constants.Followers, 'Follower ID does not exist')
-	
-	followers.push_front(identifier)
+	assert(identifier in Global.Constants.FOLLOWERS, 'Follower ID does not exist')
+	if not identifier in followers:
+		if scrap and filling >= Prices[identifier]:
+			followers.push_front(identifier)
+			filling -= Prices[identifier]
+			scrap -= Prices[identifier]
+			print(followers)
+		else:
+			print("you a broke boy")
+	else:
+		print("follower already bought")
 
 func remove_follower(identifier: String) -> void:
-	assert(identifier in Global.Constants.Followers, 'Follower ID does not exist')
-	
-	var index = followers.find(identifier)
-	var popped = followers.pop_at(index)
+	assert(identifier in Global.Constants.FOLLOWERS, 'Follower ID does not exist')
+	if Global.Constants.FOLLOWERS in followers:
+		var index = followers.find(identifier)
+		var popped = followers.pop_at(index)
+	else:
+		print("follower already bought")
