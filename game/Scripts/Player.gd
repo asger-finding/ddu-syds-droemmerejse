@@ -333,7 +333,7 @@ func _handle_jump() -> void:
 			velocity.y = -JUMP_VELOCITY
 			jump_count += 1
 			is_rolling = false
-		elif jump_count == MAX_JUMPS and "DRAGON" in Global.Inventory.followers:
+		elif "DRAGON" in Global.Inventory.followers:
 			velocity.y= -JUMP_VELOCITY
 			Global.Inventory.remove_follower("DRAGON")
 
