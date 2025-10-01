@@ -328,6 +328,8 @@ func is_touching_wall() -> int:
 func _handle_jump() -> void:
 	if Input.is_action_just_pressed("ui_up") or Input.is_action_just_pressed("ui_accept"):
 		if jump_count < MAX_JUMPS:
+			if is_rolling and _wall_ray_top.is_colliding():
+				return
 			velocity.y = -JUMP_VELOCITY
 			jump_count += 1
 			is_rolling = false
@@ -398,6 +400,14 @@ func _handle_horizontal_movement(delta: float) -> void:
 
 func _handle_punch():
 	if Input.is_action_just_pressed("Punch"):
+		# Don't exit roll if we are under a low ceiling
+		if is_rolling and _wall_ray_top.is_colliding():
+			return
+			
+		# We can still get pushed into a ceiling by our earnt velocity from the roll
+		if is_rolling and (_wall_ray_right.is_colliding() or _wall_ray_left.is_colliding()):
+			velocity.x = false
+		
 		is_rolling = false
 		is_punching = true
 		_animated_sprite.play("Punch")
