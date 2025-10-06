@@ -21,10 +21,13 @@ var was_grounded_recently: bool = false
 @onready var _standing_collision: CollisionShape2D = $StandingCollision
 @onready var _rolling_collision: CollisionShape2D = $RollingCollision
 @onready var _punch_hitbox: CollisionShape2D = $PlayerSprite/Punch/PunchHitbox
+@onready var _horn_hitbox: CollisionShape2D = $CowFollower/Horn/HornHitbox
 @onready var _wall_ray_left: RayCast2D = $WallRayLeft
 @onready var _wall_ray_right: RayCast2D = $WallRayRight
 @onready var _wall_ray_top: RayCast2D = $WallRayTop
 @onready var _dragon_sprite: AnimatedSprite2D = $DragonFollower
+@onready var _cow_sprite: AnimatedSprite2D = $CowFollower
+
 
 # Player constants
 const HEALTH := 5
@@ -293,7 +296,33 @@ func _follower_animations():
 			_dragon_sprite.flip_h=false
 	else:
 		_dragon_sprite.visible = false
+	if "COW" in Global.Inventory.followers:
+		var CowPosition = Vector2(-3.4,-54.2)
+		_horn_hitbox.disabled=false
+		_cow_sprite.visible = true
+		_cow_sprite.play("Walk")
+		if _animated_sprite.animation == "Run":
+			CowPosition+=Vector2(11,17)
+		if _animated_sprite.animation == "Fall":
+			CowPosition+=Vector2(6,0)
+		if _animated_sprite.animation == "Jump":
+			CowPosition+=Vector2(11,0)
+		if _animated_sprite.animation == "Hurt":
+			CowPosition+=Vector2(-30,30)
+		if _animated_sprite.animation == "Roll":
+			CowPosition+=Vector2(0,60)
 			
+		if _animated_sprite.flip_h == true:
+			CowPosition.x*=-1
+			_cow_sprite.position=CowPosition
+			_cow_sprite.flip_h=true
+		else:
+			_cow_sprite.position=CowPosition
+			_cow_sprite.flip_h=false
+	else:
+		_cow_sprite.visible = false
+		_horn_hitbox.disabled=true
+
 	
 
 # --- Internal: Movement ---
@@ -466,6 +495,16 @@ func _on_punch_body_entered(body: Node2D) -> void:
 		enemy.hit(self, 1)
 		enemy.receive_knockback(-1 if _animated_sprite.flip_h else 1, 1500.0)
 		_punch_hitbox.set_deferred("disabled", true)
+
+func _on_horn_body_entered(body: Node2D) -> void:
+	if body is Enemy and body != self:
+		var enemy = body
+		enemy.hit(self, 1)
+		enemy.receive_knockback(-1 if _animated_sprite.flip_h else 1, 1500.0)
+		Global.Inventory.cow_charges -=1
+		if Global.Inventory.cow_charges == 0:
+			Global.Inventory.remove_follower("COW")
+		#_punch_hitbox.set_deferred("disabled", true)
 
 # --- Public API: Stun ---
 func stun(time: float) -> bool:

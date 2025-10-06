@@ -9,7 +9,8 @@ const Prices = {"COW" : CowPrice, "DRAGON": DragonPrice, "SHARK": SharkPrice}
 var scrap = 100
 var filling = 100
 var followers = []
-
+# --- Follower State ---
+var cow_charges = 3
 # --- Lifecycle ---
 func _ready():
 	Global.Inventory = self
@@ -33,6 +34,8 @@ func add_follower(identifier: String) -> void:
 			filling -= Prices[identifier]
 			scrap -= Prices[identifier]
 			print(followers)
+			if identifier == "COW":
+				cow_charges =3
 		else:
 			print("you a broke boy")
 	else:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=4 uid="uid://bfumbaprtnnwu"]
+[gd_scene load_steps=76 format=4 uid="uid://bfumbaprtnnwu"]
 
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
 [ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
@@ -26,12 +26,12 @@
 [ext_resource type="Texture2D" uid="uid://jqpp7jsdr2nj" path="res://Assets/Sprites/Dragon/Follower/frame_1.png" id="21_jdyvg"]
 [ext_resource type="Texture2D" uid="uid://dbuxa6lx2fkf2" path="res://Assets/Sprites/Dragon/Follower/frame_2.png" id="22_jdyvg"]
 [ext_resource type="Texture2D" uid="uid://ca2gkoiq0s1d2" path="res://Assets/Backdrop/Clouds/cloud_6.png" id="22_mq4nq"]
-[ext_resource type="Texture2D" uid="uid://cwtk3n3t3b4nt" path="res://Assets/Shop/no_equip.png" id="23_26nav"]
+[ext_resource type="Texture2D" uid="uid://bo43v6otdh7ae" path="res://Assets/Shop/no_equip.png" id="23_26nav"]
 [ext_resource type="Texture2D" uid="uid://dap7respl0kd6" path="res://Assets/Backdrop/Clouds/cloud_8.png" id="23_371b6"]
-[ext_resource type="Texture2D" uid="uid://m8ctb8qi10yf" path="res://Assets/Shop/cow_dragon_equip.png" id="23_au5ix"]
+[ext_resource type="Texture2D" uid="uid://b38pr8x2gn1fh" path="res://Assets/Shop/cow_dragon_equip.png" id="23_au5ix"]
 [ext_resource type="Texture2D" uid="uid://dxc0gg33oi0ax" path="res://Assets/Backdrop/Clouds/cloud_5.png" id="24_ao4cr"]
-[ext_resource type="Texture2D" uid="uid://37lk07eugbho" path="res://Assets/Shop/cow_equip.png" id="24_pb8dl"]
-[ext_resource type="Texture2D" uid="uid://dbb2oeu2qb1s0" path="res://Assets/Shop/dragon_equip.png" id="25_3cv6b"]
+[ext_resource type="Texture2D" uid="uid://cnso1jd4sy0ha" path="res://Assets/Shop/cow_equip.png" id="24_pb8dl"]
+[ext_resource type="Texture2D" uid="uid://d32ntp0m4h5v8" path="res://Assets/Shop/dragon_equip.png" id="25_3cv6b"]
 [ext_resource type="Texture2D" uid="uid://cc2vejqs7rt2w" path="res://Assets/Backdrop/Clouds/cloud_7.png" id="25_irg3d"]
 [ext_resource type="Texture2D" uid="uid://c2q4plruniyxq" path="res://Assets/Backdrop/Clouds/cloud_1.png" id="26_y8a40"]
 [ext_resource type="Texture2D" uid="uid://wmflovunyxs2" path="res://Assets/Backdrop/Clouds/cloud_2.png" id="27_n1aqv"]
@@ -39,7 +39,10 @@
 [ext_resource type="FontFile" uid="uid://b6ixxpdy5in1g" path="res://Fonts/Schoolbell-Regular.ttf" id="28_3cv6b"]
 [ext_resource type="Texture2D" uid="uid://bfxxockuynfuk" path="res://Assets/Backdrop/Seagulls/seagull_0.png" id="28_d2jk0"]
 [ext_resource type="Texture2D" uid="uid://dv60d67pq3mvh" path="res://Assets/Backdrop/Seagulls/seagull_1.png" id="29_5dli4"]
+[ext_resource type="Texture2D" uid="uid://cpmpgiaheo712" path="res://Assets/Sprites/Cow/Follower/frame_0.png" id="29_gcpal"]
+[ext_resource type="Texture2D" uid="uid://bl66coit57tcd" path="res://Assets/Sprites/Cow/Follower/frame_1.png" id="30_1c8so"]
 [ext_resource type="Texture2D" uid="uid://cnkbpt6ytd8b" path="res://Assets/Backdrop/Seagulls/seagull_2.png" id="30_uvb3s"]
+[ext_resource type="Texture2D" uid="uid://4o6cngix7f3i" path="res://Assets/Sprites/Cow/Follower/frame_2.png" id="31_8mvdv"]
 [ext_resource type="Texture2D" uid="uid://c81ybrjslayqm" path="res://Assets/Backdrop/Seagulls/seagull_4.png" id="31_crxrm"]
 [ext_resource type="Texture2D" uid="uid://b8aaab2b1hnqh" path="res://Assets/Backdrop/Drawings/flora_0.png" id="32_d2jk0"]
 [ext_resource type="Texture2D" uid="uid://b5ynfljfkr20f" path="res://Assets/Backdrop/Drawings/devil_0.png" id="33_5dli4"]
@@ -201,6 +204,26 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_lpp4p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_gcpal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_1c8so")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_8mvdv")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gcpal"]
+size = Vector2(274, 248)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_ne1it"]
 animations = [{
 "frames": [{
@@ -277,7 +300,7 @@ z_index = 8
 position = Vector2(0.2, 0.2)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_d2jk0")
-animation = &"Hurt"
+animation = &"Fall"
 
 [node name="Punch" type="Area2D" parent="Interactability/Player/PlayerSprite"]
 position = Vector2(62, -396)
@@ -322,10 +345,29 @@ sprite_frames = SubResource("SpriteFrames_26nav")
 animation = &"Flying"
 frame_progress = 0.6323
 
+[node name="CowFollower" type="AnimatedSprite2D" parent="Interactability/Player"]
+position = Vector2(-3.40001, -49.1996)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_lpp4p")
+animation = &"Walk"
+
+[node name="Horn" type="Area2D" parent="Interactability/Player/CowFollower"]
+position = Vector2(34, -120)
+collision_layer = 0
+collision_mask = 2
+
+[node name="HornHitbox" type="CollisionShape2D" parent="Interactability/Player/CowFollower/Horn"]
+physics_interpolation_mode = 2
+position = Vector2(-25, 36)
+shape = SubResource("RectangleShape2D_gcpal")
+one_way_collision = true
+one_way_collision_margin = 48.5
+
 [node name="Shop" type="AnimatedSprite2D" parent="Interactability/Player"]
+visible = false
 z_index = 100
-position = Vector2(-3, -113)
-scale = Vector2(0.15, 0.15)
+position = Vector2(-3.19995, -123.8)
+scale = Vector2(0.17, 0.17)
 sprite_frames = SubResource("SpriteFrames_ne1it")
 animation = &"101"
 script = ExtResource("27_pb8dl")
@@ -1195,3 +1237,4 @@ texture = ExtResource("53_irs1d")
 [connection signal="animation_finished" from="Interactability/Player/PlayerSprite" to="Interactability/Player" method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="body_entered" from="Interactability/Player/PlayerSprite/Punch" to="Interactability/Player" method="_on_punch_body_entered"]
 [connection signal="body_exited" from="Interactability/Player/PlayerSprite/Punch" to="Interactability/Player" method="_on_punch_body_exited"]
+[connection signal="body_entered" from="Interactability/Player/CowFollower/Horn" to="Interactability/Player" method="_on_horn_body_entered"]
