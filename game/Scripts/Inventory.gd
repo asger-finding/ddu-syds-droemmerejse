@@ -28,18 +28,24 @@ func add_filling(num: int) -> void:
 
 func add_follower(identifier: String) -> void:
 	assert(identifier in Global.Constants.FOLLOWERS, 'Follower ID does not exist')
+	
 	if not identifier in followers:
 		if scrap and filling >= Prices[identifier]:
 			followers.push_front(identifier)
 			filling -= Prices[identifier]
 			scrap -= Prices[identifier]
-			print(followers)
+		
 			if identifier == "COW":
 				cow_charges =3
+			if identifier =="SHARK":
+				pass
+
 		else:
-			print("you a broke boy")
+			#print("you a broke boy")
+			pass
 	else:
-		print("follower already bought")
+		#print("follower already bought")
+		pass
 
 func remove_follower(identifier: String) -> void:
 	assert(identifier in Global.Constants.FOLLOWERS, 'Follower ID does not exist')

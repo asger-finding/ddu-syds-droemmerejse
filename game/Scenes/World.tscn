@@ -35,7 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://cc2vejqs7rt2w" path="res://Assets/Backdrop/Clouds/cloud_7.png" id="25_irg3d"]
 [ext_resource type="Texture2D" uid="uid://c2q4plruniyxq" path="res://Assets/Backdrop/Clouds/cloud_1.png" id="26_y8a40"]
 [ext_resource type="Texture2D" uid="uid://wmflovunyxs2" path="res://Assets/Backdrop/Clouds/cloud_2.png" id="27_n1aqv"]
-[ext_resource type="Script" uid="uid://c4gbf1j7mpk4w" path="res://Scenes/ShopSprite.gd" id="27_pb8dl"]
+[ext_resource type="Script" uid="uid://c4gbf1j7mpk4w" path="res://ShopSprite.gd" id="27_pb8dl"]
 [ext_resource type="FontFile" uid="uid://b6ixxpdy5in1g" path="res://Fonts/Schoolbell-Regular.ttf" id="28_3cv6b"]
 [ext_resource type="Texture2D" uid="uid://bfxxockuynfuk" path="res://Assets/Backdrop/Seagulls/seagull_0.png" id="28_d2jk0"]
 [ext_resource type="Texture2D" uid="uid://dv60d67pq3mvh" path="res://Assets/Backdrop/Seagulls/seagull_1.png" id="29_5dli4"]
@@ -45,11 +45,15 @@
 [ext_resource type="Texture2D" uid="uid://4o6cngix7f3i" path="res://Assets/Sprites/Cow/Follower/frame_2.png" id="31_8mvdv"]
 [ext_resource type="Texture2D" uid="uid://c81ybrjslayqm" path="res://Assets/Backdrop/Seagulls/seagull_4.png" id="31_crxrm"]
 [ext_resource type="Texture2D" uid="uid://b8aaab2b1hnqh" path="res://Assets/Backdrop/Drawings/flora_0.png" id="32_d2jk0"]
+[ext_resource type="Texture2D" uid="uid://dy8j3pj738e5a" path="res://Assets/Sprites/Shark/Follower/frame_0.png" id="32_k7vvi"]
+[ext_resource type="Script" uid="uid://bnoal75ri5" path="res://Scripts/SharkFollower.gd" id="32_kf4hd"]
 [ext_resource type="Texture2D" uid="uid://dmm55quhpdw32" path="res://Assets/Backdrop/Clouds/cloud_4.png" id="32_ofme6"]
 [ext_resource type="Texture2D" uid="uid://b5ynfljfkr20f" path="res://Assets/Backdrop/Drawings/devil_0.png" id="33_5dli4"]
 [ext_resource type="Texture2D" uid="uid://bk083g6sar8l4" path="res://Assets/Backdrop/Seagulls/seagull_3.png" id="33_jdyvg"]
+[ext_resource type="Texture2D" uid="uid://hh0hnyrf00qx" path="res://Assets/Sprites/Shark/Follower/frame_1.png" id="33_slq5t"]
 [ext_resource type="Texture2D" uid="uid://dsj11kfpg5r27" path="res://Assets/Backdrop/Drawings/flora_1.png" id="34_uvb3s"]
 [ext_resource type="Texture2D" uid="uid://bgjctpggccnwk" path="res://Assets/Backdrop/Drawings/ufo_0.png" id="35_crxrm"]
+[ext_resource type="Texture2D" uid="uid://bvd16atktjb0b" path="res://Assets/Tutorial/tutorial.png" id="35_d533g"]
 [ext_resource type="Texture2D" uid="uid://grqkrijtehkh" path="res://Assets/Backdrop/Drawings/butterfly_0.png" id="36_d4o7i"]
 [ext_resource type="Texture2D" uid="uid://2rsedpiuths6" path="res://Assets/Backdrop/Drawings/dinosaur_0.png" id="37_bbwj2"]
 [ext_resource type="Texture2D" uid="uid://dvgyylh74b5qg" path="res://Assets/Backdrop/Drawings/butterfly_1.png" id="38_ivfu3"]
@@ -77,6 +81,23 @@ colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 0)
 gradient = SubResource("Gradient_irs1d")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mvdv"]
+size = Vector2(97.2, 38.8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8mvdv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("32_k7vvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_slq5t")
+}],
+"loop": true,
+"name": &"Swim",
+"speed": 5.0
+}]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_d2jk0"]
 animations = [{
@@ -293,8 +314,28 @@ shadow_color = Color(0.321728, 0.321728, 0.321728, 0.364706)
 
 [node name="Interactability" type="Node2D" parent="."]
 
+[node name="SharkFollower" type="CharacterBody2D" parent="Interactability"]
+position = Vector2(8038, -469)
+scale = Vector2(5, 5)
+script = ExtResource("32_kf4hd")
+
+[node name="SharkRay" type="RayCast2D" parent="Interactability/SharkFollower"]
+position = Vector2(-0.799805, 7.62939e-06)
+target_position = Vector2(63.6, -0.199997)
+collision_mask = 3
+
+[node name="SharkHitbox" type="CollisionShape2D" parent="Interactability/SharkFollower"]
+position = Vector2(8.00012, 9.4)
+shape = SubResource("RectangleShape2D_8mvdv")
+disabled = true
+
+[node name="SharkSprite" type="AnimatedSprite2D" parent="Interactability/SharkFollower"]
+scale = Vector2(0.18, 0.18)
+sprite_frames = SubResource("SpriteFrames_8mvdv")
+animation = &"Swim"
+
 [node name="Player" type="CharacterBody2D" parent="Interactability"]
-position = Vector2(7310, -1209)
+position = Vector2(8060, -921)
 scale = Vector2(5, 5)
 script = ExtResource("3_r0dna")
 
@@ -370,7 +411,7 @@ one_way_collision_margin = 48.5
 [node name="Shop" type="AnimatedSprite2D" parent="Interactability/Player"]
 visible = false
 z_index = 100
-position = Vector2(-3.19995, -123.8)
+position = Vector2(-3.20005, -118.6)
 scale = Vector2(0.17, 0.17)
 sprite_frames = SubResource("SpriteFrames_ne1it")
 animation = &"101"
@@ -649,6 +690,11 @@ texture = ExtResource("29_5dli4")
 [node name="Seagull14" type="Sprite2D" parent="Interactability/Background elements"]
 position = Vector2(59711, -12841)
 texture = ExtResource("33_jdyvg")
+
+[node name="Tutorial" type="Sprite2D" parent="Interactability/Background elements"]
+z_index = -1
+position = Vector2(-21180, 4560)
+texture = ExtResource("35_d533g")
 
 [node name="Cloud32" type="Sprite2D" parent="Interactability/Background elements"]
 position = Vector2(13523, -11119)
