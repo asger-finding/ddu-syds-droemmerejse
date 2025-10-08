@@ -13,7 +13,10 @@ func _process(delta: float) -> void:
 		print(ShopOpen)
 	if Input.is_action_just_pressed("BuyCow") and ShopOpen:
 		Global.Inventory.add_follower("COW")
+		ShopOpen=false
 	if Input.is_action_just_pressed("BuyDragon") and ShopOpen:
 		Global.Inventory.add_follower("DRAGON")
+		ShopOpen=false
 	if Input.is_action_just_pressed("BuyShark") and ShopOpen:
 		Global.Inventory.add_follower("SHARK")
+		ShopOpen=false
