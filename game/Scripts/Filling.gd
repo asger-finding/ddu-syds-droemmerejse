@@ -29,7 +29,7 @@ func _ready() -> void:
 	
 	velocity = initial_velocity
 	
-	_ray.target_position = Vector2(0, HOVER_HEIGHT + 30.0)
+	_ray.target_position = Vector2(0, HOVER_HEIGHT + 100.0)
 	_ray.enabled = true
 
 func _physics_process(delta: float) -> void:
@@ -50,24 +50,24 @@ func _physics_process(delta: float) -> void:
 func _check_ground_collision() -> void:
 	if not _ray or not _ray.is_inside_tree():
 		return
-		
+
 	_ray.force_raycast_update()
-	
+
 	if _ray.is_colliding():
 		var col_point: Vector2 = _ray.get_collision_point()
 		var col_normal: Vector2 = _ray.get_collision_normal()
-		
+
 		if col_normal.y < -0.3:
 			var dist_to_ground = col_point.y - global_position.y
-			
 			if dist_to_ground <= HOVER_HEIGHT:
 				var target_y = col_point.y - HOVER_HEIGHT
 				global_position.y = target_y
-				
+
 				if abs(velocity.y) > SETTLE_THRESHOLD:
 					velocity.y = -abs(velocity.y) * BOUNCE_DAMPING
 					velocity.x *= 0.7
 				else:
+					velocity = Vector2.ZERO
 					_settle_at_position(target_y)
 
 func _settle_at_position(y_pos: float) -> void:
