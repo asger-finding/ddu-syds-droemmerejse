@@ -8,3 +8,4 @@ var Constants
 var EnemyParent
 var PaperTileMap
 var Shop
+var Shark

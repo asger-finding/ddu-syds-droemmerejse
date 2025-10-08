@@ -60,9 +60,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	move_and_slide()
+	if "SHARK" in Global.Inventory.followers:
+		return
 	
-	if position.x < 0:
-		kill()
+	
+	
 	
 	if not is_alive():
 		return
@@ -87,7 +89,8 @@ func _process(delta: float) -> void:
 	_follower_animations()
 
 func _physics_process(delta: float) -> void:
-	
+	if "SHARK" in Global.Inventory.followers:
+		return
 	_apply_dead_friction(delta)
 	_apply_gravity(delta)
 	
@@ -267,6 +270,7 @@ func _handle_animation() -> void:
 	if Input.is_action_pressed("ui_left"):
 		_animated_sprite.speed_scale *= 1.6 + abs(velocity.x) / TOP_SPEED
 		_animated_sprite.flip_h = true
+		# if you read this, Eliot has infiltrated your code >:(
 		if was_grounded_recently:
 			_animated_sprite.play("Run")
 			return
@@ -377,6 +381,7 @@ func _handle_jump() -> void:
 		if jump_count < MAX_JUMPS:
 			if is_rolling and _wall_ray_top.is_colliding():
 				return
+
 			velocity.y = -JUMP_VELOCITY
 			jump_count += 1
 			is_rolling = false

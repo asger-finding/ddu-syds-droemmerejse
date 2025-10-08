@@ -18,7 +18,7 @@
 [ext_resource type="Script" uid="uid://b2wiguib2yok5" path="res://Scripts/Buttons/GiveUpButton.gd" id="16_alh3a"]
 [ext_resource type="Script" uid="uid://vc5mgp7yj82q" path="res://Scripts/HUD/PauseHUD.gd" id="17_4q8tf"]
 [ext_resource type="Script" uid="uid://b2ahdboifpw5f" path="res://Scripts/Buttons/ResumeButton.gd" id="18_x3xnh"]
-[ext_resource type="Script" uid="uid://crgk5v2isrv2p" path="res://Scenes/Shop.gd" id="19_8r6kd"]
+[ext_resource type="Script" uid="uid://crgk5v2isrv2p" path="res://Shop.gd" id="19_8r6kd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_raj38"]
 shader = ExtResource("1_3so38")
