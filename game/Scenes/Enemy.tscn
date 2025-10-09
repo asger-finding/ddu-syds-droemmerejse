@@ -68,12 +68,12 @@ sprite_frames = SubResource("SpriteFrames_65xv6")
 animation = &"Cow"
 flip_h = true
 
-[node name="Hurtbox_Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(-19.5, 3)
 shape = SubResource("RectangleShape2D_1k0mi")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 8
 
 [node name="Hit" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(-25.5, 23.5)

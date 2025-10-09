@@ -352,6 +352,7 @@ follow_viewport_enabled = true
 script = ExtResource("19_8r6kd")
 
 [node name="Shop" type="AnimatedSprite2D" parent="Camera/ShopHUD"]
+physics_interpolation_mode = 1
 z_index = 100
 scale = Vector2(0.6, 0.6)
 sprite_frames = SubResource("SpriteFrames_i4lct")

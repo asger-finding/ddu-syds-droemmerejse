@@ -14,6 +14,7 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("Shop"): visible = not visible
+	if not visible: return
 	
 	shop_sprite.global_position = Global.Player.global_position
 	shop_sprite.global_position.y -= 500

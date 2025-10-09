@@ -20,6 +20,10 @@ boot_splash/image="uid://cjukndtemmwwi"
 
 Global="*res://Scripts/Global.gd"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/window_width_override=1152
@@ -101,6 +105,7 @@ BuyShark={
 [layer_names]
 
 2d_physics/layer_1="Player interaction with platforms"
+2d_physics/layer_4="Shark interaction with enemy"
 
 [physics]
 

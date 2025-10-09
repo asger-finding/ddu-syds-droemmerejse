@@ -74,9 +74,7 @@ func _process(delta: float) -> void:
 	shader_material.set_shader_parameter("shadow_offset", shadow_offset)
 
 	# If we are riding a shark we redirect all movement to it
-	if Global.Constants.FOLLOWERS.Shark in Global.Inventory.followers:
-		return
-	else:
+	if Global.Constants.FOLLOWERS.Shark not in Global.Inventory.followers:
 		reset_physics_interpolation()
 	
 	var was_stunned := process_stun(delta)
@@ -90,10 +88,6 @@ func _process(delta: float) -> void:
 	_follower_animations()
 
 func _physics_process(delta: float) -> void:
-	# If we are riding a shark we redirect all movement to it
-	if Global.Constants.FOLLOWERS.Shark in Global.Inventory.followers:
-		return
-	
 	_apply_dead_friction(delta)
 	_apply_gravity(delta)
 	

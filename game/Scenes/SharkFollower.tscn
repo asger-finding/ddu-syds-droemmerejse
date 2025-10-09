@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://ttducy02hjx5"]
+
+[ext_resource type="Script" uid="uid://bnoal75ri5" path="res://Scripts/SharkFollower.gd" id="1_fhsp8"]
+[ext_resource type="Texture2D" uid="uid://dy8j3pj738e5a" path="res://Assets/Sprites/Shark/Follower/frame_0.png" id="2_f8lyn"]
+[ext_resource type="Texture2D" uid="uid://hh0hnyrf00qx" path="res://Assets/Sprites/Shark/Follower/frame_1.png" id="3_sr20x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fhsp8"]
+size = Vector2(14.8667, 22)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1c8so"]
+radius = 17.2
+height = 88.8
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8mvdv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_f8lyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_sr20x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fhsp8"]
+radius = 94.3222
+
+[node name="SharkFollower" type="CharacterBody2D"]
+physics_interpolation_mode = 1
+scale = Vector2(5, 5)
+script = ExtResource("1_fhsp8")
+
+[node name="PlayerTransform" type="RemoteTransform2D" parent="."]
+physics_interpolation_mode = 1
+
+[node name="EnemyDetectionArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
+position = Vector2(0.8, -2.5)
+scale = Vector2(6, 2.5)
+shape = SubResource("RectangleShape2D_fhsp8")
+
+[node name="SharkCollision" type="CollisionShape2D" parent="."]
+physics_interpolation_mode = 1
+position = Vector2(0.6, 3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1c8so")
+
+[node name="SharkSprite" type="AnimatedSprite2D" parent="."]
+physics_interpolation_mode = 1
+position = Vector2(0, -5.65)
+scale = Vector2(0.18, 0.18)
+sprite_frames = SubResource("SpriteFrames_8mvdv")
+
+[node name="ExplosionArea" type="Area2D" parent="."]
+scale = Vector2(1, 1)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplosionArea"]
+scale = Vector2(1, 1)
+shape = SubResource("CircleShape2D_fhsp8")
+debug_color = Color(1, 0, 0, 0.160784)
