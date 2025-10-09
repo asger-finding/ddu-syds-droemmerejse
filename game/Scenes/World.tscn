@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=4 uid="uid://bfumbaprtnnwu"]
+[gd_scene load_steps=77 format=4 uid="uid://bfumbaprtnnwu"]
 
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
 [ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
@@ -26,17 +26,11 @@
 [ext_resource type="Texture2D" uid="uid://jqpp7jsdr2nj" path="res://Assets/Sprites/Dragon/Follower/frame_1.png" id="21_jdyvg"]
 [ext_resource type="Texture2D" uid="uid://dbuxa6lx2fkf2" path="res://Assets/Sprites/Dragon/Follower/frame_2.png" id="22_jdyvg"]
 [ext_resource type="Texture2D" uid="uid://ca2gkoiq0s1d2" path="res://Assets/Backdrop/Clouds/cloud_6.png" id="22_mq4nq"]
-[ext_resource type="Texture2D" uid="uid://02u6lmr8wtab" path="res://Assets/Shop/no_equip.png" id="23_26nav"]
 [ext_resource type="Texture2D" uid="uid://dap7respl0kd6" path="res://Assets/Backdrop/Clouds/cloud_8.png" id="23_371b6"]
-[ext_resource type="Texture2D" uid="uid://ceirlfxwitq7x" path="res://Assets/Shop/cow_dragon_equip.png" id="23_au5ix"]
 [ext_resource type="Texture2D" uid="uid://dxc0gg33oi0ax" path="res://Assets/Backdrop/Clouds/cloud_5.png" id="24_ao4cr"]
-[ext_resource type="Texture2D" uid="uid://svd67ywwetc3" path="res://Assets/Shop/cow_equip.png" id="24_pb8dl"]
-[ext_resource type="Texture2D" uid="uid://dgemiovns8x7g" path="res://Assets/Shop/dragon_equip.png" id="25_3cv6b"]
 [ext_resource type="Texture2D" uid="uid://cc2vejqs7rt2w" path="res://Assets/Backdrop/Clouds/cloud_7.png" id="25_irg3d"]
 [ext_resource type="Texture2D" uid="uid://c2q4plruniyxq" path="res://Assets/Backdrop/Clouds/cloud_1.png" id="26_y8a40"]
 [ext_resource type="Texture2D" uid="uid://wmflovunyxs2" path="res://Assets/Backdrop/Clouds/cloud_2.png" id="27_n1aqv"]
-[ext_resource type="Script" uid="uid://c4gbf1j7mpk4w" path="res://ShopSprite.gd" id="27_pb8dl"]
-[ext_resource type="FontFile" uid="uid://b6ixxpdy5in1g" path="res://Fonts/Schoolbell-Regular.ttf" id="28_3cv6b"]
 [ext_resource type="Texture2D" uid="uid://bfxxockuynfuk" path="res://Assets/Backdrop/Seagulls/seagull_0.png" id="28_d2jk0"]
 [ext_resource type="Texture2D" uid="uid://dv60d67pq3mvh" path="res://Assets/Backdrop/Seagulls/seagull_1.png" id="29_5dli4"]
 [ext_resource type="Texture2D" uid="uid://cpmpgiaheo712" path="res://Assets/Sprites/Cow/Follower/frame_0.png" id="29_gcpal"]
@@ -82,8 +76,9 @@ gradient = SubResource("Gradient_irs1d")
 fill_from = Vector2(0, 1)
 fill_to = Vector2(0, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8mvdv"]
-size = Vector2(97.2, 38.8)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1c8so"]
+radius = 17.2
+height = 100.4
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8mvdv"]
 animations = [{
@@ -248,46 +243,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gcpal"]
 size = Vector2(274, 248)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ne1it"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("23_au5ix")
-}],
-"loop": true,
-"name": &"001",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("24_pb8dl")
-}],
-"loop": true,
-"name": &"011",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("25_3cv6b")
-}],
-"loop": true,
-"name": &"101",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("23_26nav")
-}],
-"loop": true,
-"name": &"111",
-"speed": 5.0
-}]
-
-[sub_resource type="LabelSettings" id="LabelSettings_dwptd"]
-font = ExtResource("28_3cv6b")
-font_size = 36
-font_color = Color(0, 0, 0, 1)
-
 [node name="SceneRoot" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-1731.0, -12081.0]
 
@@ -315,26 +270,35 @@ shadow_color = Color(0.321728, 0.321728, 0.321728, 0.364706)
 [node name="Interactability" type="Node2D" parent="."]
 
 [node name="SharkFollower" type="CharacterBody2D" parent="Interactability"]
+physics_interpolation_mode = 1
 position = Vector2(8038, -469)
 scale = Vector2(5, 5)
 script = ExtResource("32_kf4hd")
 
+[node name="PlayerTransform" type="RemoteTransform2D" parent="Interactability/SharkFollower"]
+physics_interpolation_mode = 1
+
 [node name="SharkRay" type="RayCast2D" parent="Interactability/SharkFollower"]
+physics_interpolation_mode = 1
 position = Vector2(-0.799805, 7.62939e-06)
 target_position = Vector2(63.6, -0.199997)
 collision_mask = 3
 
-[node name="SharkHitbox" type="CollisionShape2D" parent="Interactability/SharkFollower"]
+[node name="SharkCollision" type="CollisionShape2D" parent="Interactability/SharkFollower"]
+physics_interpolation_mode = 1
 position = Vector2(8.00012, 9.4)
-shape = SubResource("RectangleShape2D_8mvdv")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1c8so")
 disabled = true
 
 [node name="SharkSprite" type="AnimatedSprite2D" parent="Interactability/SharkFollower"]
+physics_interpolation_mode = 1
 scale = Vector2(0.18, 0.18)
 sprite_frames = SubResource("SpriteFrames_8mvdv")
 animation = &"Swim"
 
 [node name="Player" type="CharacterBody2D" parent="Interactability"]
+physics_interpolation_mode = 1
 position = Vector2(8060, -921)
 scale = Vector2(5, 5)
 script = ExtResource("3_r0dna")
@@ -407,69 +371,6 @@ position = Vector2(-25, 36)
 shape = SubResource("RectangleShape2D_gcpal")
 one_way_collision = true
 one_way_collision_margin = 48.5
-
-[node name="Shop" type="AnimatedSprite2D" parent="Interactability/Player"]
-visible = false
-z_index = 100
-position = Vector2(-3.20005, -118.6)
-scale = Vector2(0.17, 0.17)
-sprite_frames = SubResource("SpriteFrames_ne1it")
-animation = &"101"
-script = ExtResource("27_pb8dl")
-
-[node name="Cow price" type="Label" parent="Interactability/Player/Shop"]
-z_index = 101
-offset_left = -287.0
-offset_top = 127.0
-offset_right = -232.0
-offset_bottom = 177.0
-text = "10"
-label_settings = SubResource("LabelSettings_dwptd")
-
-[node name="Cow price2" type="Label" parent="Interactability/Player/Shop"]
-z_index = 101
-offset_left = -288.0
-offset_top = 212.0
-offset_right = -235.0
-offset_bottom = 262.0
-text = "10"
-label_settings = SubResource("LabelSettings_dwptd")
-
-[node name="Dragon price" type="Label" parent="Interactability/Player/Shop"]
-z_index = 101
-offset_left = 8.00001
-offset_top = 125.333
-offset_right = 61.0
-offset_bottom = 175.333
-text = "15"
-label_settings = SubResource("LabelSettings_dwptd")
-
-[node name="Dragon price2" type="Label" parent="Interactability/Player/Shop"]
-z_index = 101
-offset_left = 8.00001
-offset_top = 213.333
-offset_right = 61.0
-offset_bottom = 263.333
-text = "15"
-label_settings = SubResource("LabelSettings_dwptd")
-
-[node name="Shark price" type="Label" parent="Interactability/Player/Shop"]
-z_index = 101
-offset_left = 305.333
-offset_top = 126.667
-offset_right = 358.333
-offset_bottom = 176.667
-text = "20"
-label_settings = SubResource("LabelSettings_dwptd")
-
-[node name="Shark price2" type="Label" parent="Interactability/Player/Shop"]
-z_index = 101
-offset_left = 302.667
-offset_top = 210.667
-offset_right = 355.667
-offset_bottom = 260.667
-text = "20"
-label_settings = SubResource("LabelSettings_dwptd")
 
 [node name="Background elements" type="Node2D" parent="Interactability"]
 position = Vector2(29050, -5205)

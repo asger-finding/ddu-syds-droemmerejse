@@ -15,7 +15,6 @@ var ground_buffer_time: float = 0.05
 var ground_buffer_timer: float = 0.0
 var was_grounded_recently: bool = false
 
-
 # --- References ---
 @onready var _animated_sprite: AnimatedSprite2D = $PlayerSprite
 @onready var _standing_collision: CollisionShape2D = $StandingCollision
@@ -60,11 +59,6 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	move_and_slide()
-	if "SHARK" in Global.Inventory.followers:
-		return
-	
-	
-	
 	
 	if not is_alive():
 		return
@@ -78,19 +72,28 @@ func _process(delta: float) -> void:
 	var shadow_offset = Vector2(shadow_exp * 35.0 * direction, shadow_exp * 80.0)
 	shader_material.set_shader_parameter("blur_std", max(shadow_exp * 20.0, 4.0))
 	shader_material.set_shader_parameter("shadow_offset", shadow_offset)
+
+	# If we are riding a shark we redirect all movement to it
+	if Global.Constants.FOLLOWERS.Shark in Global.Inventory.followers:
+		return
+	else:
+		reset_physics_interpolation()
 	
 	var was_stunned := process_stun(delta)
 	if was_stunned:
 		_animated_sprite.play("Hurt")
 		return
 	
+	# Handle animation
 	_update_ground_buffer(delta)
 	_handle_animation()
 	_follower_animations()
 
 func _physics_process(delta: float) -> void:
-	if "SHARK" in Global.Inventory.followers:
+	# If we are riding a shark we redirect all movement to it
+	if Global.Constants.FOLLOWERS.Shark in Global.Inventory.followers:
 		return
+	
 	_apply_dead_friction(delta)
 	_apply_gravity(delta)
 	
@@ -287,7 +290,7 @@ func _handle_animation() -> void:
 		else:
 			_animated_sprite.play("Fall")
 func _follower_animations():
-	if "DRAGON" in Global.Inventory.followers:
+	if Global.Constants.FOLLOWERS.Dragon in Global.Inventory.followers:
 		var DragonPosition = Vector2(-52.2,-25.0)
 		_dragon_sprite.visible = true
 		_dragon_sprite.play("Flying")
@@ -300,7 +303,7 @@ func _follower_animations():
 			_dragon_sprite.flip_h=false
 	else:
 		_dragon_sprite.visible = false
-	if "COW" in Global.Inventory.followers:
+	if Global.Constants.FOLLOWERS.Cow in Global.Inventory.followers:
 		var CowPosition = Vector2(-3.4,-54.2)
 		_horn_hitbox.disabled=false
 		_cow_sprite.visible = true
@@ -385,9 +388,9 @@ func _handle_jump() -> void:
 			velocity.y = -JUMP_VELOCITY
 			jump_count += 1
 			is_rolling = false
-		elif "DRAGON" in Global.Inventory.followers:
+		elif Global.Constants.FOLLOWERS.Dragon in Global.Inventory.followers:
 			velocity.y= -JUMP_VELOCITY
-			Global.Inventory.remove_follower("DRAGON")
+			Global.Inventory.remove_follower(Global.Constants.FOLLOWERS.Dragon)
 			
 
 func _handle_roll() -> void:
@@ -506,9 +509,10 @@ func _on_horn_body_entered(body: Node2D) -> void:
 		var enemy = body
 		enemy.hit(self, 1)
 		enemy.receive_knockback(-1 if _animated_sprite.flip_h else 1, 1500.0)
+		
 		Global.Inventory.cow_charges -=1
 		if Global.Inventory.cow_charges == 0:
-			Global.Inventory.remove_follower("COW")
+			Global.Inventory.remove_follower(Global.Constants.FOLLOWERS.Cow)
 		#_punch_hitbox.set_deferred("disabled", true)
 
 # --- Public API: Stun ---

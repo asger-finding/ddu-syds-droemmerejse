@@ -1,6 +1,6 @@
-[gd_scene load_steps=31 format=3 uid="uid://b6catodorh3mu"]
+[gd_scene load_steps=37 format=3 uid="uid://b6catodorh3mu"]
 
-[ext_resource type="Shader" path="res://Shaders/CrumbledPaper.gdshader" id="1_3so38"]
+[ext_resource type="Shader" uid="uid://bj33mdq7bwfmq" path="res://Shaders/CrumbledPaper.gdshader" id="1_3so38"]
 [ext_resource type="Script" uid="uid://dn02ekxewi45q" path="res://Scripts/Backdrop.gd" id="2_3cx6b"]
 [ext_resource type="PackedScene" uid="uid://bfumbaprtnnwu" path="res://Scenes/World.tscn" id="3_wxwew"]
 [ext_resource type="Script" uid="uid://botyddwy7pgi" path="res://Scripts/CameraFollowPlayer.gd" id="4_acvyw"]
@@ -18,7 +18,11 @@
 [ext_resource type="Script" uid="uid://b2wiguib2yok5" path="res://Scripts/Buttons/GiveUpButton.gd" id="16_alh3a"]
 [ext_resource type="Script" uid="uid://vc5mgp7yj82q" path="res://Scripts/HUD/PauseHUD.gd" id="17_4q8tf"]
 [ext_resource type="Script" uid="uid://b2ahdboifpw5f" path="res://Scripts/Buttons/ResumeButton.gd" id="18_x3xnh"]
-[ext_resource type="Script" uid="uid://crgk5v2isrv2p" path="res://Shop.gd" id="19_8r6kd"]
+[ext_resource type="Script" uid="uid://crgk5v2isrv2p" path="res://Scripts/Shop.gd" id="19_8r6kd"]
+[ext_resource type="Texture2D" uid="uid://ceirlfxwitq7x" path="res://Assets/Shop/cow_dragon_equip.png" id="20_raj38"]
+[ext_resource type="Texture2D" uid="uid://svd67ywwetc3" path="res://Assets/Shop/cow_equip.png" id="21_8e0uq"]
+[ext_resource type="Texture2D" uid="uid://dgemiovns8x7g" path="res://Assets/Shop/dragon_equip.png" id="22_i0vto"]
+[ext_resource type="Texture2D" uid="uid://02u6lmr8wtab" path="res://Assets/Shop/no_equip.png" id="23_3jf1l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_raj38"]
 shader = ExtResource("1_3so38")
@@ -115,6 +119,46 @@ shadow_size = 3
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(2, 2)
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_i4lct"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("20_raj38")
+}],
+"loop": true,
+"name": &"001",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_8e0uq")
+}],
+"loop": true,
+"name": &"011",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_i0vto")
+}],
+"loop": true,
+"name": &"101",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_3jf1l")
+}],
+"loop": true,
+"name": &"111",
+"speed": 5.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_iyesh"]
+font = ExtResource("8_8r6kd")
+font_size = 36
+font_color = Color(0, 0, 0, 1)
+
 [node name="Game" type="Node2D"]
 
 [node name="Parallax Background" type="CanvasLayer" parent="."]
@@ -132,6 +176,7 @@ parallax_speed = 0.1
 [node name="World" parent="." instance=ExtResource("3_wxwew")]
 
 [node name="Camera" type="Camera2D" parent="."]
+physics_interpolation_mode = 2
 script = ExtResource("4_acvyw")
 
 [node name="Static Background" type="CanvasLayer" parent="Camera"]
@@ -303,4 +348,65 @@ text = "vågn op"
 label_settings = SubResource("LabelSettings_wxwew")
 
 [node name="ShopHUD" type="CanvasLayer" parent="Camera"]
+follow_viewport_enabled = true
 script = ExtResource("19_8r6kd")
+
+[node name="Shop" type="AnimatedSprite2D" parent="Camera/ShopHUD"]
+z_index = 100
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_i4lct")
+animation = &"101"
+
+[node name="Cow price" type="Label" parent="Camera/ShopHUD/Shop"]
+z_index = 101
+offset_left = -287.0
+offset_top = 127.0
+offset_right = -232.0
+offset_bottom = 177.0
+text = "10"
+label_settings = SubResource("LabelSettings_iyesh")
+
+[node name="Cow price2" type="Label" parent="Camera/ShopHUD/Shop"]
+z_index = 101
+offset_left = -288.0
+offset_top = 212.0
+offset_right = -235.0
+offset_bottom = 262.0
+text = "10"
+label_settings = SubResource("LabelSettings_iyesh")
+
+[node name="Dragon price" type="Label" parent="Camera/ShopHUD/Shop"]
+z_index = 101
+offset_left = 8.00001
+offset_top = 125.333
+offset_right = 61.0
+offset_bottom = 175.333
+text = "15"
+label_settings = SubResource("LabelSettings_iyesh")
+
+[node name="Dragon price2" type="Label" parent="Camera/ShopHUD/Shop"]
+z_index = 101
+offset_left = 8.00001
+offset_top = 213.333
+offset_right = 61.0
+offset_bottom = 263.333
+text = "15"
+label_settings = SubResource("LabelSettings_iyesh")
+
+[node name="Shark price" type="Label" parent="Camera/ShopHUD/Shop"]
+z_index = 101
+offset_left = 305.333
+offset_top = 126.667
+offset_right = 358.333
+offset_bottom = 176.667
+text = "20"
+label_settings = SubResource("LabelSettings_iyesh")
+
+[node name="Shark price2" type="Label" parent="Camera/ShopHUD/Shop"]
+z_index = 101
+offset_left = 302.667
+offset_top = 210.667
+offset_right = 355.667
+offset_bottom = 260.667
+text = "20"
+label_settings = SubResource("LabelSettings_iyesh")

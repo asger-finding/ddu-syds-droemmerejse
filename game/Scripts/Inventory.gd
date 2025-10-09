@@ -1,18 +1,22 @@
 extends Node
 
 # --- Prices ---
-const CowPrice =10
-const DragonPrice =15
-const SharkPrice=20
-const Prices = {"COW" : CowPrice, "DRAGON": DragonPrice, "SHARK": SharkPrice}
+var Prices = {}
+
 # --- Inventory state ---
 var scrap = 100
 var filling = 100
 var followers = []
+
 # --- Follower State ---
 var cow_charges = 3
+
 # --- Lifecycle ---
 func _ready():
+	Prices[Global.Constants.FOLLOWERS.Cow] = 10
+	Prices[Global.Constants.FOLLOWERS.Shark] = 15
+	Prices[Global.Constants.FOLLOWERS.Dragon] = 20
+	
 	Global.Inventory = self
 
 # --- Public API: Inventory ---
@@ -27,30 +31,23 @@ func add_filling(num: int) -> void:
 	filling += num
 
 func add_follower(identifier: String) -> void:
-	assert(identifier in Global.Constants.FOLLOWERS, 'Follower ID does not exist')
+	assert(identifier in Global.Constants.FOLLOWERS.values(), "Follower ID does not exist")
 	
-	if not identifier in followers:
-		if scrap and filling >= Prices[identifier]:
-			followers.push_front(identifier)
-			filling -= Prices[identifier]
-			scrap -= Prices[identifier]
+	# We can't buy the same follower twice
+	if identifier in followers: return
+	
+	# Can we afford the follower?
+	if scrap >= Prices[identifier] and filling >= Prices[identifier]:
+		followers.push_front(identifier)
+		filling -= Prices[identifier]
+		scrap -= Prices[identifier]
 		
-			if identifier == "COW":
-				cow_charges =3
-			if identifier =="SHARK":
-				pass
-
-		else:
-			#print("you a broke boy")
-			pass
-	else:
-		#print("follower already bought")
-		pass
+		if identifier == Global.Constants.FOLLOWERS.Cow: cow_charges = 3
+		if identifier == Global.Constants.FOLLOWERS.Shark: Global.Shark.spawn()
 
 func remove_follower(identifier: String) -> void:
-	assert(identifier in Global.Constants.FOLLOWERS, 'Follower ID does not exist')
-	if identifier in followers:
-		var index = followers.find(identifier)
-		var popped = followers.pop_at(index)
-	else:
-		print("follower already bought")
+	assert(identifier in Global.Constants.FOLLOWERS.values(), "Follower ID does not exist")
+	assert(identifier in followers, "Tried to remove follower that was not bought")
+	
+	var index = followers.find(identifier)
+	followers.pop_at(index)
