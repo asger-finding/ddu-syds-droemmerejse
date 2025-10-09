@@ -5,11 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://hh0hnyrf00qx" path="res://Assets/Sprites/Shark/Follower/frame_1.png" id="3_sr20x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fhsp8"]
-size = Vector2(14.8667, 22)
+size = Vector2(9.2, 22)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1c8so"]
 radius = 17.2
-height = 88.8
+height = 59.2
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8mvdv"]
 animations = [{
@@ -41,13 +41,13 @@ collision_layer = 8
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyDetectionArea"]
-position = Vector2(0.8, -2.5)
+position = Vector2(17.8, -2.5)
 scale = Vector2(6, 2.5)
 shape = SubResource("RectangleShape2D_fhsp8")
 
 [node name="SharkCollision" type="CollisionShape2D" parent="."]
 physics_interpolation_mode = 1
-position = Vector2(0.6, 3)
+position = Vector2(26.8, 2.8)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_1c8so")
 

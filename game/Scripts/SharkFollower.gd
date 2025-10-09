@@ -32,6 +32,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if not enabled: return
 	_player_transform.position = Vector2(10, -70)
+	
+	# Check for jump input to jump off shark
+	if Input.is_action_just_pressed("ui_up"):
+		jump_off()
 
 func _physics_process(delta: float) -> void:
 	if not enabled: return
@@ -76,16 +80,27 @@ func spawn():
 	call_deferred("set_state", true)
 	enabled = true
 
+func jump_off():
+	if not enabled or _player_transform.remote_path == NodePath(""): return
+	
+	_player_transform.remote_path = NodePath("")
+	Global.Player.process_mode = Node.PROCESS_MODE_INHERIT
+	
+	await get_tree().process_frame
+	
+	knockback_player()
+
 func explode():
 	if not enabled: return
 	
 	call_deferred("enable_explosion_hitbox")
+	if _player_transform.remote_path != NodePath(""):
+		knockback_player()
 	
 	Global.Inventory.remove_follower(Global.Constants.FOLLOWERS.Shark)
 	set_state(false)
 	enabled = false
 	Global.Player.process_mode = Node.PROCESS_MODE_INHERIT
-	knockback_player()
 
 func enable_explosion_hitbox():
 	_explosion_hitbox.disabled = false
@@ -102,7 +117,7 @@ func enable_explosion_hitbox():
 
 func knockback_player():
 	var dir = 1 if _shark_sprite.flip_h else -1
-	Global.Player.velocity += Vector2(dir * 3000, -3000)
+	Global.Player.velocity += Vector2(dir * 4000, -2300)
 
 func set_state(enabled_state):
 	enabled = enabled_state
