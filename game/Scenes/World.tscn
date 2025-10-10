@@ -1274,7 +1274,7 @@ enemy_class = "Dragon"
 damage = 5
 
 [node name="Enemy49" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
-position = Vector2(78527, -174)
+position = Vector2(76730, -169)
 health = 3
 
 [node name="Enemy50" parent="Interactability/Enemy group" instance=ExtResource("18_irg3d")]
