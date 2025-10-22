@@ -7,7 +7,7 @@ MYSQL_NAME="syds-droemmerejse-mysql"
 APACHE_NAME="syds-droemmerejse-apache"
 DB_VOLUME="syds-droemmerejse-mysql-data"
 NETWORK_NAME="syds-droemmerejse-network"
-WEB_ROOT="$(pwd)"
+WEB_ROOT="$(pwd)/php"
 DB_SQL="$(pwd)/provision/Db.sql"
 
 # Create network
@@ -65,9 +65,12 @@ else
     --privileged \
     -v "$WEB_ROOT":/var/www/html:Z \
     docker.io/library/php:8.2-apache \
-    sh -c "apt-get update && apt-get install -y default-libmysqlclient-dev && docker-php-ext-install mysqli && apache2-foreground"
+    sh -c "apt-get update && apt-get install -y default-libmysqlclient-dev && docker-php-ext-install mysqli && touch /var/www/html/php_errors.log && chown www-data:www-data /var/www/html/php_errors.log && apache2-foreground"
 fi
 
 echo "Setup complete!"
 echo "MySQL: localhost:3306"
 echo "Apache: http://localhost:8080"
+
+echo "Tailing PHP error logs..."
+podman exec syds-droemmerejse-apache tail -f /var/www/html/php_errors.log
