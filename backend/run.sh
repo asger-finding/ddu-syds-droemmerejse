@@ -7,8 +7,9 @@ MYSQL_NAME="syds-droemmerejse-mysql"
 APACHE_NAME="syds-droemmerejse-apache"
 DB_VOLUME="syds-droemmerejse-mysql-data"
 NETWORK_NAME="syds-droemmerejse-network"
-WEB_ROOT="$(pwd)/php"
-DB_SQL="$(pwd)/provision/Db.sql"
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+WEB_ROOT="$SCRIPT_DIR/php"
+DB_SQL="$SCRIPT_DIR/provision/Db.sql"
 
 # Create network
 if ! podman network exists "$NETWORK_NAME"; then

@@ -1,15 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://cq4gf0ctpud42"]
+[gd_scene load_steps=7 format=3 uid="uid://cq4gf0ctpud42"]
 
 [ext_resource type="Script" uid="uid://63qhft3d562w" path="res://Scripts/Constants.gd" id="1_24d08"]
 [ext_resource type="Script" uid="uid://bed1661ujgmmn" path="res://Scripts/GameController.gd" id="1_uu6xs"]
 [ext_resource type="Script" uid="uid://y1k8o0ynu5yh" path="res://Scripts/Global.gd" id="3_cwqeq"]
 [ext_resource type="Script" uid="uid://c3omvkqoxj37v" path="res://Scripts/Inventory.gd" id="3_f5i44"]
+[ext_resource type="Script" uid="uid://cjq35w42rwwb" path="res://Scripts/Backend.gd" id="4_3ipfy"]
+[ext_resource type="Script" uid="uid://b34spibe3em4q" path="res://Scripts/Account.gd" id="4_g0d6c"]
 
 [node name="GameController" type="Node"]
 script = ExtResource("1_uu6xs")
 
 [node name="Constants" type="Node" parent="."]
 script = ExtResource("1_24d08")
+
+[node name="Backend" type="Node" parent="."]
+script = ExtResource("4_3ipfy")
+
+[node name="User" type="Node" parent="."]
+script = ExtResource("4_g0d6c")
 
 [node name="Inventory" type="Node" parent="."]
 script = ExtResource("3_f5i44")

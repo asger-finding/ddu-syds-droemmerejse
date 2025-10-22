@@ -1,9 +1,9 @@
 [gd_scene load_steps=44 format=4 uid="uid://bfumbaprtnnwu"]
 
 [ext_resource type="TileSet" uid="uid://cdid8llshmlpg" path="res://Assets/Tilemaps/tilemap.tres" id="2_u6nay"]
-[ext_resource type="PackedScene" path="res://Scenes/SharkFollower.tscn" id="3_crxrm"]
+[ext_resource type="PackedScene" uid="uid://ttducy02hjx5" path="res://Scenes/SharkFollower.tscn" id="3_crxrm"]
 [ext_resource type="Script" uid="uid://c47gav04ngiyu" path="res://Scripts/PaperShader.gd" id="3_gjpho"]
-[ext_resource type="PackedScene" path="res://Scenes/Player.tscn" id="4_d4o7i"]
+[ext_resource type="PackedScene" uid="uid://cy2wplw3dfvmh" path="res://Scenes/Player.tscn" id="4_d4o7i"]
 [ext_resource type="PackedScene" uid="uid://sp858ls63win" path="res://Scenes/Enemy.tscn" id="18_irg3d"]
 [ext_resource type="PackedScene" uid="uid://drv412exw06io" path="res://Scenes/CollectibleScrap.tscn" id="20_n1aqv"]
 [ext_resource type="Texture2D" uid="uid://rnho28up8306" path="res://Assets/Backdrop/Clouds/cloud_0.png" id="21_7dsfl"]

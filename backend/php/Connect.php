@@ -1,7 +1,6 @@
 <?php
-function OpenConnection()
-{
-    $db_host = "syds-droemmerejse-mysql";  // Use MySQL container name as hostname
+function OpenConnection() {
+    $db_host = "syds-droemmerejse-mysql";
     $db_name = "syds_droemmerejse";
     $db_username = "root";
     $db_password = "SuperSecret";
@@ -15,8 +14,7 @@ function OpenConnection()
     return $conn;
 }
 
-function CloseConnection($conn)
-{
+function CloseConnection($conn) {
     $conn->close();
 }
 ?>

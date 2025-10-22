@@ -4,8 +4,8 @@ extends Node
 var Prices = {}
 
 # --- Inventory state ---
-var scrap = 100
-var filling = 100
+var scrap = 0
+var filling = 0
 var followers = []
 
 # --- Follower State ---

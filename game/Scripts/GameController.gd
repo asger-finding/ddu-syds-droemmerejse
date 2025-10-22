@@ -1,12 +1,14 @@
 extends Node
 
-@export var default_scene = "Intro"
+@export var default_scene = "MainMenu"
 @onready var scene := $'Scene'
 
 var scene_instance
 
 func _ready():
 	Global.GameController = self
+	# Quit is handled in backend to save our state
+	get_tree().set_auto_accept_quit(false)
 	load_scene(default_scene)
 
 func unload_scene() -> void:
